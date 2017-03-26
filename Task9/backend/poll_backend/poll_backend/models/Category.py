@@ -1,6 +1,8 @@
-from mongoengine import *
+from django.db import models
+from .Competition import Competition
 
 
-class Category(Document):
-    id = SequenceField()
-    name = StringField(max_length=200)
+class Category(models.Model):
+    id = models.IntegerField()
+    name = models.CharField(max_length=200)
+    competition = models.ForeignKey(Competition)

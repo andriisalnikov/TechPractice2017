@@ -1,7 +1,8 @@
-from mongoengine import *
+from django.db import models
 
 
-class Voter(Document):
-    id: SequenceField()
-    socialId: StringField()
-    socialType: IntField(min_value=1, max_value=3)
+class Voter(models.Model):
+    id: models.IntegerField()
+    vkId: models.CharField()
+    facebookId: models.CharField()
+    googleId: models.CharField()
