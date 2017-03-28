@@ -1,4 +1,4 @@
-"""ex URL Configuration
+"""techpractice URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/urls/
@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from . import views
+from ex import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
