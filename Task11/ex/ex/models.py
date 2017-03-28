@@ -29,6 +29,12 @@ class MyObject(models.Model):
     changed_date = models.DateTimeField(default=timezone.now)
     deletion_date = models.DateTimeField(default=seven_days_hence)
 
+    def __str__(self):
+        return str(self.key)
+
 class MyFile(models.Model):
     object_id = models.ForeignKey(MyObject)
     file = models.FileField()
+
+    def __str__(self):
+        return self.file.name
