@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ex.ua</title>
+</head>
+<body>
+<h1>EX.UA is coming back! <span style="color:blue">(now with minimalistic design)</span></h1>
+{% if objects_list %}
+    <h3>List of objects:</h3>
+    <ul>
+    {% for mobject in objects_list %}
+        <li><a href="/objects/{{ mobject.id }}/">{{ mobject.key }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <h3>No objects are available.</h3>
+{% endif %}
+</body>
+</html>
