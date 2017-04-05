@@ -1,0 +1,11 @@
+D:\University\3й курс\2 Семестр\Practic\TechPractice2017\TechPractice2017\bin\Microsoft.PythonTools.WebRole.dll
+D:\University\3й курс\2 Семестр\Practic\TechPractice2017\TechPractice2017\obj\Debug\attach_server.py
+D:\University\3й курс\2 Семестр\Practic\TechPractice2017\TechPractice2017\obj\Debug\visualstudio_py_debugger.py
+D:\University\3й курс\2 Семестр\Practic\TechPractice2017\TechPractice2017\obj\Debug\visualstudio_py_repl.py
+D:\University\3й курс\2 Семестр\Practic\TechPractice2017\TechPractice2017\obj\Debug\visualstudio_py_util.py
+D:\University\3й курс\2 Семестр\Practic\TechPractice2017\TechPractice2017\obj\Debug\__init__.py
+D:\University\3й курс\2 Семестр\Practic\TechPractice2017\TechPractice2017\obj\Debug\__main__.py
+D:\University\3й курс\2 Семестр\Practic\TechPractice2017\TechPractice2017\bin\AzureSetup.cfg
+D:\University\3й курс\2 Семестр\Practic\TechPractice2017\TechPractice2017\bin\Microsoft.PythonTools.AzureSetup.exe
+D:\University\3й курс\2 Семестр\Practic\TechPractice2017\TechPractice2017\bin\Microsoft.PythonTools.AzureSetup.exe.config
+D:\University\3й курс\2 Семестр\Practic\TechPractice2017\TechPractice2017\bin\wfastcgi.py
