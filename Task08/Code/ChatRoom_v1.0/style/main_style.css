@@ -1,0 +1,81 @@
+
+*{
+	margin: 0;
+	padding: 0;
+	font-family: 'B20 Sans', sans-serif;
+}
+body {
+	background: #f2f2f2;
+}
+
+#bar {
+	top:0;
+	width: 100%;
+	position: fixed;
+	height: 34px;
+	background: #333333;
+	z-index: 20;
+    box-shadow: 0px 0px 6px #ccc;
+}
+
+#message_box {
+    position: relative;
+    height:560px;
+    width:440px;
+    background: #fff;
+    margin-left:-220px;
+    left:50%;
+    margin-top:40px;
+    box-shadow: 0px 0px 10px #ccc;
+}
+
+#action_bar {
+    position: relative;
+    height:60px;
+    width:450px;
+    margin-left:-225px;
+    left:50%;
+    margin-top:8px;
+}
+
+#photo {
+	margin: 3px;
+    position: relative;
+    display: inline-block;
+    height:100%;
+    width:60px;
+    border-radius:50%;
+    background: #fff;
+    box-shadow: 0px 0px 10px #ccc;
+}
+#message_input_part {
+	margin: 3px;
+    position: relative;
+    display: inline-block;
+    height:100%;
+    border-radius:30px;
+    width:300px;
+    background: #fff;
+    box-shadow: 0px 0px 10px #ccc;
+}
+
+#button_part{
+	margin: 3px;
+	top: 0; 
+    position: relative;
+    display: inline-block;
+    height:100%;
+    width:60px;
+    border-radius:50%;
+    background: #fff;
+    box-shadow: 0px 0px 10px #ccc;
+}
+#inf_about_chat {
+	position: relative;
+	margin: 0;
+	width: 100%;
+	height: 40px;
+	border-bottom: 1px solid #f2f2f2;
+}
+
+
