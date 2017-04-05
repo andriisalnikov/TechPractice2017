@@ -1,0 +1,23 @@
+#server script:
+import socket
+
+my_socket = socket.socket()
+my_socket.bind(("localhost", 9009))
+my_socket.listen(1)
+
+print("Connection Waiting...")
+sckt, addr = my_socket.accept()
+print("Connection Matched!")
+
+while True:
+    print("Waiting message...")
+    received = sckt.recv(128)
+    message = received.decode('utf-8')
+    if message == "quit":
+        break
+    print("Received Message: " + message)
+    sckt.send(received)
+
+print("Good bye!")
+sckt.close()
+my_socket.close()
