@@ -34,6 +34,10 @@ class Competitor(models.Model):
     course = models.IntegerField(default=1)
     speciality = models.CharField(max_length=100, default="")
 
+    def as_json(self):
+        return dict(id=self.id, competition=self.competition.id, firstName=self.firstName,
+                    lastName=self.lastName, course=self.course, specialisty=self.speciality)
+
 
 class Vote(models.Model):
     class Meta:

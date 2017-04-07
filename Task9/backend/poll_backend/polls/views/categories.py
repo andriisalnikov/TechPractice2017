@@ -24,4 +24,4 @@ def create_category(request):
     new_category = Category(name=body["name"])
     new_category.competition = Competition.objects.get(pk=body["competitionId"])
     new_category.save()
-    return HttpResponse(json.dumps(body), content_type="application/json")
+    return HttpResponse(json.dumps(new_category.as_json()), content_type="application/json")
