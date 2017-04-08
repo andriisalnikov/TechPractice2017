@@ -1,6 +1,4 @@
-from django.contrib.sessions import serializers
 from django.core.serializers import json
-from django.core import serializers
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
