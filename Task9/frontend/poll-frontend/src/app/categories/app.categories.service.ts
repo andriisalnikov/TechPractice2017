@@ -7,12 +7,12 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CategoryService {
-    private heroesUrl = 'http://localhost:8000/api/categories/all';
+    private heroesUrl = 'http://localhost:8000/api/categories/all?competitionId=';
     constructor(private http:Http) {
     
     }
-    getCategories():Observable<Category[]>{
-         return this.http.get(this.heroesUrl)
+    getCategories(competitionId:Number):Observable<Category[]>{
+         return this.http.get(this.heroesUrl+competitionId.toString())
                     .map((res:Response)=> res.json() as Category[])
                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }

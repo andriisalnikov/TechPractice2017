@@ -5,7 +5,7 @@ import { OnInit } from '@angular/core'
 
 @Component({
     selector: "competition-list",
-    templateUrl: "./app.competitonlist.html",
+    templateUrl: "./app.competitionlist.html",
     styleUrls: ["./app.competition.css"],
     providers: [CompetitionService]
 })

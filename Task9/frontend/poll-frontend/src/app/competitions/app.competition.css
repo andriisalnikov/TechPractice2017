@@ -1,0 +1,11 @@
+.competition-list {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+}
+.competition-list .competition-btn {
+    display: flex;
+    line-height: 32px;
+    font-size: 20px;
+}
