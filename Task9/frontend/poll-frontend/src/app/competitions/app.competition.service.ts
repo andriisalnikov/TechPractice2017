@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CompetitionService {
     private heroesUrl = 'http://localhost:8000/api/competitions/all';
+    private createURL = 'http://localhost:8000/api/competitions/all';
     constructor(private http:Http) {
     
     }

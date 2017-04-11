@@ -7,14 +7,16 @@ import { RouterModule, Routes} from "@angular/router"
 import { AppComponent } from './app.component';
 import { CategoryListComponent } from './categories/app.categorylist';
 import { CategoryService } from './categories/app.categories.service';
-import { CompetitionListComponent } from './competitions/app.competitionlist'
-import { ApplicationRoutes } from "./app.routes"
+import { CompetitionListComponent } from './competitions/app.competitionlist';
+import { CompetitionFormComponent } from './competitions/app.competitionform';
+import { ApplicationRoutes } from "./app.routes";
 
 @NgModule({
   declarations: [
     AppComponent,
     CategoryListComponent,
-    CompetitionListComponent
+    CompetitionListComponent,
+    CompetitionFormComponent
   ],
   imports: [
     BrowserModule,

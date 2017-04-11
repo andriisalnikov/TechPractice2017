@@ -1,0 +1,7 @@
+<form class="col-md-12">
+    <div class="form-group">
+        <label for="name" class="form-label">Назва</label>
+        <input [(ngModel)]="competition.name" type="text" class="form-control" name="name" id="name" />
+    </div>
+    <input type="submit" (click)="createCompetition()" class="btn btn-success" value="Зберегти" />
+</form>
