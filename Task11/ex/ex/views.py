@@ -25,3 +25,13 @@ def object_view(request, obj_id):
         'files_list': files_list
     }
     return HttpResponse(template.render(context, request))
+
+def testform(request):
+    array = { 1:'one', 2:'two', 3:'three' }
+    template = loader.get_template('testform.html')
+    context = {
+        'error_message': 'no errors still',
+        'headertext': 'Test Form',
+        'array': array
+    }
+    return HttpResponse(template.render(context, request))
