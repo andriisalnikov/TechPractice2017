@@ -5,16 +5,31 @@
     <title>ex.ua</title>
 </head>
 <body>
-<h1>EX.UA is coming back! <span style="color:blue">(now with minimalistic design)</span></h1>
-{% if objects_list %}
-    <h3>List of objects:</h3>
-    <ul>
-    {% for mobject in objects_list %}
-        <li><a href="/objects/{{ mobject.id }}/">{{ mobject.key }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <h3>No objects are available.</h3>
-{% endif %}
+    <h1>EX.UA <span style="color:blue">(RESURRECTED)</span></h1>
+    <form action="{% url 'date' %}">
+        <input type="submit" value="Go to date page (test feature)" />
+    </form><br><br>
+    <form action="{% url 'date' %}">
+        <input type="submit" value="Send files" />
+    </form>
+    <form action="{% url 'date' %}">
+        <label>
+            <input type="text" name="code" value="Code">
+        </label>
+        <input type="submit" value="Get files" />
+    </form><br><br>
+    <form>
+        <label>Username:
+            <input type="text" name="username" value="">
+        </label><br>
+        <label>Password:
+            <input type="password" name="password" value="">
+        </label><br>
+        <input type="submit" value="Log in" />
+    </form>
+    <form>
+        <input type="submit" value="Register" />
+    </form><br><br>
+    @EX.UA mail:aaaaaa@bbb.ccc support: sss@uu.zz
 </body>
 </html>
