@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Category } from './app.category';
+import { UrlHelper } from '../common/UrlHelper'
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CategoryService {
-    private heroesUrl = 'http://localhost:8000/api/categories/all?competitionId=';
+    private heroesUrl = UrlHelper.BaseUrl+'/api/categories/all?competitionId=';
     constructor(private http:Http) {
     
     }
