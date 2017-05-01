@@ -15,9 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from ssplsapp.views import index
+from ssplsapp.views import index, playedgames, availablegames, statistics, playgame, creategame, game
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index),
+    url(r'^played-games/', playedgames),
+    url(r'^available-games/', availablegames),
+    url(r'^statistics/', statistics),
+    url(r'^play-game\/[1-9][0-9]*/', playgame),
+    url(r'^create-game/', creategame),
+    url(r'^game\/[1-9][0-9]*/', game),
 ]
