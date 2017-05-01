@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Available Games{% endblock %}
+   
+{% block content %}
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 col-xs-12 available-games-sidebar">
+                <h3 class="current-user-name">
+                    UserName
+                </h3>
+                <hr>
+                <p>
+                    <a href="#" class="btn btn-success">Create a game</a>
+                    <a href="#" class="btn btn-danger">Random game</a>
+                </p>
+                <hr>
+                <h4>
+                    YOUR STATS
+                </h4>
+                <p>
+                    <b>Games: </b>
+                    <span class="stats games-played">0</span>
+                </p>
+                <p>
+                    <b>Won: </b>
+                    <span class="stats games-won">0</span>
+                </p>
+                <p>
+                    <b>Drawn: </b>
+                    <span class="stats games-drown">0</span>
+                </p>
+                <p>
+                    <b>Lost: </b>
+                    <span class="stats games-lost">0</span>
+                </p>
+            </div>
+            <div class="col-sm-9 col-xs-12 available-games">
+                <div class="container-fluid">
+                    <div class="row">
+                        <h2 class="text-center">Available games</h2>
+                        <div data-game-id="1" class="col-md-4 col-sm-6 col-xs-12">
+                            <div data-game-id="1" class="game">
+                                <div class="pull-left">
+                                    <p>
+                                        <b>Game: </b>
+                                        #<span class="game-id">1</span>
+                                    </p>
+                                    <p>
+                                        <b>Enemy: </b>
+                                        <span class="enemy-name">
+                                            <a href="#">EnemyName</a>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="play-button pull-right text-right">
+                                    <a href="#" class="btn btn-success">
+                                        Play
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>    
+                        </div>
+                        <div data-game-id="2" class="col-md-4 col-sm-6 col-xs-12">
+                                <div data-game-id="1" class="game">
+                                    <div class="pull-left">
+                                        <p>
+                                            <b>Game: </b>
+                                            #<span class="game-id">1</span>
+                                        </p>
+                                        <p>
+                                            <b>Enemy: </b>
+                                            <span class="enemy-name">
+                                                <a href="#">EnemyName</a>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="play-button pull-right text-right">
+                                        <a href="#" class="btn btn-success">
+                                            Play
+                                        </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

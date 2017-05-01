@@ -1,53 +1,15 @@
 {% extends 'base.html' %}
 
-{% load static %}
-
-{% block title %}Best Game Ever{% endblock %}
+{% block title %}Statistics{% endblock %}
    
 {% block content %}
     <!-- Page Content -->
-    <div class="container">
-
-        <!-- Page Header -->
-        <section class="main-page-header">
-            <div class="row">
-                <div class="col-lg-6 col-sm-12 text-center">
-                    <img src="{% static 'img/sspls.png' %}" alt="sspls">
-                </div>
-                <div class="col-lg-6 col-sm-12">
-                    <h1 class="text-center">
-                        Welcome To SSPLS Game!
-                    </h1>
-                    <p>
-                        The game is an expansion on the game Rock, Paper, Scissors. Each player picks a variable and reveals it at the same time. The winner is the one who defeats the others. In a tie, the process is repeated until a winner is found. 
-                    </p>
-                    <hr>
-                    <h3 class="text-center">Rules</h3>
-                    <p>
-                        <ol>
-                            <li>Scissors cuts Paper</li>
-                            <li>Paper covers Rock</li>
-                            <li>Rock crushes Lizard</li>
-                            <li>Lizard poisons Spock</li>
-                            <li>Spock smashes Scissors</li>
-                            <li>Scissors decapitates Lizard</li>
-                            <li>Lizard eats Paper</li>
-                            <li>Paper disproves Spock</li>
-                            <li>Spock vaporizes Rock</li>
-                            <li>Rock crushes Scissors</li>
-                        </ol>
-                    </p>
-                    <hr>
-                    <p>Here you can start your own game, choose a game of other definite or random user, check out the statistics.</p>
-                    <h3 class="text-center">Good luck, have fun!</h3>
-                </div>
-            </div>
-        </section>
+    <div class="container statistics">
         <!-- /.row -->
 
         <!-- Projects Row -->
         <div class="row">
-            <div class="col-md-6 games">
+            <div class="col-md-4 games">
                 <h3 class="text-center">Available games</h3>
                 <div class="container-fluid">
                     <div class="row">
@@ -121,7 +83,7 @@
                     </div>
                 </div>   
             </div>
-            <div class="col-md-6 games">
+            <div class="col-md-4 games">
                 <h3 class="text-center">Games history</h3>
                 <div class="games-list col-xs-12">
                     <div data-game-id="1" class="game">
@@ -157,7 +119,6 @@
                                 </span>
                             </p>
                         </div>
-                        <div class="clearfix"></div>
                         <p class="text-center">
                             <b>Winner: </b>
                             <span class="winner">Player1</span>
@@ -196,7 +157,6 @@
                                 </span>
                             </p>
                         </div>
-                        <div class="clearfix"></div>
                         <p class="text-center">
                             <b>Winner: </b>
                             <span class="winner">Player1</span>
@@ -207,6 +167,47 @@
                                 All games
                             </a>
                     </p>
+                </div>
+            </div>
+            <div class="col-md-4 players">
+               <h3 class="text-center">Players stats</h3>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Best player
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            <b>Player: </b>
+                            <span>Player</span>
+                        </p>
+                        <p>
+                            <b>Played: </b>
+                            <span>0</span>
+                        </p>
+                        <p>
+                            <b>Won: </b>
+                            <span>0</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        Worst player
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            <b>Player: </b>
+                            <span>Player</span>
+                        </p>
+                        <p>
+                            <b>Played: </b>
+                            <span>0</span>
+                        </p>
+                        <p>
+                            <b>Lost: </b>
+                            <span>0</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
