@@ -22,21 +22,25 @@ class EVENT(models.Model):
     place = models.CharField("where", max_length=40)
     date = models.DateField("when")
     participants = models.ManyToManyField(USER)
-    meetingDS = models.ManyToManyField(DATES)
     votingStart = models.DateField()
     votingEnd = models.DateField()
     pass
-    
-    def CreatePeriod(dat, mdts, mdte):
-        from practice.db.models import DATES
-        meetingDS.add(DATES(meetingDateTimeS=mdts, meetingDateTimeEnd=mdte))
 
-class DATES(models.Model):
+class MDATE(models.Model):
     id = models.AutoField(primary_key=True)
     meetingDateTimeS = models.DateField()
-    meetingDateTimeE = models.DateField()
+    
+class EVTDATE(models.Model):
+    id = models.AutField(primary_key=True)
+    evt = models.ForeignKey(EVENT)
+    dat = models.ForeignKey(MDATE)
+    
+class VOTE(models.Model):
+    id = models.AutoField(primary_key=True)
+    edate = models.ForeignKey(EVTDATE)
+    usr = models.ForeignKey(USER)
 
- def CreateUser(n, l, e, pas, c):
+def CreateUser(n, l, e, pas, c):
     from practice.db.models import USER
     usr = USER(name=n, login=l, email=e, password=pas, city=c)
     usr.save()
