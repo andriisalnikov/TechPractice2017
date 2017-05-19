@@ -1,0 +1,8 @@
+TODO
+0.Create multiuser chat app - DONE
+1.Add chatrooms
+2.URL for chatroom
+3.Private chat with code word
+4.Chat history of the chatroom --> db with chat urls and codewords. 
+As started - user is able to choose: start new chat(generates unique ip address: public or private(with codeword))
+or choose from current.

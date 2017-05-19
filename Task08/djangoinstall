@@ -1,0 +1,49 @@
+As a true Ubuntulover I decided to test Ubuntu integrated into Windows 10 for creating "SIMPLE" chat.
+This link explains Ubuntu feature in Windows: https://habrahabr.ru/post/280560/
+You can use a Computer running any Unix/Linux system or virtual machine on You own risk. This tutorial expllains django usage in ubuntu.
+
+To run the chat You need do accomplish simple actions. I will not comment them very detailed as you can contact me any time via hangouts, gmail or VK! You always will be able to contact me via VK!!!
+
+1.Install Python3.5.2
+sudo apt-get install libssl-dev openssl
+wget https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz
+tar xzvf Python-3.5.2.tgz
+cd Python-3.5.2
+./configure
+sudo apt-get install make
+make
+sudo make install
+
+2.Install Twisted
+wget https://files.pythonhosted.org/packages/d2/5d/ed5071740be94da625535f4333793d6fd238f9012f0fee189d0c5d00bd74/Twisted-17.1.0.tar.bz2
+tar -xjf Twisted-17.1.0.tar.bz2
+cd Twisted-17.1.0
+sudo python3.5 setup.py install
+sudo pip3 install scrapy
+
+sudo apt-get install python3-pip
+pip3 install --force-reinstall --upgrade pip
+
+3.JUST FOR CONVINIANCE you can use aliases
+alias python=python3.5
+alias pip=pip3
+
+4.You need NEXT pakages for chat app
+Django==1.9.5
+channels==0.11.0
+
+pip install django==1.9.5
+pip instal channels==0.11.0
+
+To run the chat app:
+git clone https://github.com/mashawolfhound/chat.git
+cd chat
+pythin manage.py migrate
+python manage.py runserver
+
+
+More about django: https://tutorial.djangogirls.org/ru/
+Any troubles, You mistakes? Contact me directly: https://vk.com/mashawolfhound
+mashawolfhound@gmail.com
+
+P.S: I got troubles using virtual enviroment - that is why, I do no use it.
