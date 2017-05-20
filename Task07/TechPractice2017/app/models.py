@@ -31,7 +31,7 @@ class MDATE(models.Model):
     meetingDateTimeS = models.DateField()
     
 class EVTDATE(models.Model):
-    evtdateid = models.AutField(primary_key=True)
+    evtdateid = models.AutoField(primary_key=True)
     evt = models.ForeignKey(EVENT)
     dat = models.ForeignKey(MDATE)
     
