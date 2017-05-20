@@ -26,20 +26,16 @@ class EVENT(models.Model):
     votingEnd = models.DateField(blank=True)
     pass
 
-class MDATE(models.Model):
-    mdateid = models.AutoField(primary_key=True)
-    meetingDateTimeS = models.DateField()
-    
 class EVTDATE(models.Model):
-    evtdateid = models.AutField(primary_key=True)
+    evtdateid = models.AutoField(primary_key=True)
     evt = models.ForeignKey(EVENT)
-    dat = models.ForeignKey(MDATE)
-    
+    meetingDateTimeS = models.DateField()
+
 class VOTE(models.Model):
     voteid = models.AutoField(primary_key=True)
     edate = models.ForeignKey(EVTDATE)
     usr = models.ForeignKey(USER)
-    
+
 ###############################################################################################################################
 
 def CreateUser(n, l, e, pas, c):
@@ -55,11 +51,11 @@ def GetUserInfo(uid):
 def EditUserName(uid, uname):
     from practice.db.models import USER
     USER.objects.filter(userid=uid).update(name=uname)
-    
+
 def EditEmail(uid, mail):
     from practice.db.models import USER
     USER.objects.filter(userid=uid).update(email=mail)
-    
+
 def EditCity(uid, c):
     from practice.db.models import USER
     USER.objects.filter(userid=uid).update(city=c)
@@ -70,7 +66,7 @@ def CreateEvent(nam): #event creation method
     from practice.db.models import EVENT
     evt = EVENT(name=nam)
     evt.save()
-    
+
 def EditEvtDetails(detls, evid): #editing event details (can be NULL first)
     from practice.db.models import EVENT
     EVENT.objects.filter(id=evid).update(details=detls)
@@ -78,32 +74,36 @@ def EditEvtDetails(detls, evid): #editing event details (can be NULL first)
 def EditEvtPlace(pla, evid): #editing event place (can be NULL first)
     from practice.db.models import EVENT
     EVENT.objects.filter(id=evid).update(place=pla)
-    
+
 def EditEvtVotingPeriod(vst, ven, evid): #editing event voting period (can be NULL first, requires both start and end dates)
     from practice.db.models import EVENT
     EVENT.objects.filter(id=evid).update(votingStart=vst, votingEnd=ven)
-    
+
 def GetEventInfo(evtid): #returns event object on necessary id
     from practice.db.models import EVENT
     evt = EVENT.objects.get(id=evtid)
     return evt
-    
+
 def DisplayAll(event): #returns all events (not finished!)
     from practice.db.models import EVENT
     allevents=[]
     for e in EVENT.objects.all():
          allevents.add(e)
     return allevents
-        
+
 def DisMostPop(event):
     from practice.db.models import EVENT
     from practice.db.models import Max
     from practice.db.models import Count
-    EVENT.objects.order_by(EVENT.objects.annotate(partcount=Count('participants'))).aggregate(Max(partcount))
-    pass #finish!!!
+    return EVENT.objects.order_by(EVENT.objects.annotate(partcount=Count('participants'))).aggregate(Max(partcount))
     
-def Participate(user, event):
+def VoteOp(user, event, dt):
     from practice.db.models import USER
     from practice.db.models import EVENT
+    from practice.db.models import EVTDATE
     event.participants.add(user)
     event.save()
+    evdate = EVTDATE(evt=event, meetingDateTimeS=dt)
+    evdate.save()
+    v = VOTE(edate=evdate, usr=user)
+    vote.save()
