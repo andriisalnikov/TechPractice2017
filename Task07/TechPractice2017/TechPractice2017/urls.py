@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Definition of urls for TechPractice2017.
 """

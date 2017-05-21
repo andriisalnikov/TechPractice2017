@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Definition of views.
 """
@@ -6,16 +7,21 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
+from app import models
 
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
+
+    all_event = models.GetAllEvent() 
+
     return render(
         request,
         'app/index.html',
         {
-            'title':'Home Page',
+            'title':'Домашня сторінка',
             'year':datetime.now().year,
+            'all_event':all_event
         }
     )
 
@@ -26,7 +32,7 @@ def about(request):
         request,
         'app/about.html',
         {
-            'title':'About',
+            'title':'О чому?',
             'message':'Your application description page.',
             'year':datetime.now().year,
         }
