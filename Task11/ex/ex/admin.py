@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import MyObject, MyFile
+from .models import TheUser, FileSet, TheFile
 
-admin.site.register(MyObject)
-admin.site.register(MyFile)
+admin.site.register(TheUser)
+admin.site.register(FileSet)
+admin.site.register(TheFile)

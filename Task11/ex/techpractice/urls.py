@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^testform/', views.testform, name='form1'),
     url(r'^$', views.index, name='index'),
-    url(r'^date/', views.current_datetime, name='date'),
+    url(r'^registration/', views.registration, name='registration'),
     url(r'^objects/(?P<obj_id>[0-9]+)/$', views.object_view, name='objects'), # ex: /objects/5/
 ]
 
