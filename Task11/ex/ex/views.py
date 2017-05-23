@@ -46,14 +46,16 @@ def registration(request):
         template = loader.get_template('message.html')
         nick_is_used = len(TheUser.objects.filter(nick=request.POST['nick'])) > 0
         mail_is_used = len(TheUser.objects.filter(email=request.POST['email'])) > 0
+        messages = []
         if nick_is_used:
-                context = {'messages': 'Sorry, Nick ' + request.POST['nick'] + ' is already in use.<br>'}
+            messages.append('Sorry, Nick ' + request.POST['nick'] + ' is already in use.')
         if mail_is_used:
-                context = {'messages': context['messages'] + 'Sorry, E-mail ' + request.POST['email'] + ' is already in use.'}
+            messages.append('Sorry, E-mail ' + request.POST['email'] + ' is already in use.')
+        context = { 'messages': messages }
         if (not nick_is_used) & (not mail_is_used):
             u = TheUser(nick=request.POST['nick'], password_hash=request.POST['password'], email=request.POST['email'])
             u.save()
-            context = {'messages': 'Ваш нік ' + request.POST['nick'] + ' зареєстровано. На вашу електронну адресу ' + request.POST['email'] + ' було вислано інструкцію для підтвердження.'}
+            context = {'messages': ['Thanks for registration! Confirmation link was sent to email ' + request.POST['email']]}
         return HttpResponse(template.render(context, request))
 
     else:
