@@ -43,8 +43,8 @@ def testform(request):
 
 def registration(request):
     if request.method == 'POST':
-        template = loader.get_template('registration_completed.html')
-        context = {'nick': request.POST['nick']}
+        template = loader.get_template('message.html')
+        context = {'message': 'Ваш нік ' + request.POST['nick'] + ' зареєстровано. На вашу електронну адресу ' + request.POST['nick'] + ' було вислано інструкцію для підтвердження.'}
         return HttpResponse(template.render(context, request))
     template = loader.get_template('registration.html')
     context = {}
