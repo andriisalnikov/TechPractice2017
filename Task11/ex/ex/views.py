@@ -44,9 +44,20 @@ def testform(request):
 def registration(request):
     if request.method == 'POST':
         template = loader.get_template('message.html')
-        context = {'message': 'Ваш нік ' + request.POST['nick'] + ' зареєстровано. На вашу електронну адресу ' + request.POST['nick'] + ' було вислано інструкцію для підтвердження.'}
+        nick_is_used = len(TheUser.objects.filter(nick=request.POST['nick'])) > 0
+        mail_is_used = len(TheUser.objects.filter(email=request.POST['email'])) > 0
+        if nick_is_used:
+                context = {'messages': 'Sorry, Nick ' + request.POST['nick'] + ' is already in use.<br>'}
+        if mail_is_used:
+                context = {'messages': context['messages'] + 'Sorry, E-mail ' + request.POST['email'] + ' is already in use.'}
+        if (not nick_is_used) & (not mail_is_used):
+            u = TheUser(nick=request.POST['nick'], password_hash=request.POST['password'], email=request.POST['email'])
+            u.save()
+            context = {'messages': 'Ваш нік ' + request.POST['nick'] + ' зареєстровано. На вашу електронну адресу ' + request.POST['email'] + ' було вислано інструкцію для підтвердження.'}
         return HttpResponse(template.render(context, request))
-    template = loader.get_template('registration.html')
-    context = {}
-    return HttpResponse(template.render(context, request))
+
+    else:
+        template = loader.get_template('registration.html')
+        context = {}
+        return HttpResponse(template.render(context, request))
 
