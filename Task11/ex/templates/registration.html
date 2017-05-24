@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Registration</title>
+    <title>VEX Registration</title>
 </head>
 <body>
-<form method="post">
+    {% load static %}
+    <img src="{% static "logo.jpg" %}" alt="Logo" width="200">
+    <h1>VEX.DDNS.NET</h1>
+    <form method="post">
      {% csrf_token %}
         <label>Nick:
             <input type="text" name="nick" value="">
@@ -17,6 +20,6 @@
             <input type="email" name="email" value="">
         </label><br>
         <input type="submit" value="Sign up" />
-</form>
+    </form>
 </body>
 </html>
