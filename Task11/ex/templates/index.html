@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VEX</title>
+</head>
+<body>
+    {% load static %}
+    <img src="{% static "logo.jpg" %}" alt="Logo" width="200">
+    <h1>VEX.DDNS.NET</h1>
+    <form method="post">
+        <label>Username:
+            <input type="text" name="username" value="">
+        </label><br>
+        <label>Password:
+            <input type="password" name="password" value="">
+        </label><br>
+        <input type="submit" value="Log in" />
+    </form>
+    <form>
+        <input type="submit" value="Register" />
+    </form><br><br>
+    @VEX.UA mail:aaaaaa@bbb.ccc support: sss@uu.zz
+    <br>
+    <a href="registration">registration</a>
+</body>
+</html>

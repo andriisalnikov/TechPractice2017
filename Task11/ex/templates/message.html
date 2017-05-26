@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" http-equiv="Cache-Control" content="no-cache">
+    <title>VEX Message</title>
+</head>
+<body>
+    {% load static %}
+    <img src="{% static "logo.jpg" %}" alt="Logo" width="200">
+    <h1>VEX.DDNS.NET</h1>
+ {% for m in messages %}
+     {{ m }}<br>
+ {% endfor %}
+</body>
+</html>
