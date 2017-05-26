@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}        
+    <div class="container">
+        <div class="col-lg-4">
+            <div class="edit-room-form">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.as_p }}
+                    </div>
+                    <div class="button-panel">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <h1>Create a group chat</h1>
+            <div class="panel-heading top-bar">
+                    <div class="col-md-8 col-xs-8">
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span><span id="chat_title_id">Chat</span></h3>
+                    </div>
+                    <div class="col-md-4 col-xs-4" style="text-align: right;">
+                        <a id="room_edit_link" href="{% url 'chat:edit_room' room=0 %}"><span class="glyphicon glyphicon-wrench edit-chat"></span></a>
+                    </div>
+            </div>
+            <div id="chat_room">
+                
+            </div>
+            <div class="panel-footer">
+                    <div class="input-group">
+                        <input id='chat_input' type="text" class="form-control input-sm chat_input" placeholder="Write your message here..." >
+                        <span class="input-group-btn">
+                            <label id="image-label" class="btn btn-default btn-file disabled">
+                                <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> 
+                                <input type="file" name="image" id="chat_file_input" style="display: none;">
+                            </label>
+                            <button class="btn btn-primary btn-sm" id="btn-chat" disabled=true>Send</button>
+                        </span>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('chat_title_id').innerText = document.getElementById('id_title').value;
+        document.getElementById('chat_room').style.background = "#" + document.getElementById('id_background_color').value;
+        document.getElementById('id_title').addEventListener('change', function(){
+            document.getElementById('chat_title_id').innerText = document.getElementById('id_title').value;
+        });
+        document.getElementById('id_background_color').addEventListener('change', function(){
+            document.getElementById('chat_room').style.background = "#" + document.getElementById('id_background_color').value;
+        });
+	</script>
+
+
+{% endblock content %}

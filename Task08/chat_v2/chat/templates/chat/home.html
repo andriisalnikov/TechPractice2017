@@ -1,0 +1,570 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <div class="col-lg-3">
+            {% if friends %}
+            <h1>Friends</h1>
+            <div id="friends">
+                <ul class="list-group">
+                {% for user in friends %}
+                    <li class="list-group-item">
+                        <div class="list-group-left">
+                            <img src="/media/{{ user.profile.profile_photo }}" class="img-circle user-img" alt="Cinque Terre" width="304" height="236">
+                            <i class="user-name" username="{{user.username}}"> {{ user.username }} </i>                          
+                        </div>
+                        <div class="list-group-right">
+                            <a class="start-chat btn btn-sm btn-info" href="#" username="{{user.username}}" room="{{user.room}}"><i class="fa fa-commenting-o" aria-hidden="true"></i></a>
+                            <a href="{% url 'users:change_friends' action='loose' pk=user.pk %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to remove this friend?');"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </div>
+                    </li> 
+                {% endfor %}
+                </ul>
+            </div>
+            {% if group_chats %}
+            <h1>Group Chats</h1>
+            <div id="group-chats">
+                <ul class="list-group">
+                {% for group_chat in group_chats %}
+                    <li class="start-chat list-group-item group-chat-remove" room="{{group_chat.room}}" title="{{group_chat.title}}">
+                        <div class="list-group-left">
+                            <!--<img src="/media/{{ user.profile.profile_photo }}" class="img-circle user-img" alt="Cinque Terre" width="304" height="236">-->
+                            <i class="group-chat-title" title="{{group_chat.title}}"> {{group_chat.title}} </i>                          
+                        </div>
+                        <div class="list-group-right">
+                            <!--<a class="start-chat btn btn-sm btn-info" href="#" username="{{group_chat.username}}" room="{{group_chat.room}}"><i class="fa fa-commenting-o" aria-hidden="true"></i></a>-->
+                            <a href="{% url 'chat:remove_group_chat' room=group_chat.pk %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to remove this chat?');"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </div>
+                    </li> 
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            <a id="start-group-chat" class="btn btn-sm btn-success" href="{% url 'chat:create_group_chat' %}"><i class="fa fa-commenting-o" aria-hidden="true"> Start a group chat</i></a>
+            {% endif %}
+        </div>
+        <div class="col-lg-6">
+            <h1 id="chat_type">Public chat</h1>
+            <div class="panel-heading top-bar">
+                <div class="col-md-8 col-xs-8">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span><span id="chat_title_id">Chat</span></h3>
+                </div>
+                <div class="col-md-4 col-xs-4" style="text-align: right;">
+                    <a id="room_edit_link" href="{% url 'chat:edit_room' room=0 %}"><i class="fa fa-pencil edit-chat" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div id="chat_room" type="global">
+            </div>
+            <div class="panel-footer">
+                <div class="input-group">
+                    <input id='chat_input' type="text" class="form-control input-sm chat_input" placeholder="Write your message here..." maxlength="1000">
+                    <span class="input-group-btn">
+                        <label id="image-label" class="btn btn-default btn-file">
+                            <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> 
+                            <input type="file" name="image" id="chat_file_input" style="display: none;">
+                        </label>
+                        <button class="btn btn-primary" id="btn-chat"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            {% if requests_received %}
+            <h1>Friend requests</h1>
+            <div id="friend_request_received">
+                <ul class="list-group">
+                {% for user in requests_received %}
+                    <li class="list-group-item">
+                        <div class="list-group-left">
+                            <img src="media/{{ user.profile.profile_photo }}" class="img-circle user-img" alt="Cinque Terre" width="304" height="236">
+                            <i class="user-name" username="{{user.username}}"> {{ user.username }} </i>
+                        </div>
+                        <div class="list-group-right">
+                            <a href="{% url 'users:change_friends' action='add' pk=user.pk %}" class="btn btn-sm btn-success" ><i class="fa fa-check" aria-hidden="true"></i></a>
+                        </div>
+                    </li>   
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% if requests_sent %}
+            <h1>Requests sent</h1>
+            <div id="friend_request_sent">
+                <ul class="list-group">
+                {% for user in requests_sent %}
+                    <li class="list-group-item"> 
+                        <div class="list-group-left">
+                            <img src="/media/{{ user.profile.profile_photo }}" class="img-circle user-img" alt="Cinque Terre" width="304" height="236">
+                            <i class="user-name" username="{{user.username}}"> {{ user.username }} </i>
+                        </div>
+                        <div class="list-group-right">
+                            <a href="{% url 'users:change_friend_request' action='cancel' pk=user.pk %}" class="btn btn-sm btn-warning" ><i class="fa fa-ban" aria-hidden="true"></i></a>
+                        </div>
+                    </li>  
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% if users %}
+            <h1>Users list</h1>
+            <div id="users">
+                <ul class="list-group">
+                {% for user in users %}
+                    <li class="list-group-item">
+                        <div class="list-group-left">
+                            <img src="/media/{{ user.profile.profile_photo }}" class="img-circle user-img" alt="Cinque Terre" width="304" height="236">
+                            <i class="user-name" username="{{user.username}}"> {{ user.username }} </i>
+                        </div>
+                        <div class="list-group-right">
+                            <a href="{% url 'users:change_friend_request' action='send' pk=user.pk %}" class="btn btn-sm btn-success"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                        </div>
+                    </li>  
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+
+<script>
+
+var room_to_load = "{{ roomID }}";
+var group_room_to_load = "{{ group_roomID }}";
+
+var user_id = "{{ current_user_id }}";
+
+socket = new WebSocket("ws://" + window.location.host + "/chat/");
+
+socket.onopen = function (event) {
+    if(room_to_load != "False"){
+            
+            elements = document.getElementById("friends").getElementsByClassName("list-group-item");
+
+            for(var i=0; i<elements.length; i++){
+                link = elements[i].getElementsByClassName("start-chat")[0];
+                if( link.getAttribute("room") == room_to_load){
+                    link.click();
+                    break;
+                }
+            }
+
+    }else if(group_room_to_load != "False"){
+
+        elements = document.getElementById("group-chats").getElementsByClassName("list-group-item");
+
+        for(var i=0; i<elements.length; i++){
+            link = elements[i];
+            if( link.getAttribute("room") == group_room_to_load){
+                link.click();
+                break;
+            }
+        }
+
+        }else{
+            load_global_messages();
+        }
+};
+
+socket.onmessage = function(e) {
+
+    var data = JSON.parse(e.data);
+
+    if(data.content_type == "text"){
+
+        if ( parseInt(user_id, 10) == parseInt(data.user_id,10) ){
+            var newmsg = sent_message_template(data.message, data.username, data.user_image, new Date(Date.now()).toLocaleString('lt'));
+        }else{
+            var newmsg = got_message_template(data.message, data.username, data.user_image, new Date(Date.now()).toLocaleString('lt'));
+        }
+        document.getElementById("room-" + data.room).innerHTML = document.getElementById("room-" + data.room).innerHTML + newmsg;
+        document.getElementById('chat_room').scrollTop = document.getElementById('chat_room').scrollHeight;
+    
+    }else if (data.content_type == "joined"){
+
+        elements = document.getElementById("friends").getElementsByClassName("list-group-item");
+        for (var i=0; i<elements.length; i++){
+            elements[i].style.background = "#f8f8f8";
+        }
+        
+        document.getElementById('chat_room').style.background = "#" + data.room_background;
+        document.getElementsByClassName('selected')[0].parentElement.parentElement.style.background = "#" + data.room_background;
+
+        /* Getting private chat messages */
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //console.log(this.responseText);
+                messages = JSON.parse(this.responseText);
+               
+                for(message in messages){
+                    if ( parseInt(user_id, 10) == parseInt(messages[message].user_id, 10) ){
+                        if(messages[message].content_type == "text"){
+                            var newmsg = sent_message_template(messages[message].message, messages[message].username, messages[message].profile_photo, messages[message].created);
+                        }else if(messages[message].content_type == "image"){
+                            var newmsg = sent_image_template(messages[message].message, messages[message].username, messages[message].profile_photo, messages[message].created);
+                        }
+                    } else {
+                        if(messages[message].content_type == "text"){
+                            var newmsg = got_message_template(messages[message].message, messages[message].username, messages[message].profile_photo, messages[message].created, "private", messages[message].message_pk);
+                        }else if(messages[message].content_type == "image"){
+                            var newmsg = got_image_template(messages[message].message, messages[message].username, messages[message].profile_photo, messages[message].created, "private", messages[message].message_pk);
+                        }
+                    }
+                    document.getElementById("room-" + messages[message].room).innerHTML = newmsg + document.getElementById("room-" + messages[message].room).innerHTML;                           
+                }
+                document.getElementById('chat_room').scrollTop = document.getElementById('chat_room').scrollHeight;
+            }
+        };
+        /* Getting private chat messages */
+        xhttp.open("GET", "/chat/get_messages/" + data.room + "/", true);
+        xhttp.send();
+
+    }else if (data.content_type == "image"){
+
+        if ( parseInt(user_id, 10) == parseInt(data.user_id,10) ){
+            var newmsg = sent_image_template(data.message, data.username, data.user_image, new Date(Date.now()).toLocaleString('lt'));
+        }else{
+            var newmsg = got_image_template(data.message, data.username, data.user_image, new Date(Date.now()).toLocaleString('lt'));
+        }
+        document.getElementById("room-" + data.room).innerHTML = document.getElementById("room-" + data.room).innerHTML + newmsg;
+        document.getElementById('chat_room').scrollTop = document.getElementById('chat_room').scrollHeight;
+
+    }else if (data.content_type == "joined_a_group"){
+
+        elements = document.getElementById("group-chats").getElementsByClassName("list-group-item");
+
+        for (var i=0; i<elements.length; i++){
+            elements[i].style.background = "#f8f8f8";
+        }  
+
+        document.getElementById('chat_room').style.background = "#" + data.room_background;
+        document.getElementsByClassName('selected')[0].parentElement.parentElement.style.background = "#" + data.room_background;
+
+        var xhttp = new XMLHttpRequest();
+        /* Getting group chat messages */
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //console.log(this.responseText);
+                messages = JSON.parse(this.responseText);
+                for(message in messages){
+                    if ( parseInt(user_id, 10) == parseInt(messages[message].user_id, 10) ){
+                        if(messages[message].content_type == "text"){
+                            var newmsg = sent_message_template(messages[message].message, messages[message].username, messages[message].profile_photo, messages[message].created);
+                        }else if(messages[message].content_type == "image"){
+                            var newmsg = sent_image_template(messages[message].message, messages[message].username, messages[message].profile_photo, messages[message].created);
+                        }
+                    } else {
+                        if(messages[message].content_type == "text"){
+                            var newmsg = got_message_template(messages[message].message, messages[message].username, messages[message].profile_photo, messages[message].created, "group", messages[message].message_pk);
+                        }else if(messages[message].content_type == "image"){
+                            var newmsg = got_image_template(messages[message].message, messages[message].username, messages[message].profile_photo, messages[message].created, "group", messages[message].message_pk);
+                        }
+                    }
+                    document.getElementById("room-" + messages[message].group).innerHTML = newmsg + document.getElementById("room-" + messages[message].group).innerHTML;                           
+                }
+                document.getElementById('chat_room').scrollTop = document.getElementById('chat_room').scrollHeight;
+            }
+        };
+        /* Getting group chat messages */
+        xhttp.open("GET", "/chat/get_group_messages/" + data.room + "/", true);
+        xhttp.send();
+    }
+
+}
+
+/*  All the friends chat buttons are bind to 
+    open a private chat window and to send join command */
+
+try{
+    var elements = document.getElementById('friends').getElementsByTagName('a');
+}catch(e){
+    var elements = [];
+}
+
+document.getElementById('chat_room').scrollTop = document.getElementById('chat_room').scrollHeight;
+
+for (var i=0; i<elements.length; i++){
+    elements[i].addEventListener('click', (function(){
+        var name = elements[i].getAttribute("username");
+        var room = elements[i].getAttribute("room");
+        var element = elements[i];
+        return function(){
+
+            document.getElementById("chat_type").innerHTML = "Private chat";
+            document.getElementById('chat_title_id').innerText = "Chatting with " + name;
+
+            if( document.getElementById("friends").getElementsByClassName("selected").length  )  {
+                document.getElementById("friends").getElementsByClassName("selected")[0].classList.remove("selected");
+            }
+            element.className += " selected";
+
+            document.getElementById('chat_room').setAttribute("type", "private");
+            link = document.getElementById("room_edit_link").href.split("/")
+            link[link.length-2] = room
+            link = document.getElementById("room_edit_link").href = link.join("/")
+
+            var roomdiv = "<div id='room-" + room + "'></div>";
+            document.getElementById('chat_room').innerHTML = roomdiv;   
+            socket.send(
+                    JSON.stringify({
+                        "command": "join",
+                        "room": room,
+                    })
+            );
+        };
+    })());
+}
+
+/*  All the group chat buttons are bind to 
+    create and open a group chat window and 
+    to send group_join command */
+
+try{
+    //var elements = document.getElementById('group-chats').getElementsByTagName('a');
+    var elements = document.getElementById('group-chats').getElementsByTagName('li');
+}catch(e){
+    var elements = [];
+}
+
+document.getElementById('chat_room').scrollTop = document.getElementById('chat_room').scrollHeight;
+
+for (var i=0; i<elements.length; i++){
+    elements[i].addEventListener('click', (function(){
+        var name = elements[i].getAttribute("title");
+        var room = elements[i].getAttribute("room");
+        var element = elements[i];
+        return function(){
+
+            document.getElementById("chat_type").innerHTML = "Group chat";
+            document.getElementById('chat_title_id').innerText = name;
+
+            if( document.getElementById("group-chats").getElementsByClassName("selected").length  )  {
+                document.getElementById("group-chats").getElementsByClassName("selected")[0].classList.remove("selected");
+            }
+            element.className += " selected";
+
+            document.getElementById('chat_room').setAttribute("type", "group");
+            link = document.getElementById("room_edit_link").href.split("/")
+            link[link.length-2] = room
+            link[link.length-3] = "edit-group-room"
+            link = document.getElementById("room_edit_link").href = link.join("/")
+
+            var roomdiv = "<div id='room-" + room + "'></div>";
+            document.getElementById('chat_room').innerHTML = roomdiv;   
+            socket.send(
+                    JSON.stringify({
+                        "command": "group_join",
+                        "room": room,
+                    })
+            );
+        };
+    })());
+}
+
+document.getElementById('btn-chat').addEventListener('click', function(){
+
+    input = document.getElementById('chat_input').value;
+
+    if(input.trim() == ""){
+        return
+    }
+
+    document.getElementById('chat_input').value = '';
+
+    message_type = document.getElementById('chat_room').getAttribute('type');
+
+    switch(message_type) {
+        case "private":
+            room = document.getElementById('chat_room').getElementsByTagName('div')[0].id;
+            room = room.split("-");
+            room = room[room.length-1];
+            break;
+        case "global":
+            room = "global";
+            break;
+        case "group":
+            room = document.getElementById('chat_room').getElementsByTagName('div')[0].id;
+            room = room.split("-");
+            room = room[room.length-1];
+            break;
+        default:
+            room = "global";
+            break;
+    }
+
+    socket.send(
+        JSON.stringify({
+            "command": "send",
+            "message": input,
+            "room": room,
+            "content_type": "text",
+            "message_type": message_type,
+        })
+    );
+});
+
+
+document.getElementById('chat_file_input').addEventListener('change', function(){
+    
+    var file = this.files[0];
+    name = file.name;
+    size = file.size;
+    type = file.type;
+
+    if(file.name.length < 1) {
+    }
+    else if(file.size > 100000) {
+        alert("The file is too big");
+    }
+    else if(file.type != 'image/png' && file.type != 'image/jpg' && file.type != 'image/gif' && file.type != 'image/jpeg' ) {
+        alert("The file does not match png, jpg or gif");
+    }
+    else {
+        
+        var formData = new FormData();
+        room = document.getElementById('chat_room').getElementsByTagName('div')[0].id
+        room = room.split("-")
+        room = room[room.length-1];
+        formData.append("image", file);
+        formData.append("room", room);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/chat/upload_photo/', true);
+        xhr.send(formData);
+
+        xhr.onreadystatechange = function() {
+            
+            if (this.readyState == 4 && this.status == 200) {
+                response = JSON.parse(this.responseText);
+                message_type = document.getElementById('chat_room').getAttribute('type');
+                socket.send(
+                    JSON.stringify({
+                        "command": "send",
+                        "message": response.imagename,
+                        "room": response.room,
+                        "content_type": "image",
+                        "message_type": message_type,
+                    })
+                );
+                document.getElementById('chat_file_input').value = '';
+            }
+        };
+    }
+});
+
+
+/* Loading global chat messages to container with id room-global */
+function load_global_messages(){
+
+    var roomdiv = "<div id='room-global'></div>";
+
+    document.getElementById('chat_room').innerHTML = roomdiv;      
+
+    
+    var xhttp = new XMLHttpRequest();
+    /*  Getting global messages history */
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+
+            messages = JSON.parse(this.responseText);
+              
+            for(message in messages){
+                if ( parseInt(user_id, 10) == parseInt(messages[message].user_id, 10) ){
+                    if(messages[message].content_type == "text"){
+                        var newmsg = sent_message_template(messages[message].message, messages[message].username, messages[message].profile_photo, messages[message].created);
+                    }else if(messages[message].content_type == "image"){
+                        var newmsg = sent_image_template(messages[message].message, messages[message].username, messages[message].profile_photo, messages[message].created);
+                    }
+                } else {
+                    if(messages[message].content_type == "text"){
+                        var newmsg = got_message_template(messages[message].message, messages[message].username, messages[message].profile_photo, messages[message].created, "group", messages[message].message_pk);
+                    }else if(messages[message].content_type == "image"){
+                        var newmsg = got_image_template(messages[message].message, messages[message].username, messages[message].profile_photo, messages[message].created, "group", messages[message].message_pk);
+                    }
+                }
+                document.getElementById("room-global").innerHTML = newmsg + document.getElementById("room-global").innerHTML;                           
+            }
+            document.getElementById('chat_room').scrollTop = document.getElementById('chat_room').scrollHeight;
+        }
+    };
+    /*  Getting global messages history */
+    xhttp.open("GET", "/chat/get_group_messages/global/", true);
+    xhttp.send();
+}
+
+function got_message_template(text, user, profile_image, created, chat_type, message_pk){
+    
+    return '<div class="row msg_container base_receive">' +
+        '<div class="col-md-2 col-xs-2 avatar">' +
+            '<img src="/media/' + profile_image + '" class=" img-responsive ">' +
+        '</div>' +
+        '<div class="col-md-10 col-xs-10">'+
+            '<div class="messages msg_receive">'+
+                '<p>' + text + '</p>'+
+                '<button onclick="reportMessage(\'' + chat_type + '\', ' + message_pk + ')" class="report-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> </button>' +
+                '<time datetime="' + created + '">' + user + ' ' + created+' </time>'+
+            '</div>'+
+        '</div>'+
+    ' </div>';
+}
+function sent_message_template(text, user, profile_image, created){
+    return '<div class="row msg_container base_sent">'+
+               '<div class="col-md-10 col-xs-10">' +
+                   '<div class="messages msg_sent">'+
+                       '<p>' + text + '</p>'+
+                       '<time datetime="' + created + '">' + user + ' ' + created+' </time>'+
+                   '</div>'+
+                '</div>'+
+                '<div class="col-md-2 col-xs-2 avatar">'+
+                    '<img src="/media/' + profile_image + '" class=" img-responsive ">'+
+                '</div>'+
+            '</div>';
+}
+function got_image_template(text, user, profile_image, created, chat_type, message_pk){
+    return '<div class="row msg_container base_receive">' +
+        '<div class="col-md-2 col-xs-2 avatar">' +
+            '<img src="/media/' + profile_image + '" class=" img-responsive ">' +
+        '</div>' +
+        '<div class="col-md-10 col-xs-10">'+
+            '<div class="messages msg_receive">'+
+                '<img class="message-img" src="/media/room_images/' + text + '" />'+
+                '<button onclick="reportMessage(\'' + chat_type + '\', ' + message_pk + ')" class="report-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> </button>' +
+                '<time datetime="' + created + '">' + user + ' ' + created+' </time>'+
+            '</div>'+
+        '</div>'+
+    ' </div>';
+}
+function sent_image_template(text, user, profile_image, created){
+    return '<div class="row msg_container base_sent">'+
+               '<div class="col-md-10 col-xs-10">'+
+                   '<div class="messages msg_sent">'+
+                       '<img class="message-img" src="/media/room_images/' + text + '" />'+
+                       '<time datetime="' + created + '">' + user + ' ' + created+' </time>'+
+                   '</div>'+
+                '</div>'+
+                '<div class="col-md-2 col-xs-2 avatar">'+
+                    '<img src="/media/' + profile_image + '" class=" img-responsive ">'+
+                '</div>'+
+            '</div>';
+}
+
+document.addEventListener("keydown", function(e){
+    if (13 == e.keyCode) {
+        document.getElementById("btn-chat").click();
+    }
+});
+function reportMessage(type, id){
+    var xhttp = new XMLHttpRequest();
+    /* Message report request response */
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            response = JSON.parse(this.responseText);
+            alert(response.status);
+        }
+    };
+    /*  Sending message report request */
+    xhttp.open("GET", "/chat/report_message/"  + type + "/" + id + "/", true);
+    xhttp.send();
+}
+
+
+</script>
+
+{% endblock content %}
