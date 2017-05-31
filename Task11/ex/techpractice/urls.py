@@ -21,13 +21,10 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from ex import views
 
 
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^testform/', views.testform, name='form1'),
     url(r'^$', views.index, name='index'),
     url(r'^registration/', views.registration, name='registration'),
-    url(r'^objects/(?P<obj_id>[0-9]+)/$', views.object_view, name='objects'), # ex: /objects/5/
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
