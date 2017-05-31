@@ -56,7 +56,7 @@ def validation(request):
     messages = ['Sorry! Something went wrong(((']
     if request.method == 'GET':
         u = TheUser.objects.filter(nick=request.GET['nick'])
-        if len(u) > 0 & len(Codes.objects.filter(code=request.GET['code'], user=u[0])) == 1:
+        if (len(u) > 0) & (len(Codes.objects.filter(code=request.GET['code'], user=u[0])) == 1):
             u.update(validation=True)
             messages = ['Congratulations! Your account was successfully validated']
     template = loader.get_template('message.html')
