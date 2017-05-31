@@ -15,12 +15,12 @@
           <div class="row">
             <div class="well span6 offset3">
               <legend>Input your personal data</legend>
-            	<form name="reg" class="cell">
-                	<input class="input span4" type ="text" id="text" required placeholder="Your nick" >
+            	<form name="reg" class="cell" method="post">
+                	<input class="input span4" type ="text" id="text" name="nick" required placeholder="Your nick" >
                   <label for="text" class="span2 ">Input your nickname</label>
-                	<input class="input span4" type ="email" id="email" required placeholder="Your e-mail" >
+                	<input class="input span4" type ="email" id="email" name="email" required placeholder="Your e-mail" >
                   <label for="email" class="span2">Input your e-mail</label>
-                	<input class="input span4" type ="password" id="passwd" required placeholder="Password" >
+                	<input class="input span4" type ="password" id="passwd" name="password" required placeholder="Password" >
                   <label for="passwd" class="span2">Input your password</label>
                 	<input class="input span4" type ="password" id="confpasswd" required placeholder="Confirm password" >
                   <label for="confpasswd" class="span2">Confirm your password</label>

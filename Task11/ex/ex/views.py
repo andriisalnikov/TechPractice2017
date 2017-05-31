@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.template import loader
 from django.http import HttpResponse
 from .models import TheUser, FileSet, TheFile, Codes
@@ -7,11 +8,26 @@ import hashlib
 import random
 import string
 
+def passwordHash(password):
+    m = hashlib.md5()
+    salt = "vex"
+    m.update(salt.encode('utf-8') + password.encode('utf-8'))
+    return m.hexdigest()
 
 def index(request):
-    objects_list = FileSet.objects.order_by('key')
+    message=''
+    if request.method == 'POST':
+        users = TheUser.objects.filter(nick=request.POST['nick'], password_hash=passwordHash(request.POST['password']))
+        if len(users) == 1:
+            if users[0].validation:
+                request.session['nick'] = request.POST['nick']
+                return redirect('myprofile')
+            else:
+                message = 'Please validate your account! Validation link was sent to your email.'
+        else:
+            message = 'Logic/password is incorrect'
     template = loader.get_template('index.html')
-    context = { 'objects_list': objects_list }
+    context = { 'message': message }
     return HttpResponse(template.render(context, request))
 
 
@@ -25,25 +41,25 @@ def registration(request):
             messages.append('Sorry, Nick ' + request.POST['nick'] + ' is already in use.')
         if mail_is_used:
             messages.append('Sorry, E-mail ' + request.POST['email'] + ' is already in use.')
-        context = {'messages': messages}
         if (not nick_is_used) & (not mail_is_used):
-            password = request.POST['password']
-            salt = "vex"
-            m = hashlib.md5()
-            m.update(salt.encode('utf-8') + password.encode('utf-8'))
-            u = TheUser(nick=request.POST['nick'], password_hash=m.hexdigest(), email=request.POST['email'])
-            u.save()
             somecode = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(32))
-            p = Codes(user=u, code=somecode)
-            p.save()
-            send_mail(
+            mail_was_sent = send_mail(
                 'VEX.NET validation',
-                'Here is your validation link: http://127.0.0.1:8000/validation/?nick=' + request.POST['nick'] + '&code=' + somecode,
+                'Here is your validation link: http://127.0.0.1:8000/validation/?nick=' + request.POST[
+                    'nick'] + '&code=' + somecode,
                 'vex.validation@gmail.com',
                 [request.POST['email']],
                 fail_silently=False,
             )
-            context = {'messages': ['Thanks for registration! Confirmation link was sent to email ' + request.POST['email']]}
+            if mail_was_sent:
+                u = TheUser(nick=request.POST['nick'], password_hash=passwordHash(request.POST['password']), email=request.POST['email'])
+                u.save()
+                p = Codes(user=u, code=somecode)
+                p.save()
+                messages.append('Thanks for registration! Confirmation link was sent to email ' + request.POST['email'])
+            else:
+                messages.append('Email was not sent! Please try again later.')
+        context = { 'messages': messages }
         return HttpResponse(template.render(context, request))
 
     else:
@@ -56,10 +72,16 @@ def validation(request):
     messages = ['Sorry! Something went wrong(((']
     if request.method == 'GET':
         u = TheUser.objects.filter(nick=request.GET['nick'])
-        if (len(u) > 0) & (len(Codes.objects.filter(code=request.GET['code'], user=u[0])) == 1):
+        c = Codes.objects.filter(code=request.GET['code'], user=u[0])
+        if (len(u) > 0) & (len(c) == 1):
             u.update(validation=True)
             messages = ['Congratulations! Your account was successfully validated']
+            c.delete()
     template = loader.get_template('message.html')
     context = {'messages': messages}
     return HttpResponse(template.render(context, request))
 
+def myprofile(request):
+    template = loader.get_template('myprofile.html')
+    context = { 'nick':request.session['nick'] }
+    return HttpResponse(template.render(context, request))

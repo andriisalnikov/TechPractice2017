@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^registration/', views.registration, name='registration'),
     url(r'^validation/', views.validation, name='registration'),
+    url(r'^myprofile/', views.myprofile, name='myprofile')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

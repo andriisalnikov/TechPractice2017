@@ -23,13 +23,15 @@
 			<div class="row top-buffer" >
 				<div class="span4 offset9">
               	<legend>Authorization</legend>
-            	<form name="reg" class="cell" >
-                	<input class="input span4" type ="text" id="text" required placeholder="Login" >               
-                	<input class="input span4" type ="password" id="passwd" required placeholder="Password" > 
+            	<form name="reg" class="cell" method="post">
+                    {% csrf_token %}
+                	<input class="input span4" type ="text" id="text" name="nick" required placeholder="Login" >
+                	<input class="input span4" type ="password" id="passwd" name="password" required placeholder="Password" >
                 	<div class="row">                
 	                    <button type ="submit" class="btn btn-success span2">Sign in</button>
 	                    <button type ="button" class="btn btn-inverse span2" onClick='location.href="registration"'>Sign up</button>
 	                </div>
+                    <div>{{ message }}</div>
                 </form>
                 </div>
 			</div>
