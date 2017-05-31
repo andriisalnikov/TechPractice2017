@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>EX.UA ALIVE!</title>
+		<link href="bootstrap.css" rel="stylesheet">
+		<link href="main_page.css" rel="stylesheet">
+	</head>
+	<body>
+		<header>
+			<h1>EX.UA NOT DEAD!!</h1>
+		</header>
+		<div class="container">
+			
+			<div class="row top-fetch">
+				
+				<form class="form-inline">
+					<input class="input span6" type ="text" pattern="^[ 0-9]+$" id="text" required placeholder="Insert Key" size="50" oninvalid ="setCustomValidity('The key must contain only numbers')" oninput="setCustomValidity('')">
+					<button class="btn btn-success">Fetch</button>
+				</form>
+				
+			<div class="row top-buffer" >
+				<div class="span4 offset9">
+              	<legend>Authorization</legend>
+            	<form name="reg" class="cell" >
+                	<input class="input span4" type ="text" id="text" required placeholder="Login" >               
+                	<input class="input span4" type ="password" id="passwd" required placeholder="Password" > 
+                	<div class="row">                
+	                    <button type ="submit" class="btn btn-success span2">Sign in</button>
+	                    <button type ="button" class="btn btn-inverse span2" onClick='location.href="registration_form.html#"'>Sign up</button> 
+	                </div>
+                </form>
+            </div>
+			</div>
+			
+		</div>
+		<script src="jquery.js"></script>
+		<script src="bootstrap.min.js"></script>
+	</body>
+</html>

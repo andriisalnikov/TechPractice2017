@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>EX.UA ALIVE!</title>
+        <link rel="stylesheet" type="text/css" href="registration_form.css">
+        <link href="bootstrap.css" rel="stylesheet">
+        <script async type="text/javascript" src="conf_passwd.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>Registration Form</h1>
+        </header>
+        <div class="container">
+          <div class="row">
+            <div class="well span6 offset3">
+              <legend>Input your personal data</legend>
+            	<form name="reg" class="cell">
+                	<input class="input span4" type ="text" id="text" required placeholder="Your nick" >
+                  <label for="text" class="span2 ">Input your nickname</label>
+                	<input class="input span4" type ="email" id="email" required placeholder="Your e-mail" >
+                  <label for="email" class="span2">Input your e-mail</label>
+                	<input class="input span4" type ="password" id="passwd" required placeholder="Password" >
+                  <label for="passwd" class="span2">Input your password</label>
+                	<input class="input span4" type ="password" id="confpasswd" required placeholder="Confirm password" >
+                  <label for="confpasswd" class="span2">Confirm your password</label>
+                  <button type ="submit" class="btn btn-block btn-success">Register me</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <script src="jquery.js"></script>
+        <script src="bootstrap.min.js"></script>
+    </body>
+</html>

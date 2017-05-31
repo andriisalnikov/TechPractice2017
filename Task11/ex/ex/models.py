@@ -46,6 +46,6 @@ class TheFile(models.Model):
 
 class Codes(models.Model):
     user = models.ForeignKey(TheUser)
-    code = models.CharField(max_length=128)
+    code = models.CharField(max_length=32)
     created_date = models.DateTimeField(default=timezone.now)
     expire_date = models.DateTimeField(default=three_hours_hence)

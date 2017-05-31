@@ -1,0 +1,39 @@
+.input
+{
+	border-radius: 7px;
+}
+.cell
+{
+	display: table;
+	float: left;
+}
+h1
+{
+	font-style: italic;
+	text-align: center;
+}
+body
+{
+	background-image: url("background.jpg");
+}
+label
+{
+	font-style: italic;
+}
+fieldset
+{
+	border-radius: 3px;
+	border-color: black;
+}
+legend
+{
+	font-size: 20pt;
+	font-style: italic;
+}
+@media screen and (max-device-width:820px)
+{
+	label
+	{
+		display: none;
+	}
+}
