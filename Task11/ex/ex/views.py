@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
 from .models import TheUser, FileSet, TheFile, Codes
+from django.core.mail import send_mail
 import hashlib
 import random
 import string
@@ -35,6 +36,13 @@ def registration(request):
             somecode = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(32))
             p = Codes(user=u, code=somecode)
             p.save()
+            send_mail(
+                'VEX.NET validation',
+                'Here is your validation link: http://127.0.0.1:8000/validation/?nick=' + request.POST['nick'] + '&code=' + somecode,
+                'vex.validation@gmail.com',
+                [request.POST['email']],
+                fail_silently=False,
+            )
             context = {'messages': ['Thanks for registration! Confirmation link was sent to email ' + request.POST['email']]}
         return HttpResponse(template.render(context, request))
 
