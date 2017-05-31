@@ -16,7 +16,7 @@ def index(request):
 
 def registration(request):
     if request.method == 'POST':
-        template = loader.get_template('../Frontend_HERE/../templates/message.html')
+        template = loader.get_template('message.html')
         nick_is_used = len(TheUser.objects.filter(nick=request.POST['nick'])) > 0
         mail_is_used = len(TheUser.objects.filter(email=request.POST['email'])) > 0
         messages = []
@@ -24,7 +24,7 @@ def registration(request):
             messages.append('Sorry, Nick ' + request.POST['nick'] + ' is already in use.')
         if mail_is_used:
             messages.append('Sorry, E-mail ' + request.POST['email'] + ' is already in use.')
-        context = { 'messages': messages }
+        context = {'messages': messages}
         if (not nick_is_used) & (not mail_is_used):
             password = request.POST['password']
             salt = "vex"
@@ -42,4 +42,16 @@ def registration(request):
         template = loader.get_template('registration.html')
         context = {}
         return HttpResponse(template.render(context, request))
+
+
+def validation(request):
+    messages = ['Sorry! Something went wrong(((']
+    if request.method == 'GET':
+        u = TheUser.objects.filter(nick=request.GET['nick'])
+        if len(u) > 0 & len(Codes.objects.filter(code=request.GET['code'], user=u[0])) == 1:
+            u.update(validation=True)
+            messages = ['Congratulations! Your account was successfully validated']
+    template = loader.get_template('message.html')
+    context = {'messages': messages}
+    return HttpResponse(template.render(context, request))
 
