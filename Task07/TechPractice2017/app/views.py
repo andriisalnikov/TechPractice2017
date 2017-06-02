@@ -25,6 +25,38 @@ def home(request):
         }
     )
 
+def order_asc(request):
+    """Renders the home page."""
+    assert isinstance(request, HttpRequest)
+
+    all_event = models.DisMostPop()
+
+    return render(
+        request,
+        'app/index.html',
+        {
+            'title':'Найбільш популярні',
+            'year':datetime.now().year,
+            'all_event':all_event
+        }
+    )
+
+def order_desc(request):
+    """Renders the home page."""
+    assert isinstance(request, HttpRequest)
+
+    all_event = models.DisLessPop()
+
+    return render(
+        request,
+        'app/index.html',
+        {
+            'title':'Найменш популярні',
+            'year':datetime.now().year,
+            'all_event':all_event
+        }
+    )
+
 def about(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)

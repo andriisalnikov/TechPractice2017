@@ -98,6 +98,13 @@ def GetAllEvent():
     evt = EVENT.objects.all()
     return evt
 
+//TODO
+def GetAllEventOrder(order, reverse):
+    '''return all event'''
+    from app.models import EVENT
+    evt = EVENT.objects.order_by(-order)
+    return evt
+
 def DisplayAll(event): #returns all events (not finished!)
     from app.models import EVENT
     allevents=[]
@@ -111,7 +118,14 @@ def DisMostPop(event):
     from app.models import Count
     EVENT.objects.order_by(EVENT.objects.annotate(partcount=Count('participants'))).aggregate(Max(partcount))
     pass #finish!!!
-    
+
+def DisLessPop(event):
+    from app.models import EVENT
+    from app.models import Max
+    from app.models import Count
+    EVENT.objects.order_by(-EVENT.objects.annotate(partcount=Count('participants'))).aggregate(Max(partcount))
+    pass  # finish!!!
+
 def Participate(user, event):
     from app.models import USER
     from app.models import EVENT
