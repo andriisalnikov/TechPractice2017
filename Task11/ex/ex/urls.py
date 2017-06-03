@@ -22,5 +22,9 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^registration/', views.registration, name='registration'),
     url(r'^validation/', views.validation, name='validation'),
-    url(r'^myprofile/', views.myprofile, name='myprofile')
+    url(r'^myprofile/', views.myprofile, name='myprofile'),
+    url(r'^create_fileset/', views.create_fileset, name='create_fileset'),
+    url(r'^logout/', views.logout, name='logout'),
+    url(r'^fileset/(?P<fileset_id>[0-9]+)/', views.fileset, name='fileset'),
+    url(r'^fileset/(?P<fileset_id>[0-9]+)/change_description', views.change_description, name='change_description'),
 ]

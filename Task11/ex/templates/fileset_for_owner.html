@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }}</title>
+</head>
+<body>
+Fileset: {{ name }}<br>
+New description:
+    <form name="reg" method="post" action="change_description/">
+        {% csrf_token %}
+        <textarea cols="40" rows="5" name="description" placeholder="Description">{{ description }}</textarea>
+        <button type ="submit">Save</button>
+    </form>
+</body>
+</html>

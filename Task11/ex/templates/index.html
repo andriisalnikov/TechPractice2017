@@ -23,6 +23,7 @@
 			<div class="row top-buffer" >
 				<div class="span4 offset9">
               	<legend>Authorization</legend>
+                    <div>Hello, {{ nick }}</div>
             	<form name="reg" class="cell" method="post">
                     {% csrf_token %}
                 	<input class="input span4" type ="text" id="text" name="nick" required placeholder="Login" >

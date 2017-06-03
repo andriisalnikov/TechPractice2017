@@ -7,6 +7,7 @@ from django.utils import timezone
 def seven_days_hence():
     return timezone.now() + timezone.timedelta(days=7)
 
+
 def three_hours_hence():
     return timezone.now() + timezone.timedelta(hours=3)
 

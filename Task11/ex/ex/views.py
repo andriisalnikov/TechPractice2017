@@ -8,14 +8,16 @@ import hashlib
 import random
 import string
 
+
 def passwordHash(password):
     m = hashlib.md5()
     salt = "vex"
     m.update(salt.encode('utf-8') + password.encode('utf-8'))
     return m.hexdigest()
 
+
 def index(request):
-    message=''
+    message = ''
     if request.method == 'POST':
         users = TheUser.objects.filter(nick=request.POST['nick'], password_hash=passwordHash(request.POST['password']))
         if len(users) == 1:
@@ -27,7 +29,12 @@ def index(request):
         else:
             message = 'Logic/password is incorrect'
     template = loader.get_template('index.html')
-    context = { 'message': message }
+    nick = 'guest'
+    try:
+        nick = request.session['nick']
+    except KeyError:
+        pass
+    context = {'message': message, 'nick': nick}
     return HttpResponse(template.render(context, request))
 
 
@@ -59,7 +66,7 @@ def registration(request):
                 messages.append('Thanks for registration! Confirmation link was sent to email ' + request.POST['email'])
             else:
                 messages.append('Email was not sent! Please try again later.')
-        context = { 'messages': messages }
+        context = {'messages': messages}
         return HttpResponse(template.render(context, request))
 
     else:
@@ -81,7 +88,49 @@ def validation(request):
     context = {'messages': messages}
     return HttpResponse(template.render(context, request))
 
+
 def myprofile(request):
     template = loader.get_template('myprofile.html')
-    context = { 'nick':request.session['nick'] }
+    context = {'nick': request.session['nick']}
     return HttpResponse(template.render(context, request))
+
+
+def create_fileset(request):
+    u = TheUser.objects.filter(nick=request.session['nick'])
+    fileset = FileSet(name=request.POST['name'], description=request.POST['description'], user=u[0])
+    if request.POST['password'] != '':
+        fileset.password_hash = passwordHash(request.POST['password'])
+    fileset.save()
+
+    return redirect('/fileset/' + fileset.id.__str__())
+
+
+def fileset(request, fileset_id):
+    f = FileSet.objects.get(id=fileset_id)
+    template = loader.get_template('fileset.html')
+    try:
+        if f.user.nick == request.session['nick']:
+            template = loader.get_template('fileset_for_owner.html')
+    except KeyError:
+        pass
+    array_of_files = []
+    #files = TheFile.objects.filter(fileset=f)
+    #for oneFile in files:
+    #    if not oneFile.deleted:
+    #        array_of_files.append([oneFile.name, 'somehref'])
+    context = {'name': f.name, 'description': f.description, 'files': array_of_files}
+    return HttpResponse(template.render(context, request))
+
+
+def change_description(request, fileset_id):
+    if request.method == 'POST':
+        f = FileSet.objects.filter(id=fileset_id)
+        f.update(description=request.POST['description'])
+    return redirect('/fileset/' + fileset_id.__str__())
+
+def logout(request):
+    try:
+        request.session.flush()
+    except KeyError:
+        pass
+    return redirect('index')
