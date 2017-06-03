@@ -28,3 +28,5 @@ class NewEventForm(forms.Form):
 
 class EventDateForm(forms.Form):
    evt_date = forms.DateField()
+   evt_id = forms.CharField()
+   evt_title = forms.CharField()
