@@ -44,6 +44,20 @@ class VOTE(models.Model):
     usr = models.ForeignKey(USER)
     
 ###############################################################################################################################
+def MakeVote(date, evnt, participant):
+    '''participant must be typeof USER!!!'''
+    from app.models import USER
+    from app.models import MDATE
+    from app.models import EVTDATE
+    from app.models import VOTE
+    dt=MDATE(meetingDateTimeS=date)
+    dt.save()
+    evtdt=EVTDATE(evt=evnt, dat=dt)
+    evtdt.save()
+    Participate(participant, evnt)
+    vt=VOTE(edate=evtdt, usr=participant)
+    vt.save()
+###############################################################################################################################
 
 
 def CreateUser(n, l, e, pas, c):
@@ -158,16 +172,3 @@ def GetParticipantsCount(event):
     return len(partList)
 
 
-
-
-#Statistics ------------------------------------------------------################################
-def GetAllEventsCount():
-    from app.models import EVENT
-    eList = (EVENT.objects.values('eventid').distinct())
-    return len(eList)
-
-def GetVotedUsersCount():
-    from app.models import VOTE
-    from django.db.models import Count
-    uList = (VOTE.objects.values('usr').distinct())
-    return len(uList)
