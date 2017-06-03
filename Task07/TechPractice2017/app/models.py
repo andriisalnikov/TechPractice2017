@@ -49,7 +49,8 @@ def MakeVote(evtdate, participant):
     from app.models import USER
     from app.models import EVTDATE
     from app.models import VOTE
-    Participate(participant, evnt)
+    partevent=evtdate.get(evt)
+    Participate(participant, partevnt)
     vt=VOTE(edate=evtdt, usr=participant)
     vt.save()
     
