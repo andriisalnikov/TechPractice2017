@@ -91,3 +91,29 @@ def about(request):
             'year':datetime.now().year,
         }
     )
+
+from app.forms import NewEventForm
+def creating(request):
+
+    evt_title = "no title"
+    evt_description = "no description"
+
+    if request.method == "POST":
+        # Get the posted form
+        eventForm = NewEventForm(request.POST)
+
+        if eventForm.is_valid():
+            evt_title = eventForm.cleaned_data['evt_title']
+            evt_description = eventForm.cleaned_data['evt_description']
+    else:
+        eventForm = NewEventForm()
+
+    return render(
+        request,
+        'app/creating.html',
+        {
+            'title': 'створення нової події',
+            'evt_title': evt_title,
+            'evt_description': evt_description
+        }
+    )
