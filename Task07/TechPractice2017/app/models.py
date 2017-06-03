@@ -88,6 +88,14 @@ def CreateEvent(nam): #event creation method
     from app.models import EVENT
     evt = EVENT(name=nam)
     evt.save()
+
+
+def CreateEventTotal(name,descript,init_date,vote_start_date,vote_end_date) :
+    from app.models import EVENT
+    evt = EVENT(name=name,details=descript,place='РФФ',date=init_date,votingStart=vote_start_date,votingEnd=vote_end_date)
+    evt.save()
+
+
     
 def EditEvtDetails(detls, evid): #editing event details (can be NULL first)
     from app.models import EVENT
@@ -153,9 +161,13 @@ def DisMostPop():
 
     order = np.argsort(part_count)[::-1]
     all_evnt = np.array(all_evnt)
-    all_evnt = all_evnt[ order ]
 
-    return all_evnt
+    all_evnt_list = []
+    for o in order :
+        curr_evnt = all_evnt[o]
+        all_evnt_list.append(curr_evnt)
+
+    return all_evnt_list
     pass  # finish!!!
 
 

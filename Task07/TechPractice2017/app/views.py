@@ -138,6 +138,8 @@ def creating(request):
             evt_date = eventForm.cleaned_data['evt_date']
             evt_vote_start = eventForm.cleaned_data['evt_vote_start']
             evt_vote_end = eventForm.cleaned_data['evt_vote_end']
+
+            models.CreateEventTotal(evt_title,evt_description,evt_date,evt_vote_start,evt_vote_end)
     else:
         eventForm = NewEventForm()
 

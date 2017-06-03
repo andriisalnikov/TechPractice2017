@@ -19,8 +19,8 @@ class BootstrapAuthenticationForm(AuthenticationForm):
                                    'placeholder':'Password'}))
 
 class NewEventForm(forms.Form):
-   evt_title = forms.CharField(max_length = 100)
-   evt_description = forms.CharField(max_length=500)
+   evt_title = forms.CharField()
+   evt_description = forms.CharField()
    evt_date = forms.DateField()
    evt_vote_start = forms.DateField()
    evt_vote_end = forms.DateField()
