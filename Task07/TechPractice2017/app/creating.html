@@ -39,33 +39,34 @@
 
 <div class="container">
 
-    <form class="form-signin">
+    <form class="form-signin" action = "{% url "app.views.creating" %}"
+         method = "POST" >{% csrf_token %}>
         <h2 class="form-signin-heading">Створення події</h2>
         <label for="inputTitle" class="sr-only">Назва</label>
-        <input type="text" id="inputTitle" class="form-control" placeholder="Назва події" required autofocus>
+        <input type="text" id="inputTitle" class="form-control" name = "evt_title" placeholder="Назва події" required autofocus>
         <label for="inputDescription" class="sr-only">Опис</label>
-        <input type="text" id="inputDescription" class="form-control" placeholder="Опис події" required>
+        <input type="text" id="inputDescription" class="form-control" name = "evt_description" placeholder="Опис події" required>
 
         <h3 class="form-signin-heading">Дати події</h3>
         <p>
         Дата:
-        <input type="date" name="edate">
+        <input type="date" name = "evt_date">
         </p>
 
         <h3 class="form-signin-heading">Межі голосування</h3>
         <p>
         Початок голосування:
             </br>
-        <input type="date" name="vstart">
+        <input type="date" name = "evt_vote_start">
         </p>
 
         <p>
         Кінець голосування:
             </br>
-        <input type="date" name="vfinish">
+        <input type="date" name = "evt_vote_start">
         </p>
 
-        <button class="btn btn-action btn-lg btn-primary btn-block" type="submit">Створити</button>
+        <button class="btn btn-action btn-lg btn-primary btn-block" type="submit" value = "Login" >Створити</button>
     </form>
 
 

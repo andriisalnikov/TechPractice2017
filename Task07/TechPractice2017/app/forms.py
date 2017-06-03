@@ -17,3 +17,10 @@ class BootstrapAuthenticationForm(AuthenticationForm):
                                widget=forms.PasswordInput({
                                    'class': 'form-control',
                                    'placeholder':'Password'}))
+
+class NewEventForm(forms.Form):
+   evt_title = forms.CharField(max_length = 100)
+   evt_description = forms.CharField(max_length=500)
+   event_date = forms.DateInput()
+   vote_start_date = forms.DateInput()
+   vote_end_date = forms.DateInput()

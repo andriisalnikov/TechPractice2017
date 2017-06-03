@@ -118,3 +118,38 @@ def about(request):
             'year':datetime.now().year,
         }
     )
+
+from app.forms import NewEventForm
+def creating(request):
+
+    evt_title = "no title"
+    evt_description = "no description"
+    evt_date = datetime.datetime.now()
+    evt_vote_start = datetime.datetime.now()
+    evt_vote_end = datetime.datetime.now()
+
+    if request.method == "POST":
+        # Get the posted form
+        eventForm = NewEventForm(request.POST)
+
+        if eventForm.is_valid():
+            evt_title = eventForm.cleaned_data['evt_title']
+            evt_description = eventForm.cleaned_data['evt_description']
+            evt_date = eventForm.cleaned_data['evt_date']
+            evt_vote_start = eventForm.cleaned_data['evt_vote_start']
+            evt_vote_end = eventForm.cleaned_data['evt_vote_end']
+    else:
+        eventForm = NewEventForm()
+
+    return render(
+        request,
+        'app/creating.html',
+        {
+            'title': 'створення нової події',
+            'evt_title': evt_title,
+            'evt_description': evt_description,
+            'evt_date': evt_date,
+            'evt_vote_start': evt_vote_start,
+            'evt_vote_end': evt_vote_end
+        }
+    )
