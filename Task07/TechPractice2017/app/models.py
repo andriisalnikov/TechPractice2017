@@ -138,36 +138,18 @@ def DisplayAll(event): #returns all events (not finished!)
 
 def DisLessPop():
     from app.models import EVENT
+    from django.db.models import Count
     
-    all_evnt = EVENT.objects.all()
-    part_count = []
-    for t in all_evnt.annotate(evnt_count=models.Count('participants')):
-        part_count.append(t.evnt_count)
-
-    order = np.argsort(part_count)
-    all_evnt = np.array(all_evnt)
-    all_evnt = all_evnt[ order ]
-
-    return all_evnt 
+    all_evnt = EVENT.objects.annotate(part_count=Count('participants')).order_by('part_count')
+    return all_evnt
     pass #finish!!!
 
 def DisMostPop():
     from app.models import EVENT
-
-    all_evnt = EVENT.objects.all()
-    part_count = []
-    for t in all_evnt.annotate(evnt_count=models.Count('participants')):
-        part_count.append(t.evnt_count)
-
-    order = np.argsort(part_count)[::-1]
-    all_evnt = np.array(all_evnt)
-
-    all_evnt_list = []
-    for o in order :
-        curr_evnt = all_evnt[o]
-        all_evnt_list.append(curr_evnt)
-
-    return all_evnt_list
+    from django.db.models import Count
+    
+    all_evnt = EVENT.objects.annotate(part_count=Count('participants')).order_by('-part_count')
+    return all_evnt
     pass  # finish!!!
 
 
@@ -183,15 +165,15 @@ def GetParticipantsCount(event):
     partList=event.participants.all()
     return len(partList)
 
--#Statistics ------------------------------------------------------################################
- -def GetAllEventsCount():
- -    from app.models import EVENT
- -    eList = (EVENT.objects.values('eventid').distinct())
- -    return len(eList)
- -
- -def GetVotedUsersCount():
- -    from app.models import VOTE
- -    from django.db.models import Count
- -    uList = (VOTE.objects.values('usr').distinct())
- -    return len(uList) 
+#Statistics ------------------------------------------------------################################
+def GetAllEventsCount():
+    from app.models import EVENT
+    eList = (EVENT.objects.values('eventid').distinct())
+    return len(eList)
+ 
+def GetVotedUsersCount():
+    from app.models import VOTE
+    from django.db.models import Count
+    uList = (VOTE.objects.values('usr').distinct())
+    return len(uList) 
 
