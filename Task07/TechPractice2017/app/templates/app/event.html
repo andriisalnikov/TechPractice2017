@@ -31,6 +31,13 @@
             {{ event.votingEnd  }}
         </h3>
 
+
+        <form class="form-signin" action="{% url 'voting' %}" method="POST">
+        {% csrf_token %}>
+
+            <input style="display:none" type="text" name="evt_id" value="{{event.eventid}}">
+            <button class="btn btn-info btn-md" type="submit" value="Login">Прийняти участь</button>
+        </form>
     </div>
 
 
