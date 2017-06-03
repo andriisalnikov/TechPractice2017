@@ -150,3 +150,9 @@ def Participate(user, event):
     from app.models import EVENT
     event.participants.add(user)
     event.save()
+
+def GetParticipantsCount(event):
+    from app.models import EVENT
+    from app.models import USER
+    partList=event.participants.all()
+    return len(partList)
