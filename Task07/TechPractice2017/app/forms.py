@@ -24,3 +24,7 @@ class NewEventForm(forms.Form):
    evt_date = forms.DateField()
    evt_vote_start = forms.DateField()
    evt_vote_end = forms.DateField()
+
+
+class EventDateForm(forms.Form):
+   evt_date = forms.DateField()

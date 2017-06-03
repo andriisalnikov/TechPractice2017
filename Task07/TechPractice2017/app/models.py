@@ -90,11 +90,11 @@ def CreateEvent(nam): #event creation method
     evt.save()
 
 
-def CreateEventTotal(name,descript,init_date,vote_start_date,vote_end_date) :
+def CreateEventTotal(name,descript,init_date,vote_start_date,vote_end_date):
     from app.models import EVENT
     evt = EVENT(name=name,details=descript,place='РФФ',date=init_date,votingStart=vote_start_date,votingEnd=vote_end_date)
     evt.save()
-
+    return evt.id
 
     
 def EditEvtDetails(detls, evid): #editing event details (can be NULL first)

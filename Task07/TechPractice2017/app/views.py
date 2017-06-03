@@ -128,6 +128,8 @@ def creating(request):
     evt_vote_start = datetime.now()
     evt_vote_end = datetime.now()
 
+    evt_id = 0
+
     if request.method == "POST":
         # Get the posted form
         eventForm = NewEventForm(request.POST)
@@ -139,7 +141,17 @@ def creating(request):
             evt_vote_start = eventForm.cleaned_data['evt_vote_start']
             evt_vote_end = eventForm.cleaned_data['evt_vote_end']
 
-            models.CreateEventTotal(evt_title,evt_description,evt_date,evt_vote_start,evt_vote_end)
+            evt_id = models.CreateEventTotal(evt_title,evt_description,evt_date,evt_vote_start,evt_vote_end)
+
+            return render(
+                request,
+                'app/event_date_creating.html',
+                {
+                    'title': 'створення дат для події',
+                    'evt_id': evt_id,
+                    'evt_title': evt_title
+                }
+            )
     else:
         eventForm = NewEventForm()
 
@@ -153,5 +165,34 @@ def creating(request):
             'evt_date': evt_date,
             'evt_vote_start': evt_vote_start,
             'evt_vote_end': evt_vote_end
+        }
+    )
+
+from app.forms import EventDateForm
+def event_date_creating(request):
+
+    evt_date = datetime.now()
+    evt_id = request['evt_id']
+    evt_title = request['evt_title']
+
+    if request.method == "POST":
+        # Get the posted form
+        eventForm = EventDateForm(request.POST)
+
+        if eventForm.is_valid():
+            evt_date = eventForm.cleaned_data['evt_date']
+
+            # evt_id = models.CreateEventTotal(evt_title,evt_description,evt_date,evt_vote_start,evt_vote_end)
+
+    else:
+        eventForm = NewEventForm()
+
+    return render(
+        request,
+        'app/event_date_creating.html',
+        {
+            'title': 'створення нової події',
+            'evt_title': evt_title,
+            'evt_id': evt_id
         }
     )

@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^order_desc', app.views.order_desc, name='order_desc'),
     url(r'^rnd_evnt', app.views.rnd_evnt, name='rnd_evnt'),
     url(r'^creating', app.views.creating, name='creating'),
+    url(r'^event_date_creating', app.views.event_date_creating, name='event_date_creating'),
     url(r'^stats', app.views.stats,name='stats'),
 
     url(r'^login/$',
