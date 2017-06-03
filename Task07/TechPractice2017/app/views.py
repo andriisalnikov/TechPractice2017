@@ -74,6 +74,7 @@ def rnd_evnt(request):
         {
             'title':'Випадкова подія',
             'message':'Your application description page.',
+            'view_decript': 'Найвипадковіша подія у світі, зустрічайте',
             'year':datetime.now().year,
             'event':rnd_event
         }
@@ -172,8 +173,12 @@ from app.forms import EventDateForm
 def event_date_creating(request):
 
     evt_date = datetime.now()
-    evt_id = request['evt_id']
-    evt_title = request['evt_title']
+
+    if 'evt_id' in request :
+        evt_id = request['evt_id']
+    
+    if 'evt_title' in request :
+        evt_title = request['evt_title']
 
     if request.method == "POST":
         # Get the posted form
@@ -181,6 +186,8 @@ def event_date_creating(request):
 
         if eventForm.is_valid():
             evt_date = eventForm.cleaned_data['evt_date']
+            evt_id = eventForm.cleaned_data['evt_id']
+            evt_title = eventForm.cleaned_data['evt_title']
 
             mid = models.MakePossibleDate(evt_date)
             models.MakePairDateEvent(mid,evt_id)
@@ -195,5 +202,22 @@ def event_date_creating(request):
             'evt_title': evt_title,
             'evt_id': evt_id,
             'evt_date': evt_date
+        }
+    )
+
+
+def evnt(request, id) :
+
+    evnt = models.GetEventInfo(id)
+
+    return render(
+        request,
+        'app/event.html',
+        {
+            'title':evnt.name,
+            'view_decript':'Подія',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+            'event':evnt
         }
     )

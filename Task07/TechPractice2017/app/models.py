@@ -30,7 +30,7 @@ class EVENT(models.Model):
     pass
 
 class MDATE(models.Model):
-    mdateid = models.AutoField(primary_key=True)
+    mdateid = models.AutoField("ID",primary_key=True)
     meetingDateTimeS = models.DateField()
     
 class EVTDATE(models.Model):
@@ -39,7 +39,7 @@ class EVTDATE(models.Model):
     dat = models.ForeignKey(MDATE)
     
 class VOTE(models.Model):
-    voteid = models.AutoField(primary_key=True)
+    voteid = models.AutoField("ID",primary_key=True)
     edate = models.ForeignKey(EVTDATE)
     usr = models.ForeignKey(USER)
     
@@ -54,15 +54,19 @@ def MakeVote(evtdate, participant):
     vt=VOTE(edate=evtdt, usr=participant)
     vt.save()
     
-def MakePossibleDate(dt):
-    from app.model import MDATE
+def MakePossibleDate(date):
+    from app.models import MDATE
     dt=MDATE(meetingDateTimeS=date)
     dt.save()
     return dt.mdateid
 
-def MakePairDateEvent(mdate, evnt):
-    from app.model import MDATE
-    from app.model import EVTDATE
+def MakePairDateEvent(mdateId, evntId):
+    from app.models import MDATE
+    from app.models import EVTDATE
+
+    mdate = MDATE.objects.filter(mdateid=mdateId)[0]
+    evnt = EVENT.objects.filter(eventid=evntId)[0]
+
     evtdt=EVTDATE(evt=evnt, dat=mdate)
     evtdt.save()
 ###############################################################################################################################
@@ -120,7 +124,9 @@ def EditEvtVotingPeriod(vst, ven, evid): #editing event voting period (can be NU
 def GetEventInfo(evtid):
     '''returns event object on necessary id'''
     from app.models import EVENT
-    evt = EVENT.objects.get(id=evtid)
+
+    evtid = int(evtid)
+    evt = EVENT.objects.get(eventid=evtid)
     return evt
     
 
@@ -129,6 +135,8 @@ def GetAllEvent():
     from app.models import EVENT 
     evt = EVENT.objects.all()
     return evt
+    
+
 
 def GetAllEventOrder(order, reverse):
     '''return all event'''

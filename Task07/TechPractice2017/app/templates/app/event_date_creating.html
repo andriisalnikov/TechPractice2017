@@ -7,14 +7,16 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <form class="form-signin" action="{% url 'event_date_creating' %}" method="POST">
         {% csrf_token %}>
-        <h2 class="form-signin-heading">Додавання дати до події</h2>
-        <label for="inputTitle" class="sr-only">Подія {{ evt_title }}</label>
+        <h2 class="form-signin-heading">Додавання дати до події :  {{ evt_title }} </h2>
 
         <h3 class="form-signin-heading">Дата події</h3>
         <p>
             Дата:
             <input type="date" name="evt_date">
         </p>
+
+            <input style="display:none" type="text" name="evt_id" value="{{evt_id}}" />
+            <input style="display:none" type="text" name="evt_title" value="{{evt_title}}" />
 
         <button class="btn btn-danger btn-md" type="submit" value="Login">Створити</button>
 
