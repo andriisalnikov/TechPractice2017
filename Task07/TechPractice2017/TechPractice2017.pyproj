@@ -62,6 +62,7 @@
     <Content Include="app\templates\app\event.html" />
     <Content Include="app\templates\app\event_date_creating.html" />
     <Content Include="app\templates\app\stats.html" />
+    <Content Include="app\templates\app\voting.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

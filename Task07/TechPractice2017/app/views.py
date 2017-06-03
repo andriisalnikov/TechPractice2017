@@ -232,16 +232,37 @@ def voting(request) :
 
         if votingForm.is_valid():
             evt_id = votingForm.cleaned_data['evt_id']
+            evt_id = int(evt_id)            
 
             dates = models.GetEvtDatesForEvent(evt_id)
-    else:
-        votingForm = VotingForm()
+            evnt = models.GetEventInfo(evt_id)
 
+            return render(
+                    request,
+                    'app/voting.html',
+                    {
+                        'evnt': evnt,
+                        'evt_dates': dates
+                    }
+            )
+            
+        else:
+            votingForm = VotingForm()
+            return render(request,'app/home.html')
+
+def votedate(request,evtdateid) :
+    evtdateid = int(evtdateid)
+    userId = 1 #login TODO
+
+    models.MakeVote(evtdateid,userId)
+
+    all_event = models.GetAllEvent() 
     return render(
         request,
-        'app/voting.html',
+        'app/index.html',
         {
-            'title': evnt.name,
-            'evt_dates': dates
+            'title':'Домашня сторінка',
+            'year':datetime.now().year,
+            'all_event':all_event
         }
     )

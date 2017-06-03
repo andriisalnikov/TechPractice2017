@@ -44,14 +44,20 @@ class VOTE(models.Model):
     usr = models.ForeignKey(USER)
     
 ###############################################################################################################################
-def MakeVote(evtdate, participant):
+def MakeVote(evtdateId, userId):
     '''participant must be typeof USER!!!'''
     from app.models import USER
     from app.models import EVTDATE
     from app.models import VOTE
-    partevent=evtdate.get(evt)
-    Participate(participant, partevnt)
-    vt=VOTE(edate=evtdt, usr=participant)
+
+    evtdt = EVTDATE.objects.get(evtdateid = evtdateId)
+    user = USER.objects.get(userid = userId)
+
+    event = evtdt.evt
+    event.participants.add(user)
+    event.save()
+
+    vt=VOTE(edate=evtdt, usr=user)
     vt.save()
     
 def MakePossibleDate(date):
@@ -171,12 +177,6 @@ def DisMostPop():
     return all_evnt
     pass  # finish!!!
 
-
-def Participate(user, event):
-    from app.models import USER
-    from app.models import EVENT
-    event.participants.add(user)
-    event.save()
 
 def GetParticipantsCount(event):
     from app.models import EVENT
