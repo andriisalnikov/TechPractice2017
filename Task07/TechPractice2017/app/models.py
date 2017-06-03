@@ -116,14 +116,14 @@ def DisMostPop(event):
     from app.models import EVENT
     from app.models import Max
     from app.models import Count
-    EVENT.objects.order_by(EVENT.objects.annotate(partcount=Count('participants'))).aggregate(Max(partcount))
+    return EVENT.objects.order_by(EVENT.objects.annotate(partcount=Count('participants'))).aggregate(Max(partcount))
     pass #finish!!!
 
 def DisLessPop(event):
     from app.models import EVENT
-    from app.models import Max
+    from app.models import Min
     from app.models import Count
-    EVENT.objects.order_by(-EVENT.objects.annotate(partcount=Count('participants'))).aggregate(Max(partcount))
+    return EVENT.objects.order_by(-EVENT.objects.annotate(partcount=Count('participants'))).aggregate(Min(partcount))
     pass  # finish!!!
 
 def Participate(user, event):
