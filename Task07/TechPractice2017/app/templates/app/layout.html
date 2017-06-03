@@ -62,9 +62,9 @@
                 <li><a href="">More navigation</a></li>-->
               </ul>
               <ul class="nav nav-sidebar">
-                <li><a href="#">Створити подію</a></li>
+                <li><a href="{% url 'creating' %}">Створити подію</a></li>
                 <li><a href="">Створені мною</a></li>
-                <li><a href="#">Статистика</a></li>
+                <li><a href="{% url 'stats' %}">Статистика</a></li>
               </ul>
             </div>
             {% block content %}{% endblock %}

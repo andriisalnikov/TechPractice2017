@@ -156,3 +156,18 @@ def GetParticipantsCount(event):
     from app.models import USER
     partList=event.participants.all()
     return len(partList)
+
+
+
+
+#Statistics ------------------------------------------------------################################
+def GetAllEventsCount():
+    from app.models import EVENT
+    eList = (EVENT.objects.values('eventid').distinct())
+    return len(eList)
+
+def GetVotedUsersCount():
+    from app.models import VOTE
+    from django.db.models import Count
+    uList = (VOTE.objects.values('usr').distinct())
+    return len(uList)

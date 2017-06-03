@@ -79,6 +79,33 @@ def rnd_evnt(request):
         }
     ) 
 
+
+def creating(request):
+    
+    return render(
+        request,
+        'app/creating.html',
+        {
+            'title':'створення нової події'
+        }
+    ) 
+
+def stats(request):
+
+    all_evnt_count = models.GetAllEventsCount()
+    vouted_user_count = models.GetVotedUsersCount()
+
+    return render(
+        request,
+        'app/stats.html',
+        {
+            'title':'Статисика створенних подій',
+            'all_evnt_count':all_evnt_count,
+            'vouted_user_count':vouted_user_count
+        }
+    )
+
+
 def about(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)

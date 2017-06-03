@@ -22,7 +22,8 @@ urlpatterns = [
     url(r'^order_asc', app.views.order_asc, name='order_asc'),
     url(r'^order_desc', app.views.order_desc, name='order_desc'),
     url(r'^rnd_evnt', app.views.rnd_evnt, name='rnd_evnt'),
-        
+    url(r'^creating', app.views.creating, name='creating'),
+    url(r'^stats', app.views.stats,name='stats'),
 
     url(r'^login/$',
         django.contrib.auth.views.login,
