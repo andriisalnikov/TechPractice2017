@@ -182,8 +182,8 @@ def event_date_creating(request):
         if eventForm.is_valid():
             evt_date = eventForm.cleaned_data['evt_date']
 
-            # evt_id = models.CreateEventTotal(evt_title,evt_description,evt_date,evt_vote_start,evt_vote_end)
-
+            mid = models.MakePossibleDate(evt_date)
+            models.MakePairDateEvent(mid,evt_id)
     else:
         eventForm = NewEventForm()
 
