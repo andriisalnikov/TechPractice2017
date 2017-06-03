@@ -221,3 +221,19 @@ def evnt(request, id) :
             'event':evnt
         }
     )
+
+
+def voting(request) :
+
+    evt_id = request['evt_id']
+
+    dates = models.GetEvtDatesForEvent(evt_id)
+
+    return render(
+        request,
+        'app/voting.html',
+        {
+            'title': evnt.name,
+            'evt_dates': dates
+        }
+    )

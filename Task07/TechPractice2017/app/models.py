@@ -137,6 +137,9 @@ def GetAllEvent():
     return evt
     
 
+def GetEvtDatesForEvent(evtid):
+    return EVTDATE.objects.filter(evtdateid=evtid)
+
 
 def GetAllEventOrder(order, reverse):
     '''return all event'''
