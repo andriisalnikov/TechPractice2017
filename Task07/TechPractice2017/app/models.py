@@ -44,19 +44,25 @@ class VOTE(models.Model):
     usr = models.ForeignKey(USER)
     
 ###############################################################################################################################
-def MakeVote(date, evnt, participant):
+def MakeVote(evtdate, participant):
     '''participant must be typeof USER!!!'''
     from app.models import USER
-    from app.models import MDATE
     from app.models import EVTDATE
     from app.models import VOTE
-    dt=MDATE(meetingDateTimeS=date)
-    dt.save()
-    evtdt=EVTDATE(evt=evnt, dat=dt)
-    evtdt.save()
     Participate(participant, evnt)
     vt=VOTE(edate=evtdt, usr=participant)
     vt.save()
+    
+def MakePossibleDate(dt):
+    from app.model import MDATE
+    dt=MDATE(meetingDateTimeS=date)
+    dt.save()
+
+def MakePairDateEvent(mdate, evnt):
+    from app.model import MDATE
+    from app.model import EVTDATE
+    evtdt=EVTDATE(evt=evnt, dat=mdate)
+    evtdt.save()
 ###############################################################################################################################
 
 
@@ -179,9 +185,10 @@ def Participate(user, event):
 
 def GetParticipantsCount(event):
     from app.models import EVENT
-    from app.models import USER
     partList=event.participants.all()
     return len(partList)
+
+def Get
 
 -#Statistics ------------------------------------------------------################################
  -def GetAllEventsCount():
