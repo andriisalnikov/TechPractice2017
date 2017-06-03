@@ -1,0 +1,27 @@
+{% extends "app/layout.html" %}
+
+
+
+{% block content %}
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <form class="form-signin" action="{% url 'voting' %}" method="POST">
+        {% csrf_token %}>
+        <h2 class="form-signin-heading">Голосування за дату події</h2>
+        <label for="inputTitle" class="sr-only">Подія {{ evt_title }}</label>
+
+        <h3 class="form-signin-heading">Дата події</h3>
+        <p>
+            Дата:
+            <input type="date" name="evt_date">
+        </p>
+
+        <button class="btn btn-danger btn-md" type="submit" value="Login">Створити</button>
+
+    </form>
+
+    <a href="{% url 'home' %}" class="btn btn-danger btn-md" >Завершити створення події</a>
+
+</div>
+
+{% endblock %}
