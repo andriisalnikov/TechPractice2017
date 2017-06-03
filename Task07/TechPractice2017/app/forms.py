@@ -30,3 +30,7 @@ class EventDateForm(forms.Form):
    evt_date = forms.DateField()
    evt_id = forms.CharField()
    evt_title = forms.CharField()
+
+
+class VotingForm(forms.Form):
+    evt_id = forms.CharField()

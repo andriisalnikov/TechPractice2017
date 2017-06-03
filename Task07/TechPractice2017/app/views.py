@@ -223,11 +223,19 @@ def evnt(request, id) :
     )
 
 
+from app.forms import VotingForm
 def voting(request) :
 
-    evt_id = request['evt_id']
+    if request.method == "POST":
+        # Get the posted form
+        votingForm = VotingForm(request.POST)
 
-    dates = models.GetEvtDatesForEvent(evt_id)
+        if votingForm.is_valid():
+            evt_id = votingForm.cleaned_data['evt_id']
+
+            dates = models.GetEvtDatesForEvent(evt_id)
+    else:
+        votingForm = VotingForm()
 
     return render(
         request,
