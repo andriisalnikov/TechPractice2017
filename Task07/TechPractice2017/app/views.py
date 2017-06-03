@@ -26,7 +26,7 @@ def home(request):
     )
 
 def order_asc(request):
-    """Renders the home page."""
+    """Renders the order_asc page."""
     assert isinstance(request, HttpRequest)
 
     all_event = models.DisMostPop()
@@ -42,7 +42,7 @@ def order_asc(request):
     )
 
 def order_desc(request):
-    """Renders the home page."""
+    """Renders the order_desc page."""
     assert isinstance(request, HttpRequest)
 
     all_event = models.DisLessPop()
@@ -56,6 +56,28 @@ def order_desc(request):
             'all_event':all_event
         }
     )
+
+
+def rnd_evnt(request):
+    """Renders the random event page."""
+    assert isinstance(request, HttpRequest)
+
+    all_event = models.GetAllEvent() 
+    
+    from random import randint
+    ent_indx = randint(0,len(all_event) - 1)
+    rnd_event = all_event[ent_indx]
+
+    return render(
+        request,
+        'app/event.html',
+        {
+            'title':'Випадкова подія',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+            'event':rnd_event
+        }
+    ) 
 
 def about(request):
     """Renders the about page."""

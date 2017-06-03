@@ -57,6 +57,7 @@
   <ItemGroup>
     <Content Include="app\static\app\content\dashboard.css" />
     <Content Include="app\static\app\content\logo.png" />
+    <Content Include="app\templates\app\event.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

@@ -4,6 +4,7 @@ Definition of models.
 """
 
 from django.db import models
+import numpy as np
 
 # Create your models here.
 
@@ -25,6 +26,7 @@ class EVENT(models.Model):
     participants = models.ManyToManyField(USER, blank=True)
     votingStart = models.DateField(blank=True)
     votingEnd = models.DateField(blank=True)
+
     pass
 
 class MDATE(models.Model):
@@ -98,7 +100,6 @@ def GetAllEvent():
     evt = EVENT.objects.all()
     return evt
 
-//TODO
 def GetAllEventOrder(order, reverse):
     '''return all event'''
     from app.models import EVENT
@@ -112,19 +113,37 @@ def DisplayAll(event): #returns all events (not finished!)
          allevents.add(e)
     return allevents
         
-def DisMostPop(event):
+
+def DisLessPop():
     from app.models import EVENT
-    from app.models import Max
-    from app.models import Count
-    return EVENT.objects.order_by(EVENT.objects.annotate(partcount=Count('participants'))).aggregate(Max(partcount))
+    
+    all_evnt = EVENT.objects.all()
+    part_count = []
+    for t in all_evnt.annotate(evnt_count=models.Count('participants')):
+        part_count.append(t.evnt_count)
+
+    order = np.argsort(part_count)
+    all_evnt = np.array(all_evnt)
+    all_evnt = all_evnt[ order ]
+
+    return all_evnt 
     pass #finish!!!
 
-def DisLessPop(event):
+def DisMostPop():
     from app.models import EVENT
-    from app.models import Min
-    from app.models import Count
-    return EVENT.objects.order_by(-EVENT.objects.annotate(partcount=Count('participants'))).aggregate(Min(partcount))
+
+    all_evnt = EVENT.objects.all()
+    part_count = []
+    for t in all_evnt.annotate(evnt_count=models.Count('participants')):
+        part_count.append(t.evnt_count)
+
+    order = np.argsort(part_count)[::-1]
+    all_evnt = np.array(all_evnt)
+    all_evnt = all_evnt[ order ]
+
+    return all_evnt
     pass  # finish!!!
+
 
 def Participate(user, event):
     from app.models import USER

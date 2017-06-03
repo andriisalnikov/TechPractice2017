@@ -19,6 +19,11 @@ urlpatterns = [
     # Examples:
     url(r'^$', app.views.home, name='home'),
     url(r'^about', app.views.about, name='about'),
+    url(r'^order_asc', app.views.order_asc, name='order_asc'),
+    url(r'^order_desc', app.views.order_desc, name='order_desc'),
+    url(r'^rnd_evnt', app.views.rnd_evnt, name='rnd_evnt'),
+        
+
     url(r'^login/$',
         django.contrib.auth.views.login,
         {
@@ -37,6 +42,7 @@ urlpatterns = [
             'next_page': '/',
         },
         name='logout'),
+    
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -1,0 +1,37 @@
+﻿{% extends "app/layout.html" %}
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h2 class="sub-header">Найвипадковіша подія у світі, зустрічайте :</h2>
+        <h3>
+            Номер :
+            {{ event.eventid  }}
+        </h3>
+        <h3>
+            Назіва :
+            {{ event.name  }}
+        </h3>
+        <h3>
+            Деталі :
+            {{ event.details  }}
+        </h3>
+        <h3>
+            Місце :
+            {{ event.place  }}
+        </h3>
+        <h3>
+            Дата події :
+            {{ event.date  }}
+        </h3>
+        <h3>
+            Початок голосування :
+            {{ event.votingStart  }}
+        </h3>
+        <h3>
+            Кінець голосування :
+            {{ event.votingEnd  }}
+        </h3>
+
+    </div>
+
+
+{% endblock %}

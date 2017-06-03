@@ -35,3 +35,16 @@ D:\University\3_course\2_Semestr\Practic\TechPractice2017\Task07\TechPractice201
 D:\University\3_course\2_Semestr\Practic\TechPractice2017\Task07\TechPractice2017\bin\wfastcgi.py
 D:\University\3_course\2_Semestr\Practic\TechPractice2017\Task07\TechPractice2017\obj\Debug\web.config
 D:\University\3_course\2_Semestr\Practic\TechPractice2017\Task07\TechPractice2017\obj\Debug\web.debug.config
+C:\Users\frizm\Source\Repos\TechPractice2017\Task07\TechPractice2017\bin\Microsoft.PythonTools.WebRole.dll
+C:\Users\frizm\Source\Repos\TechPractice2017\Task07\TechPractice2017\obj\Debug\attach_server.py
+C:\Users\frizm\Source\Repos\TechPractice2017\Task07\TechPractice2017\obj\Debug\visualstudio_py_debugger.py
+C:\Users\frizm\Source\Repos\TechPractice2017\Task07\TechPractice2017\obj\Debug\visualstudio_py_repl.py
+C:\Users\frizm\Source\Repos\TechPractice2017\Task07\TechPractice2017\obj\Debug\visualstudio_py_util.py
+C:\Users\frizm\Source\Repos\TechPractice2017\Task07\TechPractice2017\obj\Debug\__init__.py
+C:\Users\frizm\Source\Repos\TechPractice2017\Task07\TechPractice2017\obj\Debug\__main__.py
+C:\Users\frizm\Source\Repos\TechPractice2017\Task07\TechPractice2017\bin\AzureSetup.cfg
+C:\Users\frizm\Source\Repos\TechPractice2017\Task07\TechPractice2017\bin\Microsoft.PythonTools.AzureSetup.exe
+C:\Users\frizm\Source\Repos\TechPractice2017\Task07\TechPractice2017\bin\Microsoft.PythonTools.AzureSetup.exe.config
+C:\Users\frizm\Source\Repos\TechPractice2017\Task07\TechPractice2017\bin\wfastcgi.py
+C:\Users\frizm\Source\Repos\TechPractice2017\Task07\TechPractice2017\obj\Debug\web.config
+C:\Users\frizm\Source\Repos\TechPractice2017\Task07\TechPractice2017\obj\Debug\web.debug.config
