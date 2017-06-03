@@ -21,6 +21,6 @@ class BootstrapAuthenticationForm(AuthenticationForm):
 class NewEventForm(forms.Form):
    evt_title = forms.CharField(max_length = 100)
    evt_description = forms.CharField(max_length=500)
-   event_date = forms.DateInput()
-   vote_start_date = forms.DateInput()
-   vote_end_date = forms.DateInput()
+   evt_date = forms.DateField()
+   evt_vote_start = forms.DateField()
+   evt_vote_end = forms.DateField()

@@ -6,34 +6,37 @@
 {% block content %}
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <form class="form-signin">
-            <h2 class="form-signin-heading">Створення події</h2>
-            <label for="inputTitle" class="sr-only">Назва</label>
-            <input type="text" id="inputTitle" class="form-control" placeholder="Назва події" required autofocus>
-            <label for="inputDescription" class="sr-only">Опис</label>
-            <input type="text" id="inputDescription" class="form-control" placeholder="Опис події" required>
+    <form class="form-signin" action="{% url 'creating' %}" method="POST">
+        {% csrf_token %}>
+        <h2 class="form-signin-heading">Створення події</h2>
+        <label for="inputTitle" class="sr-only">Назва</label>
 
-            <h3 class="form-signin-heading">Дати події</h3>
-            <p>
+        <input type="text" id="inputTitle" class="form-control" name="evt_title" placeholder="Назва події" required autofocus>
+        <label for="inputDescription" class="sr-only">Опис</label>
+        <input type="text" id="inputDescription" class="form-control" name="evt_description" placeholder="Опис події" required>
+
+        <h3 class="form-signin-heading">Дати події</h3>
+        <p>
             Дата:
-            <input type="date" name="edate">
-            </p>
+            <input type="date" name="evt_date">
+        </p>
 
-            <h3 class="form-signin-heading">Межі голосування</h3>
-            <p>
+        <h3 class="form-signin-heading">Межі голосування</h3>
+        <p>
             Початок голосування:
-                </br>
-            <input type="date" name="vstart">
-            </p>
+            </br>
+            <input type="date" name="evt_vote_start">
+        </p>
 
-            <p>
+        <p>
             Кінець голосування:
-                </br>
-            <input type="date" name="vfinish">
-            </p>
+            </br>
+            <input type="date" name="evt_vote_start">
+        </p>
 
-            <button class="btn btn-danger btn-md" type="submit">Створити</button>
-        </form>
+
+        <button class="btn btn-danger btn-md" type="submit" value="Login">Створити</button>
+    </form>
 
 </div>
 {% endblock %}

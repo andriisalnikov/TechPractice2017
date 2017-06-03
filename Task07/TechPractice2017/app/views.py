@@ -124,9 +124,9 @@ def creating(request):
 
     evt_title = "no title"
     evt_description = "no description"
-    evt_date = datetime.datetime.now()
-    evt_vote_start = datetime.datetime.now()
-    evt_vote_end = datetime.datetime.now()
+    evt_date = datetime.now()
+    evt_vote_start = datetime.now()
+    evt_vote_end = datetime.now()
 
     if request.method == "POST":
         # Get the posted form
