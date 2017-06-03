@@ -185,14 +185,15 @@ def event_date_creating(request):
             mid = models.MakePossibleDate(evt_date)
             models.MakePairDateEvent(mid,evt_id)
     else:
-        eventForm = NewEventForm()
+        eventForm = EventDateForm()
 
     return render(
         request,
         'app/event_date_creating.html',
         {
-            'title': 'створення нової події',
+            'title': 'створення дат для події',
             'evt_title': evt_title,
-            'evt_id': evt_id
+            'evt_id': evt_id,
+            'evt_date': evt_date
         }
     )
