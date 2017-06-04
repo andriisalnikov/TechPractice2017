@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+    {% endif %}
+    <div class="login-container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+                <a href="{% url 'users:reset_password' %}">Forgot password? Reset it here...</a>
+            </div>
+            <div class="button-panel">
+               <button type="submit" class="btn btn-default">Submit</button><br>
+<br>
+<br>
+<!-- <a href="{% url 'social:begin' 'facebook' %}" class="fa fa-facebook"></a>-->
+  
+  <a href="{% url 'social:begin' 'twitter' %}" class="fa fa-twitter"><span></a>
+<!--  <a href="{% url 'social:begin' 'google-oauth2' %}" class="fa fa-google"><span></a>-->
+  <a href="{% url 'social:begin' 'github' %}"><span><i class="fa fa-github"></i></a>
+  <a href="{% url 'social:begin' backend='linkedin-oauth2' %}" class="fa fa-linkedin" ></a>
+  <!--  <a href="{% url 'social:begin' backend='fouraquare' %}"></a>
+  <a href="{% url 'social:begin' backend='dropbox' %}">Login with dropbox</a>
+<a href="https://www.twilio.com/authorize/CN38b0f6b947f18e1ed72c8eb3f35d43ed" id="twilio-connect-button">Twilio</a>-->
+  <a href="{% url 'social:begin' backend='instagram' %}"class="fa fa-instagram"></a>
+
+</div>
+        </form>
+    </div>
+{% endblock content %}
