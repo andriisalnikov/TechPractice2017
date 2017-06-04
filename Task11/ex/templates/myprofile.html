@@ -1,41 +1,68 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+{% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>VEX.NET</title>
-</head>
-<body>
-<div style="background-color: #0e90d2; height: 10%; width: 100%" >
-    <div align="left">
-        LOGO
-        <input type="button" name="Logout" value="Create new fileset" onClick='location.href="/create_fileset"'>
-    </div>
-    <div align="right">
-        {{ nick }}
-        <input type="button" name="Logout" value="Logout" onClick='location.href="/logout"'>
-    </div>
-</div>
-Hello, {{ nick }}
-<div style="background-color: red; height: 30%; width: 40%">
-Your files:
-    <ul>
-     {% for f in filesets %}
-        <li>{{ f }}   <input type="button" value="edit" onClick='location.href="/{{ f.name }}"'></li>
-     {% endfor %}
-    </ul>
-</div>
-
-{#<br>#}
-{#эта форма должна выскочить поверх всей странички при нажатии кнопки "New FileSet". По боками типо затемнить остальную страницу и запретить нажатие на нее. И сделать крестик, чтоб спрятать форму.#}
-{#<br>UPD. Нет, не должна!#}
-{#    <form name="reg" method="post" action="/create_fileset/">#}
-{#        {% csrf_token %}#}
-{#        <input  type ="text" name="name" required placeholder="Name" disabled>#}
-{#        <textarea cols="40" rows="5" name="description" placeholder="Description" disabled></textarea>#}
-{#        <input  type ="text" name="password" placeholder="Password" disabled>#}
-{#        <button type="submit" disabled>Create</button>#}
-{#        <br><br><br>#}
-{#        <button type ="button" class="btn btn-inverse span2" onClick='location.href="/logout"'>Logout</button>#}
-{#    </form>#}
-</body>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>VEX.NET</title>
+        <link href="{% static "bootstrap.min.css" %}" rel="stylesheet">
+		<link href="{% static "myprofile.css" %}" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container">
+			  <section>
+			    <div class="page-header">
+			      <h3 class="pull-left">
+			        Personal cabinet
+                      {# TODO #}
+                      <button type="button" onClick='location.href="/create_fileset/"'>
+                          New fileset
+                      </button>
+			      </h3>
+			      <div class="pull-right">
+			        <div class="btn-group">
+			          <button type="button" class="btn btn-block btn-info" onClick='location.href="/logout"'>
+			            Log out
+			          </button>
+			        </div>
+			      </div>
+			      <div class="clearfix"></div>
+			    </div>
+			  </section>
+		</div>
+		<div class="container ">
+		<div class="col-xs-12 col-md-9">
+			<div class="jumbotron">
+                {% for f in filesets %}
+                    <p>{{ f.name }}</p>
+                    <dl class="dl-horizontal">
+                        <dt class="descr">Creation date</dt>
+                        <dd class="descr">- {{ f.created_date }}</dd>
+                        <dt class="descr">Size</dt>
+                        <dd class="descr">- 124KB</dd>
+				    </dl>
+                    <input type="button" value="edit" onClick='location.href="/{{ f.name }}"'>
+                {% endfor %}
+			</div>
+		</div>
+		<div class="pull-right">
+				<h3>Rank <span class="label label-info"> sum </span></h3>
+				<h3>Total Size <span class="label label-info"> sum </span></h3>
+				<h3>All Files <span class="label label-info"> sum </span></h3>
+				<h3>All Sets <span class="label label-info"> sum </span></h3>
+				<h3>Curr Files <span class="label label-info"> sum </span></h3>
+				<h3>Curr Sets <span class="label label-info"> sum </span></h3>
+				<h3>Curr Size <span class="label label-info"> sum </span></h3>
+		</div>
+		</div>
+		<footer>
+			<div class="container">
+          		<h6>
+             		© 2017 VEX.NET ALL RIGHTS RESERVED
+          		</h6>
+         	</div>
+		</footer>
+		<script src="{% static "jquery.js" %}"></script>
+        <script src="{% static "bootstrap.min.js" %}"></script>
+	</body>
 </html>

@@ -103,7 +103,7 @@ def myprofile(request):
 
 
 def create_fileset(request):
-    au = TheUser.objects.filter(nick='anonymous')
+    au = TheUser.objects.filter(nick=request.session['nick'])
     somekey = randomStringJustDigits(12)
     fileset = FileSet(name=somekey, user=au[0])
     fileset.save()
