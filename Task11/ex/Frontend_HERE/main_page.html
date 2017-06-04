@@ -2,38 +2,71 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>EX.UA ALIVE!</title>
-		<link href="bootstrap.css" rel="stylesheet">
+		<link href="bootstrap.min.css" rel="stylesheet">
 		<link href="main_page.css" rel="stylesheet">
 	</head>
 	<body>
 		<header>
-			<h1>EX.UA NOT DEAD!!</h1>
+			<img src="logo.jpg" width="70" height="50">
+			<h1 >VEX.NET</h1>	
 		</header>
-		<div class="container">
-			
-			<div class="row top-fetch">
-				
-				<form class="form-inline">
-					<input class="input span6" type ="text" pattern="^[ 0-9]+$" id="text" required placeholder="Insert Key" size="50" oninvalid ="setCustomValidity('The key must contain only numbers')" oninput="setCustomValidity('')">
-					<button class="btn btn-success">Fetch</button>
-				</form>
-			</div>		
-			<div class="row top-buffer" >
-				<div class="span4 offset9">
-              	<legend>Authorization</legend>
-            	<form name="reg" class="cell" >
-                	<input class="input span4" type ="text" id="text" required placeholder="Login" >               
-                	<input class="input span4" type ="password" id="passwd" required placeholder="Password" > 
-                	<div class="row">                
-	                    <button type ="submit" class="btn btn-success span2">Sign in</button>
-	                    <button type ="button" class="btn btn-inverse span2" onClick='location.href="registration_form.html#"'>Sign up</button> 
-	                </div>
-                </form>
+			<div class="container">
+			<div class="row">
+			<div class="col-sm-3 col-sm-offset-9 top-buffer">
+				<legend>Authorization</legend>
+				<form >
+					<div class="form-group">
+						<input class="input form-control" type ="text" id="text" required placeholder="Login" > 
+					</div>
+					<div class="form-group">
+						<input class="input form-control" type ="password" id="passwd" required placeholder="Password" > 
+					</div>
+					<div class="row">
+					<div class="col-sm-6 ">
+					<div class="form-group">
+							<button type ="submit" class="btn btn-block btn-success">Sign in</button>
+						</div>
+					</div>
+					<div class="col-sm-6 ">
+					<div class="form-group">
+							<button type ="button" class="btn btn-block btn-primary" onClick='location.href="file:///C:/Users/User/Desktop/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA			%D0%B0%D1%8F%20%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0/registration_form/registration_form.html#"'>Sign up</button>
+						</div>
+					</div>
+					</div>
+					<div class="form-group log">
+						<legend> Login with: </legend>
+						<div class="text-center" id="uLogin" >
+		                <div class="social-icon google" data-uloginbutton="google"></div>
+		                <div class="social-icon vk" data-uloginbutton="vkontakte"></div>
+		                <div class="social-icon facebook" data-uloginbutton="facebook"></div>
             </div>
+					</div>
+				</form>
 			</div>
-			
-		</div>
+			<div class="col-sm-8 col-sm-offset-1 top-fetch ">
+				<form class="form-inline">
+				<div class="form-group">
+						<button type="button" class="btn btn-warning">Transfer files</button>
+				</div>
+				<div class="form-group">
+						<input class="input form-control" type ="text" pattern="^[ 0-9]+$" id="text" required placeholder="Insert Key"  oninvalid ="setCustomValidity('The key must contain only numbers')" oninput="setCustomValidity('')">
+				</div>
+				<div class="form-group">
+						<button class="btn btn-success">Fetch</button>
+				</div>
+				</form>
+			</div>			
+			</div>
+			</div>
+		<footer >
+			<div class="container">
+          <h6>
+             © 2017 VEX.NET ALL RIGHTS RESERVED
+          </h6>
+         </div>
+		</footer>
 		<script src="jquery.js"></script>
 		<script src="bootstrap.min.js"></script>
 	</body>

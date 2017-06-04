@@ -1,39 +1,40 @@
-.input
-{
-	border-radius: 7px;
+html {
+    height: 97%;
 }
-.cell
-{
-	display: table;
-	float: left;
+body {
+	padding: 0;
+	margin: 0;
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 40px;
+    background-image: url("background.jpg");
 }
-h1
-{
-	font-style: italic;
+h1 {
 	text-align: center;
 }
-body
-{
-	background-image: url("background.jpg");
-}
-label
-{
-	font-style: italic;
-}
-fieldset
-{
+fieldset {
 	border-radius: 3px;
 	border-color: black;
 }
-legend
-{
+legend {
 	font-size: 20pt;
-	font-style: italic;
+	text-align: center;
 }
-@media screen and (max-device-width:820px)
-{
-	label
-	{
-		display: none;
-	}
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin-top: 50px;
+    border-top: 1px solid #9c9c9c;
+    background-color: white;
 }
+.input {
+	border-radius: 7px;
+}
+.cell {
+	width: 60%;
+}
+
+
