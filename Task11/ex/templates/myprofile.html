@@ -5,18 +5,37 @@
     <title>VEX.NET</title>
 </head>
 <body>
+<div style="background-color: #0e90d2; height: 10%; width: 100%" >
+    <div align="left">
+        LOGO
+        <input type="button" name="Logout" value="Create new fileset" onClick='location.href="/create_fileset"'>
+    </div>
+    <div align="right">
+        {{ nick }}
+        <input type="button" name="Logout" value="Logout" onClick='location.href="/logout"'>
+    </div>
+</div>
 Hello, {{ nick }}
+<div style="background-color: red; height: 30%; width: 40%">
+Your files:
+    <ul>
+     {% for f in filesets %}
+        <li>{{ f }}   <input type="button" value="edit" onClick='location.href="/fileset/{{ f.id }}"'></li>
+     {% endfor %}
+    </ul>
+</div>
 
-<br>
-эта форма должна выскочить поверх всей странички при нажатии кнопки "New FileSet". По боками типо затемнить остальную страницу и запретить нажатие на нее. И сделать крестик, чтоб спрятать форму.
-    <form name="reg" method="post" action="/create_fileset/">
-        {% csrf_token %}
-        <input  type ="text" name="name" required placeholder="Name" >
-        <textarea cols="40" rows="5" name="description" placeholder="Description"></textarea>
-        <input  type ="text" name="password" placeholder="Password" >
-        <button type="submit">Create</button>
-        <br><br><br>
-        <button type ="button" class="btn btn-inverse span2" onClick='location.href="/logout"'>Logout</button>
-    </form>
+{#<br>#}
+{#эта форма должна выскочить поверх всей странички при нажатии кнопки "New FileSet". По боками типо затемнить остальную страницу и запретить нажатие на нее. И сделать крестик, чтоб спрятать форму.#}
+{#<br>UPD. Нет, не должна!#}
+{#    <form name="reg" method="post" action="/create_fileset/">#}
+{#        {% csrf_token %}#}
+{#        <input  type ="text" name="name" required placeholder="Name" disabled>#}
+{#        <textarea cols="40" rows="5" name="description" placeholder="Description" disabled></textarea>#}
+{#        <input  type ="text" name="password" placeholder="Password" disabled>#}
+{#        <button type="submit" disabled>Create</button>#}
+{#        <br><br><br>#}
+{#        <button type ="button" class="btn btn-inverse span2" onClick='location.href="/logout"'>Logout</button>#}
+{#    </form>#}
 </body>
 </html>

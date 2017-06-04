@@ -90,8 +90,10 @@ def validation(request):
 
 
 def myprofile(request):
+    u = TheUser.objects.filter(nick=request.session['nick'])
+    filesets = FileSet.objects.filter(user=u)
     template = loader.get_template('myprofile.html')
-    context = {'nick': request.session['nick']}
+    context = {'nick': request.session['nick'], 'filesets': filesets}
     return HttpResponse(template.render(context, request))
 
 
