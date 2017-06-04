@@ -20,7 +20,7 @@ Hello, {{ nick }}
 Your files:
     <ul>
      {% for f in filesets %}
-        <li>{{ f }}   <input type="button" value="edit" onClick='location.href="/fileset/{{ f.id }}"'></li>
+        <li>{{ f }}   <input type="button" value="edit" onClick='location.href="/{{ f.name }}"'></li>
      {% endfor %}
     </ul>
 </div>

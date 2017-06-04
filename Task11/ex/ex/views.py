@@ -15,6 +15,11 @@ def passwordHash(password):
     m.update(salt.encode('utf-8') + password.encode('utf-8'))
     return m.hexdigest()
 
+def randomStringUpperAndDigits(length):
+    return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(length))
+
+def randomStringJustDigits(length):
+    return ''.join(random.SystemRandom().choice(string.digits) for _ in range(length))
 
 def index(request):
     message = ''
@@ -49,7 +54,7 @@ def registration(request):
         if mail_is_used:
             messages.append('Sorry, E-mail ' + request.POST['email'] + ' is already in use.')
         if (not nick_is_used) & (not mail_is_used):
-            somecode = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(32))
+            somecode = randomStringUpperAndDigits(32)
             mail_was_sent = send_mail(
                 'VEX.NET validation',
                 'Here is your validation link: http://127.0.0.1:8000/validation/?nick=' + request.POST[
@@ -98,17 +103,15 @@ def myprofile(request):
 
 
 def create_fileset(request):
-    u = TheUser.objects.filter(nick=request.session['nick'])
-    fileset = FileSet(name=request.POST['name'], description=request.POST['description'], user=u[0])
-    if request.POST['password'] != '':
-        fileset.password_hash = passwordHash(request.POST['password'])
+    au = TheUser.objects.filter(nick='anonymous')
+    somekey = randomStringJustDigits(12)
+    fileset = FileSet(name=somekey, user=au[0])
     fileset.save()
+    return redirect('/' + fileset.name.__str__() + '/')
 
-    return redirect('/fileset/' + fileset.id.__str__())
 
-
-def fileset(request, fileset_id):
-    f = FileSet.objects.get(id=fileset_id)
+def fileset(request, fileset_name):
+    f = FileSet.objects.get(name=fileset_name)
     template = loader.get_template('fileset.html')
     try:
         if f.user.nick == request.session['nick']:
@@ -120,15 +123,15 @@ def fileset(request, fileset_id):
     #for oneFile in files:
     #    if not oneFile.deleted:
     #        array_of_files.append([oneFile.name, 'somehref'])
-    context = {'name': f.name, 'description': f.description, 'files': array_of_files}
+    context = {'fileset': f}
     return HttpResponse(template.render(context, request))
 
 
-def change_description(request, fileset_id):
+def change_description(request, fileset_name):
     if request.method == 'POST':
-        f = FileSet.objects.filter(id=fileset_id)
+        f = FileSet.objects.filter(name=fileset_name)
         f.update(description=request.POST['description'])
-    return redirect('/fileset/' + fileset_id.__str__())
+    return redirect('/' + fileset_name.__str__() + '/')
 
 def logout(request):
     try:
