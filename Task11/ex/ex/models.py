@@ -41,7 +41,7 @@ class TheFile(models.Model):
     name = models.CharField(max_length=300)
     qty = models.IntegerField(default=0)
     deleted = models.BooleanField(default=False)
-
+	#TODO Add FileFiled named 'file' and migrate
     def __str__(self):
         return self.name
 

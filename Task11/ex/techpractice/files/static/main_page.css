@@ -6,6 +6,16 @@ body
 {
 	background-image: url("background.jpg");
 }
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin-top: 50px;
+    border-top: 1px solid #9c9c9c;
+    background-color: white;
+}
 .top-buffer
 {
 	position: absolute;

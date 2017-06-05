@@ -1,12 +1,3 @@
-.input
-{
-	border-radius: 7px;
-}
-.cell
-{
-	display: table;
-	float: left;
-}
 h1
 {
 	font-style: italic;
@@ -29,6 +20,25 @@ legend
 {
 	font-size: 20pt;
 	font-style: italic;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin-top: 50px;
+    border-top: 1px solid #9c9c9c;
+    background-color: white;
+}
+.input
+{
+	border-radius: 7px;
+}
+.cell
+{
+	display: table;
+	float: left;
 }
 @media screen and (max-device-width:820px)
 {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ name }}</title>
 </head>
 <body>
@@ -10,5 +10,13 @@
     Owner: {{ fileset.user.nick }}<br>
     Description: {{ fileset.description }}<br>
 {% endblock %}
+<div style="background-color: red; height: 30%; width: 40%">
+	<h1>Files in this fileset:</h1>
+	<ul>
+		{% for f in files %}
+			<li>{{ f }}   <input type="button" value="edit" onClick='location.href="/download/{{ f.id }}"'></li>
+		{% endfor %}
+	</ul>
+</div>
 </body>
 </html>

@@ -41,3 +41,6 @@ h1 {
 .descr {
 	color: #aaa;
 }
+.label-info {
+	float: right;
+}

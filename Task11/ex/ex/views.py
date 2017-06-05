@@ -2,11 +2,14 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.template import loader
 from django.http import HttpResponse
+from django.conf import settings
 from .models import TheUser, FileSet, TheFile, Codes
 from django.core.mail import send_mail
+from wsgiref.util import FileWrapper
 import hashlib
 import random
 import string
+
 
 
 def passwordHash(password):
@@ -112,20 +115,21 @@ def create_fileset(request):
 
 def fileset(request, fileset_name):
     f = FileSet.objects.get(name=fileset_name)
-    template = loader.get_template('fileset.html')
-    try:
-        if f.user.nick == request.session['nick']:
-            template = loader.get_template('fileset_for_owner.html')
-    except KeyError:
-        pass
-    array_of_files = []
-    #files = TheFile.objects.filter(fileset=f)
-    #for oneFile in files:
-    #    if not oneFile.deleted:
-    #        array_of_files.append([oneFile.name, 'somehref'])
-    context = {'fileset': f}
-    return HttpResponse(template.render(context, request))
-
+	if len(f) < 1:
+		raise Http404
+	else:
+		try:
+			if f.user.nick == request.session['nick']:
+				template = loader.get_template('fileset_for_owner.html')
+		except KeyError:
+			pass
+		array_of_files = []
+		files = TheFile.objects.filter(fileset=f)
+		for oneFile in files:
+			if not oneFile.deleted:
+				array_of_files.append([oneFile.name, 'somehref'])
+		context = {'nick': request.session['nick'], 'files': array_of_files}
+		return HttpResponse(template.render(context, request))
 
 def change_description(request, fileset_name):
     if request.method == 'POST':
@@ -139,3 +143,12 @@ def logout(request):
     except KeyError:
         pass
     return redirect('index')
+
+def download(request, fileset_name):
+    f = TheFile.objects.get(name=download_name)
+	if len(f) < 1:
+		raise Http404
+	else:
+		response = HttpResponse(FileWrapper(f.file.getvalue()), content_type='application/octet-stream')
+		response['Content-Disposition'] = 'attachment; filename=%f.name'
+		return response

@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^logout/', views.logout, name='logout'),
     url(r'^(?P<fileset_name>[0-9]+)/$', views.fileset, name='fileset'),
     url(r'^(?P<fileset_name>[0-9]+)/change_description', views.change_description, name='change_description'),
-
+	url(r'^download/(?P<download_name>[0-9]+)', views.download, name='download'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
