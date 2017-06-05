@@ -10,8 +10,6 @@ import hashlib
 import random
 import string
 
-
-
 def passwordHash(password):
     m = hashlib.md5()
     salt = "vex"
@@ -44,7 +42,6 @@ def index(request):
         pass
     context = {'message': message, 'nick': nick}
     return HttpResponse(template.render(context, request))
-
 
 def registration(request):
     if request.method == 'POST':
@@ -82,7 +79,6 @@ def registration(request):
         context = {}
         return HttpResponse(template.render(context, request))
 
-
 def validation(request):
     messages = ['Sorry! Something went wrong(((']
     if request.method == 'GET':
@@ -96,7 +92,6 @@ def validation(request):
     context = {'messages': messages}
     return HttpResponse(template.render(context, request))
 
-
 def myprofile(request):
     u = TheUser.objects.filter(nick=request.session['nick'])
     filesets = FileSet.objects.filter(user=u)
@@ -104,14 +99,12 @@ def myprofile(request):
     context = {'nick': request.session['nick'], 'filesets': filesets}
     return HttpResponse(template.render(context, request))
 
-
 def create_fileset(request):
     au = TheUser.objects.filter(nick=request.session['nick'])
     somekey = randomStringJustDigits(12)
     fileset = FileSet(name=somekey, user=au[0])
     fileset.save()
     return redirect('/' + fileset.name.__str__() + '/')
-
 
 def fileset(request, fileset_name):
     f = FileSet.objects.get(name=fileset_name)
@@ -125,7 +118,11 @@ def fileset(request, fileset_name):
 		except KeyError:
 			pass
 		files = TheFile.objects.filter(fileset=f)
-		context = {'fileset': f, 'files': files}
+		notDeletedFiles = []
+ 		for oneFile in files:
+ 			if not oneFile.deleted:
+ 				notDeletedFiles.append([oneFile.name, 'somehref'])
+ 		context = {'nick': request.session['nick'], 'files': notDeletedFiles}
 		return HttpResponse(template.render(context, request))
 
 def change_description(request, fileset_name):
@@ -133,7 +130,6 @@ def change_description(request, fileset_name):
         f = FileSet.objects.filter(name=fileset_name)
         f.update(description=request.POST['description'])
     return redirect('/' + fileset_name.__str__() + '/')
-
 
 def logout(request):
     try:
@@ -144,13 +140,12 @@ def logout(request):
 
 def download(request, fileset_name):
     f = TheFile.objects.get(name=download_name)
-	if len(f) < 1:
+	if len(f) < 1 or f.deleted:
 		raise Http404
 	else:
 		response = HttpResponse(FileWrapper(f.file.getvalue()), content_type='application/octet-stream')
 		response['Content-Disposition'] = 'attachment; filename=%f.name'
 		return response
-
 
 def upload_file(request, fileset_name):
     if request.method == 'POST':
