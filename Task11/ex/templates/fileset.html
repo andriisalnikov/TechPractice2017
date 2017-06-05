@@ -10,13 +10,17 @@
     Owner: {{ fileset.user.nick }}<br>
     Description: {{ fileset.description }}<br>
 {% endblock %}
-<div style="background-color: red; height: 30%; width: 40%">
-	<h1>Files in this fileset:</h1>
-	<ul>
-		{% for f in files %}
-			<li>{{ f }}   <input type="button" value="edit" onClick='location.href="/download/{{ f.id }}"'></li>
-		{% endfor %}
-	</ul>
-</div>
+<h1>Files in this fileset:</h1>
+<ul>
+	{% for f in files %}
+		<li>{{ f }}   <input type="button" value="edit" onClick='location.href="/download/{{ f.id }}"'></li>
+	{% endfor %}
+</ul>
+<h1>Add new file:</h1>
+<form enctype="multipart/form-data" method="post" action="/{{ fileset.name }}/upload_file/" >
+    {% csrf_token %}
+    <input type="file" name="somefile">
+    <button type="submit">Add</button>
+</form>
 </body>
 </html>

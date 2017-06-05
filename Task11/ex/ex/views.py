@@ -118,17 +118,14 @@ def fileset(request, fileset_name):
 	if len(f) < 1:
 		raise Http404
 	else:
+		template = loader.get_template('fileset.html')
 		try:
 			if f.user.nick == request.session['nick']:
 				template = loader.get_template('fileset_for_owner.html')
 		except KeyError:
 			pass
-		array_of_files = []
 		files = TheFile.objects.filter(fileset=f)
-		for oneFile in files:
-			if not oneFile.deleted:
-				array_of_files.append([oneFile.name, 'somehref'])
-		context = {'nick': request.session['nick'], 'files': array_of_files}
+		context = {'fileset': f, 'files': files}
 		return HttpResponse(template.render(context, request))
 
 def change_description(request, fileset_name):
@@ -136,6 +133,7 @@ def change_description(request, fileset_name):
         f = FileSet.objects.filter(name=fileset_name)
         f.update(description=request.POST['description'])
     return redirect('/' + fileset_name.__str__() + '/')
+
 
 def logout(request):
     try:
@@ -152,3 +150,17 @@ def download(request, fileset_name):
 		response = HttpResponse(FileWrapper(f.file.getvalue()), content_type='application/octet-stream')
 		response['Content-Disposition'] = 'attachment; filename=%f.name'
 		return response
+
+
+def upload_file(request, fileset_name):
+    if request.method == 'POST':
+        f = FileSet.objects.filter(name=fileset_name)
+        handle_uploaded_file(request.FILES['somefile'])
+        thatfile = TheFile(fileset=f[0], name=request.FILES['somefile'].name)
+        thatfile.save()
+    return redirect('/' + fileset_name + '/')
+
+def handle_uploaded_file(f):
+    with open(f.name, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
