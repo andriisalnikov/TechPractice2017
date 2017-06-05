@@ -10,5 +10,15 @@
     Owner: {{ fileset.user.nick }}<br>
     Description: {{ fileset.description }}<br>
 {% endblock %}
+Files:<br>
+{% for file in files %}
+    {{ file.name }}<br>
+{% endfor %}<br>
+Add new file:
+<form enctype="multipart/form-data" method="post" action="/{{ fileset.name }}/upload_file/" >
+    {% csrf_token %}
+    <input type="file" name="somefile">
+    <button type="submit">Add</button>
+</form>
 </body>
 </html>

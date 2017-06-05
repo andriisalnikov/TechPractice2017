@@ -118,12 +118,8 @@ def fileset(request, fileset_name):
             template = loader.get_template('fileset_for_owner.html')
     except KeyError:
         pass
-    array_of_files = []
-    #files = TheFile.objects.filter(fileset=f)
-    #for oneFile in files:
-    #    if not oneFile.deleted:
-    #        array_of_files.append([oneFile.name, 'somehref'])
-    context = {'fileset': f}
+    files = TheFile.objects.filter(fileset=f)
+    context = {'fileset': f, 'files': files}
     return HttpResponse(template.render(context, request))
 
 
@@ -133,9 +129,25 @@ def change_description(request, fileset_name):
         f.update(description=request.POST['description'])
     return redirect('/' + fileset_name.__str__() + '/')
 
+
 def logout(request):
     try:
         request.session.flush()
     except KeyError:
         pass
     return redirect('index')
+
+
+def upload_file(request, fileset_name):
+    if request.method == 'POST':
+        f = FileSet.objects.filter(name=fileset_name)
+        handle_uploaded_file(request.FILES['somefile'])
+        thatfile = TheFile(fileset=f[0], name=request.FILES['somefile'].name)
+        thatfile.save()
+    return redirect('/' + fileset_name + '/')
+
+
+def handle_uploaded_file(f):
+    with open(f.name, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
