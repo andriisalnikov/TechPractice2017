@@ -10,18 +10,26 @@ class Game(models.Model):
     firstuser = models.ForeignKey(User, related_name='firstuser')
     seconduser = models.ForeignKey(User, related_name='seconduser')
     FIRSTBET = (
-        ('st', 'stone'),
-        ('sc', 'scissors'),
-        ('p', 'paper'),
-        ('l', 'lizard'),
-        ('sp', 'spock'),
+        ('stone', 'stone'),
+        ('scissors', 'scissors'),
+        ('paper', 'paper'),
+        ('lizard', 'lizard'),
+        ('spock', 'spock'),
     )
     SECONDBET = (
-        ('st', 'stone'),
-        ('sc', 'scissors'),
-        ('p', 'paper'),
-        ('l', 'lizard'),
-        ('sp', 'spock'),
+        ('nb', ''),
+        ('stone', 'stone'),
+        ('scissors', 'scissors'),
+        ('paper', 'paper'),
+        ('lizard', 'lizard'),
+        ('spock', 'spock'),
     )
-    firstbet = models.CharField(max_length=2, choices=FIRSTBET,default='')
-    secondbet = models.CharField(max_length=2, choices=SECONDBET,default='')
+    STATUS = (
+        ('np', ''),
+        ('firstwon', 'firstwon'),
+        ('secondwon', 'secondwon'),
+        ('draw', 'draw'),
+    )
+    firstbet = models.CharField(max_length=10, choices=FIRSTBET,default='')
+    secondbet = models.CharField(max_length=10, choices=SECONDBET,default='')
+    status = models.CharField(max_length=10, choices=STATUS,default='')
