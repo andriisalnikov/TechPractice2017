@@ -107,22 +107,26 @@ def create_fileset(request):
     return redirect('/' + fileset.name.__str__() + '/')
 
 def fileset(request, fileset_name):
-    f = FileSet.objects.get(name=fileset_name)
-	if len(f) < 1:
+	try:
+	   fs = FileSet.objects.get(name=fileset_name)
+	except SomeModel.DoesNotExist:
+	   fs = None
+	if fs is None or fs.deleted:
 		raise Http404
 	else:
 		template = loader.get_template('fileset.html')
 		try:
-			if f.user.nick == request.session['nick']:
+			if fs.user.nick == request.session['nick']:
 				template = loader.get_template('fileset_for_owner.html')
 		except KeyError:
 			pass
-		files = TheFile.objects.filter(fileset=f)
+		files = TheFile.objects.filter(fileset=fs)
 		notDeletedFiles = []
- 		for oneFile in files:
- 			if not oneFile.deleted:
- 				notDeletedFiles.append([oneFile.name, 'somehref'])
- 		context = {'nick': request.session['nick'], 'files': notDeletedFiles}
+		if len(files) > 0:
+			for oneFile in files:
+				if not oneFile.deleted:
+					notDeletedFiles.append([oneFile.name, '/download/' + oneFile.name])
+		context = {'nick': request.session['nick'], 'files': notDeletedFiles}	
 		return HttpResponse(template.render(context, request))
 
 def change_description(request, fileset_name):
@@ -139,12 +143,15 @@ def logout(request):
     return redirect('index')
 
 def download(request, fileset_name):
-    f = TheFile.objects.get(name=download_name)
-	if len(f) < 1 or f.deleted:
+	try:
+	   file = TheFile.objects.get(name=download_name).first()
+	except SomeModel.DoesNotExist:
+	   file = None
+	if file is None or f.deleted:
 		raise Http404
 	else:
 		response = HttpResponse(FileWrapper(f.file.getvalue()), content_type='application/octet-stream')
-		response['Content-Disposition'] = 'attachment; filename=%f.name'
+		response['Content-Disposition'] = 'attachment; filename=' + f.name
 		return response
 
 def upload_file(request, fileset_name):
