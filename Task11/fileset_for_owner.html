@@ -1,0 +1,13 @@
+{% extends 'fileset.html' %}
+
+{% block content %}
+    Fileset: {{ fileset.name }}<br>
+    Owner: {{ fileset.user.nick }}<br>
+    Description: {{ fileset.description }}<br>
+    New description:
+    <form name="reg" method="post" action="/{{ fileset.name }}/change_description/">
+        {% csrf_token %}
+        <textarea cols="40" rows="5" name="description" placeholder="Description">{{ description }}</textarea>
+        <button type ="submit">Save</button>
+    </form>
+{% endblock %}
