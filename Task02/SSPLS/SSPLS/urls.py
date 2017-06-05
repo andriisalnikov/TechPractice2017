@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^played-games/', playedgames),
     url(r'^available-games/', availablegames),
     url(r'^statistics/', statistics),
-    url(r'^play-game\/[1-9][0-9]*/', playgame),
+    url(r'^play-game/(?P<game_id>\d+)/$', playgame),
     url(r'^create-game/', creategame),
     url(r'^game\/[1-9][0-9]*/', game),
 ]

@@ -8,20 +8,25 @@ from django.template import Context
 from .forms import ContactForm
 from .models import Game, User
 def index(request):
-	context_data = ""
-	return render(request, 'index.html', dict(context_data))
+    context_data = ""
+    return render(request, 'index.html', dict(context_data))
 def playedgames(request):
-	context_data = ""
-	return render(request, 'played-games.html', dict(context_data))
+    games = Game.objects.exclude(secondbet='nb')
+    context = {'games': games}
+    return render(request, 'played-games.html', dict(context))
 def availablegames(request):
-	context_data = ""
-	return render(request, 'available-games.html', dict(context_data))
+    games = Game.objects.filter(secondbet='nb')
+    context = {'games': games}
+    return render(request, 'available-games.html', dict(context))
 def statistics(request):
-	context_data = ""
-	return render(request, 'statistics.html', dict(context_data))
-def playgame(request):
-	context_data = ""
-	return render(request, 'play-game.html', dict(context_data))
+    playedGames = Game.objects.exclude(secondbet='nb')
+    availableGames = Game.objects.filter(secondbet='nb')
+    context = {'playedGames': playedGames, 'availableGames': availableGames}
+    return render(request, 'statistics.html', dict(context))
+def playgame(request, game_id):
+    game = Game.objects.get(pk=game_id)
+    context = {'game': game}
+    return render(request, 'play-game.html', dict(context))
 def creategame(request):
 	context_data = ""
 	return render(request, 'create-game.html', dict(context_data))
