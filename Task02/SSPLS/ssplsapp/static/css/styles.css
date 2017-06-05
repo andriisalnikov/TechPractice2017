@@ -86,10 +86,10 @@ h1, h2, h3, h4 {
     background-position: -15px -28px;
 }
 .create-game form span.scissors, .play-game form span.scissors {
-    background-position: -110px -28px;
+    background-position: -222px -28px;
 }
 .create-game form span.paper, .play-game form span.paper {
-    background-position: -222px -28px;
+    background-position: -110px -28px;
 }
 .create-game form span.lizard, .play-game form span.lizard {
     background-position: -324px -28px;

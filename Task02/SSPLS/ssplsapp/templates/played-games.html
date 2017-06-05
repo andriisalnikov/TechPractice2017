@@ -10,23 +10,24 @@
         <!-- Projects Row -->
         <div class="row played-games">
             <h3 class="text-center">Games history</h3>
-            <div data-game-id="1" class="col-md-4 col-sm-6 col-xs-12">
+            {% for game in games %}
+            <div data-game-id="{{ game.id }}" class="col-md-4 col-sm-6 col-xs-12">
                 <div class="game">
                     <p class="text-center">
                         <b>Game: </b>
-                        #<span class="game-id">1</span>
+                        #<span class="game-id">{{ game.id }}</span>
                     </p>
                     <div class="col-sm-6 col-xs-12">
                         <p>
                             <b>Player #1: </b>
                             <span class="playername">
-                                <a href="#">Player1</a>
+                                <a href="#">{{ game.firstuser.username }}</a>
                             </span>
                         </p>
                         <p>
                             <b>Bet: </b>
                             <span class="bet">
-                                Bet1
+                                {{ game.firstbet }}
                             </span>
                         </p>
                     </div>
@@ -34,64 +35,24 @@
                         <p>
                             <b>Player #2: </b>
                             <span class="playername">
-                                <a href="#">Player2</a>
+                                <a href="#">{{ game.firstuser.username }}</a>
                             </span>
                         </p>
                         <p>
                             <b>Bet: </b>
                             <span class="bet">
-                                Bet2
+                                {{ game.secondbet }}
                             </span>
                         </p>
                     </div>
                     <div class="clearfix"></div>
                     <p class="text-center">
                         <b>Winner: </b>
-                        <span class="winner">Player1</span>
+                        <span class="winner">{{ game.status }}</span>
                     </p>
                 </div>
             </div>
-            <div data-game-id="2" class="col-md-4 col-sm-6 col-xs-12">
-                <div class="game">
-                    <p class="text-center">
-                        <b>Game: </b>
-                        #<span class="game-id">2</span>
-                    </p>
-                    <div class="col-sm-6 col-xs-12">
-                        <p>
-                            <b>Player #1: </b>
-                            <span class="playername">
-                                <a href="#">Player1</a>
-                            </span>
-                        </p>
-                        <p>
-                            <b>Bet: </b>
-                            <span class="bet">
-                                Bet1
-                            </span>
-                        </p>
-                    </div>
-                    <div class="col-sm-6 col-xs-12">
-                        <p>
-                            <b>Player #2: </b>
-                            <span class="playername">
-                                <a href="#">Player2</a>
-                            </span>
-                        </p>
-                        <p>
-                            <b>Bet: </b>
-                            <span class="bet">
-                                Bet2
-                            </span>
-                        </p>
-                    </div>
-                    <div class="clearfix"></div>
-                    <p class="text-center">
-                        <b>Winner: </b>
-                        <span class="winner">Player1</span>
-                    </p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
 
 

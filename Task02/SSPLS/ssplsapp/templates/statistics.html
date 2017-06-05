@@ -14,68 +14,30 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="games-list col-xs-12">
-                            <div data-game-id="1" class="game">
+                           {% for game in availableGames %}
+                            <div data-game-id="{{ game.id }}" class="game">
                                 <div class="pull-left">
                                     <p>
                                         <b>Game: </b>
-                                        #<span class="game-id">1</span>
+                                        #<span class="game-id">{{ game.id }}</span>
                                     </p>
                                     <p>
                                         <b>Enemy: </b>
                                         <span class="enemy-name">
-                                            <a href="#">EnemyName</a>
+                                            <a href="#">{{ game.firstuser.username }}</a>
                                         </span>
                                     </p>
                                 </div>
                                 <div class="play-button pull-right text-right">
-                                    <a href="#" class="btn btn-success">
+                                    <a href="/play-game/{{ game.id }}" class="btn btn-success">
                                         Play
                                     </a>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <div data-game-id="3" class="game">
-                                <div class="pull-left">
-                                    <p>
-                                        <b>Game: </b>
-                                        #<span class="game-id">3</span>
-                                    </p>
-                                    <p>
-                                        <b>Enemy: </b>
-                                        <span class="enemy-name">
-                                            <a href="#">EnemyName</a>
-                                        </span>
-                                    </p>
-                                </div>
-                                <div class="play-button pull-right text-right">
-                                    <a href="#" class="btn btn-success">
-                                        Play
-                                    </a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div data-game-id="2" class="game">
-                                <div class="pull-left">
-                                    <p>
-                                        <b>Game: </b>
-                                        #<span class="game-id">2</span>
-                                    </p>
-                                    <p>
-                                        <b>Enemy: </b>
-                                        <span class="enemy-name">
-                                            <a href="#">EnemyName</a>
-                                        </span>
-                                    </p>
-                                </div>
-                                <div class="play-button pull-right text-right">
-                                    <a href="#" class="btn btn-success">
-                                        Play
-                                    </a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
+                            {% endfor %}
                             <p class="text-center">
-                                <a href="#" class="btn btn-warning">
+                                <a href="/available-games/" class="btn btn-warning">
                                     All games
                                 </a>
                             </p>
@@ -86,22 +48,23 @@
             <div class="col-md-4 games">
                 <h3 class="text-center">Games history</h3>
                 <div class="games-list col-xs-12">
-                    <div data-game-id="1" class="game">
+                    {% for game in playedGames %}
+                    <div data-game-id="{{ game.id }}" class="game">
                         <p class="text-center">
                             <b>Game: </b>
-                            #<span class="game-id">1</span>
+                            #<span class="game-id">{{ game.id }}</span>
                         </p>
                         <div class="col-sm-6 col-xs-12">
                             <p>
                                 <b>Player #1: </b>
                                 <span class="playername">
-                                    <a href="#">Player1</a>
+                                    <a href="#">{{ game.firstuser.username }}</a>
                                 </span>
                             </p>
                             <p>
                                 <b>Bet: </b>
                                 <span class="bet">
-                                    Bet1
+                                    {{ game.firstbet }}
                                 </span>
                             </p>
                         </div>
@@ -109,13 +72,13 @@
                             <p>
                                 <b>Player #2: </b>
                                 <span class="playername">
-                                    <a href="#">Player2</a>
+                                    <a href="#">{{ game.seconduser.username }}</a>
                                 </span>
                             </p>
                             <p>
                                 <b>Bet: </b>
                                 <span class="bet">
-                                    Bet2
+                                    {{ game.secondbet }}
                                 </span>
                             </p>
                         </div>
@@ -124,46 +87,9 @@
                             <span class="winner">Player1</span>
                         </p>
                     </div>
-                    <div data-game-id="2" class="game">
-                        <p class="text-center">
-                            <b>Game: </b>
-                            #<span class="game-id">2</span>
-                        </p>
-                        <div class="col-sm-6 col-xs-12">
-                            <p>
-                                <b>Player #1: </b>
-                                <span class="playername">
-                                    <a href="#">Player1</a>
-                                </span>
-                            </p>
-                            <p>
-                                <b>Bet: </b>
-                                <span class="bet">
-                                    Bet1
-                                </span>
-                            </p>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <p>
-                                <b>Player #2: </b>
-                                <span class="playername">
-                                    <a href="#">Player2</a>
-                                </span>
-                            </p>
-                            <p>
-                                <b>Bet: </b>
-                                <span class="bet">
-                                    Bet2
-                                </span>
-                            </p>
-                        </div>
-                        <p class="text-center">
-                            <b>Winner: </b>
-                            <span class="winner">Player1</span>
-                        </p>
-                    </div>
+                    {% endfor %}
                     <p class="text-center">
-                            <a href="#" class="btn btn-warning">
+                            <a href="/played-games/" class="btn btn-warning">
                                 All games
                             </a>
                     </p>
