@@ -17,7 +17,7 @@
 	{% endfor %}
 </ul>
 <h1>Add new file:</h1>
-<form enctype="multipart/form-data" method="post" action="/{{ fileset.name }}/upload_file/" >
+<form enctype="multipart/form-data" method="post" action="/{{ fileset.id }}/upload_file/" >
     {% csrf_token %}
     <input type="file" name="somefile">
     <button type="submit">Add</button>

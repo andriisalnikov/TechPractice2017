@@ -1,7 +1,9 @@
+import os
+
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.template import loader
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.conf import settings
 from .models import TheUser, FileSet, TheFile, Codes
 from django.core.mail import send_mail
@@ -10,17 +12,21 @@ import hashlib
 import random
 import string
 
+
 def passwordHash(password):
     m = hashlib.md5()
     salt = "vex"
     m.update(salt.encode('utf-8') + password.encode('utf-8'))
     return m.hexdigest()
 
+
 def randomStringUpperAndDigits(length):
     return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(length))
 
+
 def randomStringJustDigits(length):
     return ''.join(random.SystemRandom().choice(string.digits) for _ in range(length))
+
 
 def index(request):
     message = ''
@@ -43,6 +49,7 @@ def index(request):
     context = {'message': message, 'nick': nick}
     return HttpResponse(template.render(context, request))
 
+
 def registration(request):
     if request.method == 'POST':
         template = loader.get_template('message.html')
@@ -64,7 +71,8 @@ def registration(request):
                 fail_silently=False,
             )
             if mail_was_sent:
-                u = TheUser(nick=request.POST['nick'], password_hash=passwordHash(request.POST['password']), email=request.POST['email'])
+                u = TheUser(nick=request.POST['nick'], password_hash=passwordHash(request.POST['password']),
+                            email=request.POST['email'])
                 u.save()
                 p = Codes(user=u, code=somecode)
                 p.save()
@@ -79,6 +87,7 @@ def registration(request):
         context = {}
         return HttpResponse(template.render(context, request))
 
+
 def validation(request):
     messages = ['Sorry! Something went wrong(((']
     if request.method == 'GET':
@@ -92,12 +101,14 @@ def validation(request):
     context = {'messages': messages}
     return HttpResponse(template.render(context, request))
 
+
 def myprofile(request):
     u = TheUser.objects.filter(nick=request.session['nick'])
     filesets = FileSet.objects.filter(user=u)
     template = loader.get_template('myprofile.html')
     context = {'nick': request.session['nick'], 'filesets': filesets}
     return HttpResponse(template.render(context, request))
+
 
 def create_fileset(request):
     au = TheUser.objects.filter(nick=request.session['nick'])
@@ -106,34 +117,38 @@ def create_fileset(request):
     fileset.save()
     return redirect('/' + fileset.name.__str__() + '/')
 
-def fileset(request, fileset_name):
-	try:
-	   fs = FileSet.objects.get(name=fileset_name)
-	except SomeModel.DoesNotExist:
-	   fs = None
-	if fs is None:
-		raise Http404
-	else:
-		template = loader.get_template('fileset.html')
-		try:
-			if fs.user.nick == request.session['nick']:
-				template = loader.get_template('fileset_for_owner.html')
-		except KeyError:
-			pass
-		files = TheFile.objects.filter(fileset=fs)
-		notDeletedFiles = []
-		if len(files) > 0:
-			for oneFile in files:
-				if not oneFile.deleted:
-					notDeletedFiles.append([oneFile.name, '/download/' + oneFile.name])
-		context = {'nick': request.session['nick'], 'files': notDeletedFiles}	
-		return HttpResponse(template.render(context, request))
 
-def change_description(request, fileset_name):
+def fileset(request, fileset_id):
+    try:
+        fs = FileSet.objects.get(id=fileset_id)
+    except FileSet.DoesNotExist:
+        fs = None
+    if fs is None:
+        raise Http404
+    else:
+        template = loader.get_template('fileset.html')
+        try:
+            if fs.user.nick == request.session['nick']:
+                template = loader.get_template('fileset_for_owner.html')
+        except KeyError:
+            pass
+
+        files = TheFile.objects.filter(fileset=fs)
+        notDeletedFiles = []
+        if len(files) > 0:
+            for oneFile in files:
+                if not oneFile.deleted:
+                    notDeletedFiles.append([oneFile.name, '/download/' + oneFile.id.__str__()])
+        context = {'nick': request.session['nick'], 'files': notDeletedFiles, 'fileset': fs}
+        return HttpResponse(template.render(context, request))
+
+
+def change_description(request, fileset_id):
     if request.method == 'POST':
-        f = FileSet.objects.filter(name=fileset_name)
+        f = FileSet.objects.filter(id=fileset_id)
         f.update(description=request.POST['description'])
-    return redirect('/' + fileset_name.__str__() + '/')
+    return redirect('/' + fileset_id.__str__() + '/')
+
 
 def logout(request):
     try:
@@ -142,8 +157,9 @@ def logout(request):
         pass
     return redirect('index')
 
-def download(request, download_name):
-	file_path = os.path.join(settings.MEDIA_ROOT, download_name)
+
+def download(request, file_id):
+    file_path = os.path.join(file_id)
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/force-download")
@@ -151,15 +167,17 @@ def download(request, download_name):
             return response
     raise Http404
 
-def upload_file(request, fileset_name):
-    if request.method == 'POST':
-        f = FileSet.objects.filter(name=fileset_name)
-        handle_uploaded_file(request.FILES['somefile'])
-        thatfile = TheFile(fileset=f[0], name=request.FILES['somefile'].name)
-        thatfile.save()
-    return redirect('/' + fileset_name + '/')
 
-def handle_uploaded_file(f):
-    with open(f.name, 'wb+') as destination:
+def upload_file(request, fileset_id):
+    if request.method == 'POST':
+        f = FileSet.objects.get(id=fileset_id)
+        thatfile = TheFile(fileset=f, name=request.FILES['somefile'].name)
+        handle_uploaded_file(request.FILES['somefile'], thatfile.id)
+        thatfile.save()
+    return redirect('/' + fileset_id.__str__() + '/')
+
+
+def handle_uploaded_file(f, id):
+    with open(id, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
