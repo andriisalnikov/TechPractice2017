@@ -1,14 +1,11 @@
 <!DOCTYPE HTML>
-{% load static %}
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>VEX.NET</title>
-        <link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}">
-		<link rel="stylesheet" type="text/css" href="{% static "myprofile.css" %}">
-		<script src="{% static "jquery.js" %}"></script>
-        <script src="{% static "bootstrap.min.js" %}"></script>
+		<link href="bootstrap.min.css" rel="stylesheet">
+		<link href="personal_cabinet.css" rel="stylesheet">
 	</head>
 	<body>
 		<div class="container">
@@ -16,23 +13,10 @@
 			    <div class="page-header">
 			      <h3 class="pull-left">
 			        Personal cabinet
-                      {# TODO #}
-                      <br>
-                      <form action='/create_fileset/' method="post">
-                          {% csrf_token %}
-                          <input type ="text" id="text" name="name" required placeholder="Name" >
-                          <input type ="text" id="text" name="description" placeholder="Description" >
-                          <input  type ="password" id="passwd" name="password" placeholder="Password">
-
-                          <div class="row">
-	                       <button type ="submit" class="btn btn-success span2">New fileset</button>
-                          </div>
-                    <div>{{ message }}</div>
-                    </form>
 			      </h3>
 			      <div class="pull-right">
 			        <div class="btn-group">
-			          <button type="button" class="btn btn-block btn-info" onClick='location.href="/logout"'>
+			          <button type="button" class="btn btn-block btn-info">
 			            Log out
 			          </button>
 			        </div>
@@ -44,17 +28,28 @@
 		<div class="container ">
 		<div class="col-xs-12 col-md-9">
 			<div class="jumbotron">
-                {% for f in filesets %}
-                    <p>{{ f.name }}</p>
-                    <dl class="dl-horizontal">
-                        <dt class="descr">Creation date</dt>
-                        <dd class="descr">- {{ f.created_date }}</dd>
-                        <dt class="descr">Size</dt>
-                        <dd class="descr">- 124KB</dd>
-				    </dl>
-                    <input type="button" value="edit" onClick='location.href="/{{ f.id }}"'>
-                {% endfor %}
-			</div>
+				 <p>Filename.txt</p>
+				  <dl class="dl-horizontal">
+				    <dt class="descr">creation date</dt>
+				    <dd class="descr">- 17.06.1992</dd>
+				    <dt class="descr">size</dt>
+				    <dd class="descr">- 124KB</dd>
+				  </dl>   
+				  <p>Filename.txt</p>
+				  <dl class="dl-horizontal">
+				    <dt class="descr">creation date</dt>
+				    <dd class="descr">- 17.06.1992</dd>
+				    <dt class="descr">size</dt>
+				    <dd class="descr">- 124KB</dd>
+				  </dl>   
+				  <p>Filename.txt</p>
+				  <dl class="dl-horizontal">
+				    <dt class="descr">creation date</dt>
+				    <dd class="descr">- 17.06.1992</dd>
+				    <dt class="descr">size</dt>
+				    <dd class="descr">- 124KB</dd>
+				  </dl>   
+			</div> 
 		</div>
 		<div class="pull-right">
 				<h3>Rank <span class="label label-info"> sum </span></h3>
@@ -73,5 +68,7 @@
           		</h6>
          	</div>
 		</footer>
+		<script src="jquery.js"></script>
+		<script src="bootstrap.min.js"></script>
 	</body>
 </html>

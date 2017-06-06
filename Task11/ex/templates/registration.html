@@ -1,62 +1,63 @@
 <!DOCTYPE HTML>
-{% load static %}
 <html lang="ru">
     <head>
-        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>VEX.NET</title>
-        <link rel="stylesheet" type="text/css" href="{% static "registration_form.css" %}">
-        <link rel="stylesheet" type="text/css" href="{% static "bootstrap.css" %}">
-        <script async type="text/javascript" src="{% static "conf_passwd.js" %}"></script>
-        <script src="{% static "jquery.js" %}"></script>
-        <script src="{% static "bootstrap.min.js" %}"></script>
+        <link rel="stylesheet" type="text/css" href="registration_form.css">
+        <link href="bootstrap.min.css" rel="stylesheet">
+        <script async type="text/javascript" src="conf_passwd.js"></script>
     </head>
     <body>
         <header>
-            <h1>Registration Form</h1>
+            <h1 class="hdr" >VEX.NET</h1> 
         </header>
-        <div class="container">
-        <div class="row">
-		<div class="col-sm-6 col-sm-offset-3">
-			<legend>Input your personal data</legend>
-			<form name="reg" class="form-horizontal" method="post">
-				{% csrf_token %}
-				<div class="form-group ">
-					<div class="col-sm-8">
-						<input class="input  form-control" type ="text" id="text" name="nick" required placeholder="Your nick" >
-					</div>
-					<label for="text" class=" col-sm-4 control-label">Input your nickname</label>
-				</div>
-				<div class="form-group ">
-					<div class="col-sm-8">
-						<input class="input form-control" type ="email" id="email" name="email" required placeholder="Your e-mail" >
-					</div>
-					<label for="email" class="col-sm-4 control-label">Input your e-mail</label>
-				</div>
-				<div class="form-group ">
-					<div class="col-sm-8">
-						<input class="input form-control " type ="password" id="passwd" name="password" required placeholder="Password" >
-					</div>
-					<label for="passwd" class="col-sm-4 control-label">Input your password</label>
-				</div>
-				<div class="form-group ">
-					<div class="col-sm-8">
-						<input class="input form-control" type ="password" id="confpasswd" required placeholder="Confirm password" >
-					</div>
-					<label for="confpasswd" class="col-sm-4 control-label">Confirm your password</label>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-12">
-					<button type ="submit" class="btn btn-block btn-success ">Register me</button>
-					</div>
-				</div>
-			</form>
-		</div>
-        </div>
-        </div>
-		<footer >
-			<div class="container">
-				<h6>© 2017 VEX.NET ALL RIGHTS RESERVED</h6>
-			</div>
-		</footer>
+            <div class="container">
+              <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+              <legend>Input your personal data</legend>
+            	<form name="reg" class="form-horizontal ">
+              <div class="form-group ">
+                <div class="col-sm-8">
+                	<input class="input  form-control" type ="text" id="text" required placeholder="Your nick" >
+                </div>
+                  <label for="text" class=" col-sm-4 control-label">Input your nickname</label>
+              </div>
+              <div class="form-group ">
+                <div class="col-sm-8">
+                	<input class="input form-control" type ="email" id="email" required placeholder="Your e-mail" >
+                </div>
+                  <label for="email" class="col-sm-4 control-label">Input your e-mail</label>
+              </div>
+              <div class="form-group ">
+                <div class="col-sm-8">
+                	<input class="input form-control " type ="password" id="passwd" required placeholder="Password" >
+                </div>
+                  <label for="passwd" class="col-sm-4 control-label">Input your password</label>
+              </div>
+              <div class="form-group ">
+                <div class="col-sm-8">
+                	<input class="input form-control" type ="password" id="confpasswd" required placeholder="Confirm password" >
+                </div>
+                  <label for="confpasswd" class="col-sm-4 control-label">Confirm your password</label>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <button type ="submit" class="btn btn-block btn-success ">Register me</button>
+                </div>
+              </div>
+              </form>
+              </div>
+              </div>
+              </div>
+        <footer >
+          <div class="container">
+          <h6>
+             © 2017 VEX.NET ALL RIGHTS RESERVED
+          </h6>
+         </div>
+        </footer>
+        <script src="jquery.js"></script>
+        <script src="bootstrap.min.js"></script>
     </body>
 </html>
