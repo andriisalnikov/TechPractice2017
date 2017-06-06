@@ -5,6 +5,8 @@ from django.shortcuts import redirect
 from django.template import loader
 from django.http import HttpResponse, Http404
 from django.conf import settings
+from django.utils.datastructures import MultiValueDictKeyError
+
 from .models import TheUser, FileSet, TheFile, Codes
 from django.core.mail import send_mail
 from wsgiref.util import FileWrapper
@@ -181,9 +183,12 @@ def download(request, file_id):
 def upload_file(request, fileset_id):
     if request.method == 'POST':
         f = FileSet.objects.get(id=fileset_id)
-        thatfile = TheFile(fileset=f, name=request.FILES['somefile'].name)
-        thatfile.save()
-        handle_uploaded_file(request.FILES['somefile'], thatfile.id)
+        try:
+            thatfile = TheFile(fileset=f, name=request.FILES['somefile'].name)
+            thatfile.save()
+            handle_uploaded_file(request.FILES['somefile'], thatfile.id)
+        except MultiValueDictKeyError:
+            pass
     return redirect('/' + fileset_id.__str__() + '/')
 
 
