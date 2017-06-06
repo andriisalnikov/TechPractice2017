@@ -103,6 +103,11 @@ def validation(request):
 
 
 def myprofile(request):
+    try:
+        if request.session['nick']:
+            pass
+    except KeyError:
+        return redirect('/')
     u = TheUser.objects.filter(nick=request.session['nick'])
     filesets = FileSet.objects.filter(user=u)
     template = loader.get_template('myprofile.html')
