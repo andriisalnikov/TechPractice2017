@@ -115,3 +115,17 @@ footer {
     color: #9d9d9d;
     padding: 25px;
 }
+.social {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-top: 8px !important;
+    margin-right: 5px !important;
+    background-size: cover;
+	background-image: url(../img/social_sprite.png);
+}
+.facebook {
+}
+.google {
+	background-position-x: -29px;
+}

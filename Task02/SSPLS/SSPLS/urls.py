@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from ssplsapp.views import index, playedgames, availablegames, statistics, playgame, creategame, game, addgame
+from ssplsapp.views import index, playedgames, availablegames, statistics, playgame, creategame, game, addgame, logout, play
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,4 +27,7 @@ urlpatterns = [
     url(r'^play-game/(?P<game_id>\d+)/$', playgame),
     url(r'^create-game/', creategame),
     url(r'^game\/[1-9][0-9]*/', game),
+    url(r'^logout/' , logout),
+    url(r'^play/(?P<game_id>\d+)/$' , play),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
 ]

@@ -38,10 +38,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">SSPLS</a>
+                <a class="navbar-brand" href="/">SSPLS</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    {% if user.is_anonymous  %}
+                    <li>
+                        <a class="social facebook" href="{% url 'social:begin' 'facebook' %}"></a>
+                    </li>
+                    <li>
+                        <a class="social google" href="{% url 'social:begin' 'google-oauth2' %}"></a>
+                    </li>                    
+                    {% else %}
                     <li>
                         <a href="/available-games/">Play</a>
                     </li>
@@ -51,6 +59,10 @@
                     <li>
                         <a href="/statistics/">Statistics</a>
                     </li>
+                    <li>
+                        <a href="/logout">Logout</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
