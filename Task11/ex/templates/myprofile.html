@@ -8,13 +8,13 @@
 		<link href="personal_cabinet.css" rel="stylesheet">
 	</head>
 	<body>
-		<div class="container">
+		<div class="container hdr">
 			  <section>
-			    <div class="page-header">
-			      <h3 class="pull-left">
+			    <div class="page-header subhdr">
+			      <h3 class="pull-left titl">
 			        Personal cabinet
 			      </h3>
-			      <div class="pull-right">
+			      <div class="pull-right logout">
 			        <div class="btn-group">
 			          <button type="button" class="btn btn-block btn-info">
 			            Log out
@@ -25,41 +25,111 @@
 			    </div>
 			  </section>
 		</div>
-		<div class="container ">
-		<div class="col-xs-12 col-md-9">
-			<div class="jumbotron">
-				 <p>Filename.txt</p>
-				  <dl class="dl-horizontal">
-				    <dt class="descr">creation date</dt>
-				    <dd class="descr">- 17.06.1992</dd>
-				    <dt class="descr">size</dt>
-				    <dd class="descr">- 124KB</dd>
-				  </dl>   
-				  <p>Filename.txt</p>
-				  <dl class="dl-horizontal">
-				    <dt class="descr">creation date</dt>
-				    <dd class="descr">- 17.06.1992</dd>
-				    <dt class="descr">size</dt>
-				    <dd class="descr">- 124KB</dd>
-				  </dl>   
-				  <p>Filename.txt</p>
-				  <dl class="dl-horizontal">
-				    <dt class="descr">creation date</dt>
-				    <dd class="descr">- 17.06.1992</dd>
-				    <dt class="descr">size</dt>
-				    <dd class="descr">- 124KB</dd>
-				  </dl>   
-			</div> 
-		</div>
-		<div class="pull-right">
-				<h3>Rank <span class="label label-info"> sum </span></h3>
-				<h3>Total Size <span class="label label-info"> sum </span></h3>
-				<h3>All Files <span class="label label-info"> sum </span></h3>
-				<h3>All Sets <span class="label label-info"> sum </span></h3>
-				<h3>Curr Files <span class="label label-info"> sum </span></h3>
-				<h3>Curr Sets <span class="label label-info"> sum </span></h3>
-				<h3>Curr Size <span class="label label-info"> sum </span></h3>
-		</div>
+		
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 col-md-9">
+					<ul class="nav nav-tabs">
+			  			<li class="active"><a data-toggle="tab" href="#myfs">My filesets</a></li>
+			  			<li><a data-toggle="tab" href="#newfs">New fileset</a></li>
+					</ul>
+					<div class="tab-content">
+						<div id="myfs" class="tab-pane fade in active newfs">
+							 <p>Filename.txt</p>
+							  <dl class="dl-horizontal">
+							  	<dt class="descr">size</dt>
+							    <dd class="descr">- 124KB</dd>
+							    <dt class="descr">creation date</dt>
+							    <dd class="descr">- 17.06.1992</dd>
+							    <dt class="descr">expired date</dt>
+							    <dd class="descr">- 18.06.2017</dd>
+							  </dl>   
+							  <p>Filename.txt</p>
+							  <dl class="dl-horizontal">
+							    <dt class="descr">size</dt>
+							    <dd class="descr">- 124KB</dd>
+							    <dt class="descr">creation date</dt>
+							    <dd class="descr">- 17.06.1992</dd>
+							    <dt class="descr">expired date</dt>
+							    <dd class="descr">- 18.06.2017</dd>
+							  </dl>   
+							  <p>Filename.txt</p>
+							  <dl class="dl-horizontal">
+							    <dt class="descr">size</dt>
+							    <dd class="descr">- 124KB</dd>
+							    <dt class="descr">creation date</dt>
+							    <dd class="descr">- 17.06.1992</dd>
+							    <dt class="descr">expired date</dt>
+							    <dd class="descr">- 18.06.2017</dd>
+							  </dl>  
+							  <p>Filename.txt</p>
+							  <dl class="dl-horizontal">
+							  	<dt class="descr">size</dt>
+							    <dd class="descr">- 124KB</dd>
+							    <dt class="descr">creation date</dt>
+							    <dd class="descr">- 17.06.1992</dd>
+							    <dt class="descr">expired date</dt>
+							    <dd class="descr">- 18.06.2017</dd>
+							  </dl>   
+							  <p>Filename.txt</p>
+							  <dl class="dl-horizontal">
+							    <dt class="descr">size</dt>
+							    <dd class="descr">- 124KB</dd>
+							    <dt class="descr">creation date</dt>
+							    <dd class="descr">- 17.06.1992</dd>
+							    <dt class="descr">expired date</dt>
+							    <dd class="descr">- 18.06.2017</dd>
+							  </dl>   
+							  <p>Filename.txt</p>
+							  <dl class="dl-horizontal">
+							    <dt class="descr">size</dt>
+							    <dd class="descr">- 124KB</dd>
+							    <dt class="descr">creation date</dt>
+							    <dd class="descr">- 17.06.1992</dd>
+							    <dt class="descr">expired date</dt>
+							    <dd class="descr">- 18.06.2017</dd>
+							  </dl>  
+						</div> 
+						<div id="newfs" class="tab-pane fade ">
+							<div class="col-md-6">
+								<legend>Create new fileset</legend>
+							  	<form >
+									<div class="form-group">
+										<input class="input form-control" type ="text" id="text" required placeholder="Name" > 
+									</div>
+									<div class="form-group">
+										<input class="input form-control" type ="password" id="passwd" required placeholder="Password" > 
+									</div>
+									<div class="form-group">
+										<textarea class="form-control" rows="5" id="comment" required placeholder="Description"></textarea> 
+									</div>
+									<div class="row">
+										<label class="col-md-4 control-label">Select expire date: </label>
+									<div class="col-md-8">
+										<div class="form-group">
+											<input class="input form-control" type ="date" id="passwd" required placeholder="Password" > 
+										</div>
+									</div>
+									</div>
+									<div class="form-group">
+										<button type ="submit" class="btn btn-success">Create</button>
+									</div>
+									
+								</form>	
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-3">
+						<h3>Rank <span class="label label-info"> sum </span></h3>
+						<h3>Total Size <span class="label label-info"> sum </span></h3>
+						<h3>All Files <span class="label label-info"> sum </span></h3>
+						<h3>All Sets <span class="label label-info"> sum </span></h3>
+						<h3>Curr Files <span class="label label-info"> sum </span></h3>
+						<h3>Curr Sets <span class="label label-info"> sum </span></h3>
+						<h3>Curr Size <span class="label label-info"> sum </span></h3>
+				</div>
+			</div>
 		</div>
 		<footer>
 			<div class="container">

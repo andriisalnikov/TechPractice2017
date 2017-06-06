@@ -37,11 +37,8 @@ footer {
 .input {
 	border-radius: 7px;
 }
-@media screen and (max-device-width:820px) {
-	label
-	{
-		display: none;
-	}
+.cell {
+	width: 60%;
 }
 
 

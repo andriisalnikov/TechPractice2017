@@ -1,0 +1,14 @@
+{% extends 'fileset.html' %}
+
+{% block content %}
+    New description:
+    <form name="reg" method="post" action="/{{ fileset.id }}/change_description/">
+        {% csrf_token %}
+        <textarea cols="40" rows="5" name="description" placeholder="Description">{{ description }}</textarea>
+        <button type ="submit">Save</button>
+    </form>
+{% endblock %}
+
+{% block conten_delete %}
+    <input type="button" value="delete" onClick='location.href="/file/{{ f.id }}/delete/"'>
+{% endblock %}

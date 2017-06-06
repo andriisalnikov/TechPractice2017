@@ -3,24 +3,58 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ name }}</title>
-</head>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="file_set.css" rel="stylesheet">
+    
 <body>
-    Fileset: {{ fileset.name }}<br>
-    Owner: {{ fileset.user.nick }}<br>
-    Description: {{ fileset.description }}<br>
-{% block content %}
-{% endblock %}
-<h1>Files in this fileset:</h1>
-<ul>
-	{% for f in files %}
-        <li><a href="/file/{{ f.id }}/">{{ f.name }}</a>   {% block conten_delete %}{% endblock %}</li>
-	{% endfor %}
-</ul>
-<h1>Add new file:</h1>
-<form enctype="multipart/form-data" method="post" action="/{{ fileset.id }}/upload_file/" >
-    {% csrf_token %}
-    <input type="file" name="somefile">
-    <button type="submit">Add</button>
-</form>
+    <header>
+      <h1 class="hdr" >VEX.NET</h1> 
+    </header>
+
+    <div class="container">
+        {% block content %}
+            <h3>Fileset: <span class="label label-info"> {{ fileset.name }} </span></h3>
+            <h3>Owner: <span class="label label-info"> {{ fileset.user.nick  }} </span></h3>
+            <label data-toggle="collapse" data-target="#descript"><h3>Description: </h3></label>
+            <div id="descript" class="collapse">
+                {{ fileset.description  }}
+            </div>
+        {% endblock %}
+    </div>
+        <h1>Files in this fileset:</h1>
+       <!--  <ul>
+        	{% for f in files %}
+        		<li>{{ f }}   <input type="button" value="edit" onClick='location.href="/download/{{ f.id }}"'></li>
+        	{% endfor %}
+        </ul> -->
+         <div class="list-group">
+            {% for f in files %}
+          <a href="#" class="list-group-item"> {{ f }} 
+          <button type ="button" class="btn btn-warning" onClick='location.href="/download/{{ f.id }}"'> Edit </button>
+          </a>
+            {% endfor %}
+        </div> 
+
+        <h1>Add new file:</h1>
+        <form enctype="multipart/form-data" method="post" action="/{{ fileset.id }}/upload_file/" >
+            {% csrf_token %}
+            <!-- <input type="file" class="btn btn-success" name="somefile"> -->
+            <label class="btn btn-primary btn-file">
+                Browse <input id="upl" class="upl" type="file" hidden>
+            </label>
+            <button type="submit" class="btn btn-success" id="add" disabled>Add</button>
+        </form>
+
+    <footer>
+            <div class="container">
+                <h6>
+                    © 2017 VEX.NET ALL RIGHTS RESERVED
+                </h6>
+            </div>
+    </footer>
+    <script src="jquery.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="val_browse.js"></script>
+</head>
 </body>
 </html>

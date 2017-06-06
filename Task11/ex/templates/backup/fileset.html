@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ name }}</title>
+</head>
+<body>
+    Fileset: {{ fileset.name }}<br>
+    Owner: {{ fileset.user.nick }}<br>
+    Description: {{ fileset.description }}<br>
+{% block content %}
+{% endblock %}
+<h1>Files in this fileset:</h1>
+<ul>
+	{% for f in files %}
+        <li><a href="/file/{{ f.id }}/">{{ f.name }}</a>   {% block conten_delete %}{% endblock %}</li>
+	{% endfor %}
+</ul>
+<h1>Add new file:</h1>
+<form enctype="multipart/form-data" method="post" action="/{{ fileset.id }}/upload_file/" >
+    {% csrf_token %}
+    <input type="file" name="somefile">
+    <button type="submit">Add</button>
+</form>
+</body>
+</html>
