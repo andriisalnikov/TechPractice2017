@@ -32,6 +32,11 @@ def randomStringJustDigits(length):
 
 def index(request):
     message = ''
+    try:
+        if request.user.is_authenticated | request.session['nick']:
+            return redirect('/myprofile/')
+    except KeyError:
+        pass
     if request.method == 'POST':
         users = TheUser.objects.filter(nick=request.POST['nick'], password_hash=passwordHash(request.POST['password']))
         if len(users) == 1:
@@ -43,11 +48,6 @@ def index(request):
         else:
             message = 'Logic/password is incorrect'
     template = loader.get_template('index.html')
-    try:
-        if request.session['nick']:
-            return redirect('/myprofile/')
-    except KeyError:
-        pass
     context = {'message': message}
     return HttpResponse(template.render(context, request))
 
@@ -103,8 +103,13 @@ def validation(request):
     context = {'messages': messages}
     return HttpResponse(template.render(context, request))
 
-@login_required
+
 def myprofile(request):
+    try:
+        if request.user.is_authenticated:
+            request.session['nick'] = request.user.username
+    except KeyError:
+        pass
     try:
         if request.session['nick']:
             pass
