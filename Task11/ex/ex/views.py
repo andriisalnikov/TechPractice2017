@@ -41,12 +41,12 @@ def index(request):
         else:
             message = 'Logic/password is incorrect'
     template = loader.get_template('index.html')
-    nick = 'guest'
     try:
-        nick = request.session['nick']
+        if request.session['nick']:
+            return redirect('/myprofile/')
     except KeyError:
         pass
-    context = {'message': message, 'nick': nick}
+    context = {'message': message}
     return HttpResponse(template.render(context, request))
 
 
