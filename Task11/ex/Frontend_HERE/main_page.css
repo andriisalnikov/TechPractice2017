@@ -33,7 +33,6 @@ footer {
     background-color: black;
     color: white;
 }
-}
 .log {
 	text-align: center;
 }
@@ -47,9 +46,6 @@ div.social-icon {
 	width: 40px; 
 	height: 38px;
     cursor: pointer;
-}
-div.vk {
-	background-position: -78px -14px;
 }
 div.google {
 	background-position: -205px -137px;

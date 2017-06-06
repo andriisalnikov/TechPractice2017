@@ -118,7 +118,6 @@ def myprofile(request):
 def create_fileset(request):
     if request.method != 'POST':
         return redirect('/')
-
     try:
         author = TheUser.objects.filter(nick=request.session['nick'])
     except KeyError:
