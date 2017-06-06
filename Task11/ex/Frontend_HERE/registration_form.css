@@ -7,10 +7,13 @@ body {
     position: relative;
     min-height: 100%;
     padding-bottom: 40px;
-    background-image: url("background.jpg");
 }
-h1 {
-	text-align: center;
+header {
+    background-color: black;
+    color:white;
+}
+.hdr {
+    margin-left: 20px;
 }
 fieldset {
 	border-radius: 3px;
@@ -28,7 +31,8 @@ footer {
     width: 100%;
     margin-top: 50px;
     border-top: 1px solid #9c9c9c;
-    background-color: white;
+    background-color: black;
+    color: white;
 }
 .input {
 	border-radius: 7px;
