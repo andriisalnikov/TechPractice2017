@@ -6,7 +6,7 @@ from django.template import loader
 from django.http import HttpResponse, Http404
 from django.conf import settings
 from django.utils.datastructures import MultiValueDictKeyError
-
+from django.contrib.auth.decorators import login_required
 from .models import TheUser, FileSet, TheFile, Codes
 from django.core.mail import send_mail
 from wsgiref.util import FileWrapper
@@ -103,7 +103,7 @@ def validation(request):
     context = {'messages': messages}
     return HttpResponse(template.render(context, request))
 
-
+@login_required
 def myprofile(request):
     try:
         if request.session['nick']:

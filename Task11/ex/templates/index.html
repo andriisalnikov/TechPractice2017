@@ -53,8 +53,8 @@
 					<div class="form-group log">
 						<legend> Login with: </legend>
 						<div class="text-center" id="uLogin" >
-							<div class="social-icon google" data-uloginbutton="google"></div>
-							<div class="social-icon facebook" data-uloginbutton="facebook"></div>
+							<div class="social-icon google" data-uloginbutton="google"> <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a></div>
+{#							<div class="social-icon facebook" data-uloginbutton="facebook"><a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a></div>#}
 						</div>
 					</div>
 					<div>{{ message }}</div>
