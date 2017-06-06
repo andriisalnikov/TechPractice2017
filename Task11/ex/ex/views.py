@@ -116,11 +116,16 @@ def myprofile(request):
 
 
 def create_fileset(request):
-    au = TheUser.objects.filter(nick=request.session['nick'])
-    somekey = randomStringJustDigits(12)
-    fileset = FileSet(name=somekey, user=au[0])
+    if request.method != 'POST':
+        return redirect('/')
+
+    try:
+        author = TheUser.objects.filter(nick=request.session['nick'])
+    except KeyError:
+        return redirect('/')
+    fileset = FileSet(name=request.POST['name'], user=author[0], description=request.POST['description'])
     fileset.save()
-    return redirect('/' + fileset.name.__str__() + '/')
+    return redirect('/' + fileset.id.__str__() + '/')
 
 
 def fileset(request, fileset_id):

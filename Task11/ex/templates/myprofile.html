@@ -17,9 +17,18 @@
 			      <h3 class="pull-left">
 			        Personal cabinet
                       {# TODO #}
-                      <button type="button" onClick='location.href="/create_fileset/"'>
-                          New fileset
-                      </button>
+                      <br>
+                      <form action='/create_fileset/"' method="post">
+                          {% csrf_token %}
+                          <input type ="text" id="text" name="name" required placeholder="Name" >
+                          <input type ="text" id="text" name="description" placeholder="Description" >
+                          <input  type ="password" id="passwd" name="password" placeholder="Password">
+
+                          <div class="row">
+	                       <button type ="submit" class="btn btn-success span2">New fileset</button>
+                          </div>
+                    <div>{{ message }}</div>
+                    </form>
 			      </h3>
 			      <div class="pull-right">
 			        <div class="btn-group">
