@@ -9,12 +9,11 @@
     Owner: {{ fileset.user.nick }}<br>
     Description: {{ fileset.description }}<br>
 {% block content %}
-
 {% endblock %}
 <h1>Files in this fileset:</h1>
 <ul>
 	{% for f in files %}
-		<li>{{ f }}   <input type="button" value="edit" onClick='location.href="/download/{{ f.id }}"'></li>
+        <li><a href="/file/{{ f.id }}/">{{ f.name }}</a>   {% block conten_delete %}{% endblock %}</li>
 	{% endfor %}
 </ul>
 <h1>Add new file:</h1>

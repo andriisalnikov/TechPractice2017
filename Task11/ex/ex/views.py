@@ -118,7 +118,6 @@ def myprofile(request):
 def create_fileset(request):
     if request.method != 'POST':
         return redirect('/')
-
     try:
         author = TheUser.objects.filter(nick=request.session['nick'])
     except KeyError:
@@ -148,7 +147,7 @@ def fileset(request, fileset_id):
         if len(files) > 0:
             for oneFile in files:
                 if not oneFile.deleted:
-                    notDeletedFiles.append([oneFile.name, '/download/' + oneFile.id.__str__()])
+                    notDeletedFiles.append(oneFile)
         context = {'nick': request.session['nick'], 'files': notDeletedFiles, 'fileset': fs}
         return HttpResponse(template.render(context, request))
 
@@ -192,3 +191,15 @@ def handle_uploaded_file(f, id):
     with open(id.__str__(), 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
+
+
+def delete_file(request, file_id):
+    try:
+        file = TheFile.objects.get(id=file_id)
+        if file.fileset.user != TheUser.objects.get(nick=request.session['nick']):
+            return redirect('/')
+    except KeyError:
+        return redirect('/')
+    file.deleted = True
+    file.save()
+    return redirect('/'+file.fileset_id.__str__()+'/')
