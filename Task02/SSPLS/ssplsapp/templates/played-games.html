@@ -48,7 +48,17 @@
                     <div class="clearfix"></div>
                     <p class="text-center">
                         <b>Winner: </b>
-                        <span class="winner">{{ game.status }}</span>
+                        <span class="winner">
+                        {% if game.status == 'firstwon'  %}
+                        <a href="#">{{ game.firstuser.username }}</a>
+                        {% endif %}
+                        {% if game.status == 'secondwon'  %}
+                        <a href="#">{{ game.seconduser.username }}</a>
+                        {% endif %}
+                        {% if game.status == 'draw'  %}
+                        Draw
+                        {% endif %}
+                        </span>
                     </p>
                 </div>
             </div>

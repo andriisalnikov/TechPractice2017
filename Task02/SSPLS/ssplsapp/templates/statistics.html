@@ -84,7 +84,17 @@
                         </div>
                         <p class="text-center">
                             <b>Winner: </b>
-                            <span class="winner">Player1</span>
+                            <span class="winner">
+                                {% if game.status == 'firstwon'  %}
+                        <a href="#">{{ game.firstuser.username }}</a>
+                        {% endif %}
+                        {% if game.status == 'secondwon'  %}
+                        <a href="#">{{ game.seconduser.username }}</a>
+                        {% endif %}
+                        {% if game.status == 'draw'  %}
+                        Draw
+                        {% endif %}
+                            </span>
                         </p>
                     </div>
                     {% endfor %}
@@ -108,11 +118,11 @@
                         </p>
                         <p>
                             <b>Played: </b>
-                            <span>0</span>
+                            <span>{{ bestUserGames }}</span>
                         </p>
                         <p>
                             <b>Won: </b>
-                            <span>0</span>
+                            <span>{{ bestWonGames }}</span>
                         </p>
                     </div>
                 </div>
@@ -123,15 +133,15 @@
                     <div class="panel-body">
                         <p>
                             <b>Player: </b>
-                            <span>Player</span>
+                            <span>{{ worstPlayer.0.username }}</span>
                         </p>
                         <p>
                             <b>Played: </b>
-                            <span>0</span>
+                            <span>{{ worstUserGames }}</span>
                         </p>
                         <p>
                             <b>Lost: </b>
-                            <span>0</span>
+                            <span>{{ worstLooseGames }}</span>
                         </p>
                     </div>
                 </div>
