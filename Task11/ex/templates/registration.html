@@ -15,23 +15,43 @@
             <h1>Registration Form</h1>
         </header>
         <div class="container">
-          <div class="row">
-            <div class="well span6 offset3">
-              <legend>Input your personal data</legend>
-            	<form name="reg" class="cell" method="post">
-                    {% csrf_token %}
-                	<input class="input span4" type ="text" id="text" name="nick" required placeholder="Your nick" >
-                  <label for="text" class="span2 ">Input your nickname</label>
-                	<input class="input span4" type ="email" id="email" name="email" required placeholder="Your e-mail" >
-                  <label for="email" class="span2">Input your e-mail</label>
-                	<input class="input span4" type ="password" id="passwd" name="password" required placeholder="Password" >
-                  <label for="passwd" class="span2">Input your password</label>
-                	<input class="input span4" type ="password" id="confpasswd" required placeholder="Confirm password" >
-                  <label for="confpasswd" class="span2">Confirm your password</label>
-                  <button type ="submit" class="btn btn-block btn-success">Register me</button>
-              </form>
-            </div>
-          </div>
+        <div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<legend>Input your personal data</legend>
+			<form name="reg" class="form-horizontal" method="post">
+				{% csrf_token %}
+				<div class="form-group ">
+					<div class="col-sm-8">
+						<input class="input  form-control" type ="text" id="text" required placeholder="Your nick" >
+					</div>
+					<label for="text" class=" col-sm-4 control-label">Input your nickname</label>
+				</div>
+				<div class="form-group ">
+					<div class="col-sm-8">
+						<input class="input form-control" type ="email" id="email" required placeholder="Your e-mail" >
+					</div>
+					<label for="email" class="col-sm-4 control-label">Input your e-mail</label>
+				</div>
+				<div class="form-group ">
+					<div class="col-sm-8">
+						<input class="input form-control " type ="password" id="passwd" required placeholder="Password" >
+					</div>
+					<label for="passwd" class="col-sm-4 control-label">Input your password</label>
+				</div>
+				<div class="form-group ">
+					<div class="col-sm-8">
+						<input class="input form-control" type ="password" id="confpasswd" required placeholder="Confirm password" >
+					</div>
+					<label for="confpasswd" class="col-sm-4 control-label">Confirm your password</label>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+					<button type ="submit" class="btn btn-block btn-success ">Register me</button>
+					</div>
+				</div>
+			</form>
+		</div>
+        </div>
         </div>
 		<footer >
 			<div class="container">
