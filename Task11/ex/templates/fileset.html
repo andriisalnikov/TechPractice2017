@@ -5,10 +5,11 @@
     <title>{{ name }}</title>
 </head>
 <body>
-{% block content %}
     Fileset: {{ fileset.name }}<br>
     Owner: {{ fileset.user.nick }}<br>
     Description: {{ fileset.description }}<br>
+{% block content %}
+
 {% endblock %}
 <h1>Files in this fileset:</h1>
 <ul>

@@ -170,10 +170,11 @@ def logout(request):
 
 def download(request, file_id):
     file_path = os.path.join(file_id)
+    f = TheFile.objects.get(id=file_id)
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/force-download")
-            response['Content-Disposition'] = 'attachment; filename=' + os.path.basename(file_path)
+            response['Content-Disposition'] = 'attachment; filename=' + f.name
             return response
     raise Http404
 
@@ -182,12 +183,12 @@ def upload_file(request, fileset_id):
     if request.method == 'POST':
         f = FileSet.objects.get(id=fileset_id)
         thatfile = TheFile(fileset=f, name=request.FILES['somefile'].name)
-        handle_uploaded_file(request.FILES['somefile'], thatfile.id)
         thatfile.save()
+        handle_uploaded_file(request.FILES['somefile'], thatfile.id)
     return redirect('/' + fileset_id.__str__() + '/')
 
 
 def handle_uploaded_file(f, id):
-    with open(id, 'wb+') as destination:
+    with open(id.__str__(), 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
