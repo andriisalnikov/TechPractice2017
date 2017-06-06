@@ -111,7 +111,7 @@ def fileset(request, fileset_name):
 	   fs = FileSet.objects.get(name=fileset_name)
 	except SomeModel.DoesNotExist:
 	   fs = None
-	if fs is None or fs.deleted:
+	if fs is None:
 		raise Http404
 	else:
 		template = loader.get_template('fileset.html')
