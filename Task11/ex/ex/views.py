@@ -142,17 +142,14 @@ def logout(request):
         pass
     return redirect('index')
 
-def download(request, fileset_name):
-	try:
-	   file = TheFile.objects.get(name=download_name).first()
-	except SomeModel.DoesNotExist:
-	   file = None
-	if file is None or f.deleted:
-		raise Http404
-	else:
-		response = HttpResponse(FileWrapper(f.file.getvalue()), content_type='application/octet-stream')
-		response['Content-Disposition'] = 'attachment; filename=' + f.name
-		return response
+def download(request, download_name):
+	file_path = os.path.join(settings.MEDIA_ROOT, download_name)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/force-download")
+            response['Content-Disposition'] = 'attachment; filename=' + os.path.basename(file_path)
+            return response
+    raise Http404
 
 def upload_file(request, fileset_name):
     if request.method == 'POST':
