@@ -1,10 +1,8 @@
-legend
-{
-	text-align: center;
-}
-body
-{
+body {
 	background-image: url("background.jpg");
+}
+legend {
+	text-align: center;
 }
 footer {
     position: absolute;
@@ -16,18 +14,15 @@ footer {
     border-top: 1px solid #9c9c9c;
     background-color: white;
 }
-.top-buffer
-{
+.top-buffer {
 	position: absolute;
     top:1%;
 }
-.top-fetch
-{
+.top-fetch {
 	position: absolute;
     top: 50%;
 }
-h1
-{
+h1 {
 	font-style: italic;
 	margin-left: 50px;
 }
