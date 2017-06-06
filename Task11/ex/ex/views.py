@@ -103,7 +103,7 @@ def validation(request):
     context = {'messages': messages}
     return HttpResponse(template.render(context, request))
 
-@login_required
+
 def myprofile(request):
     try:
         if request.session['nick']:
@@ -208,3 +208,9 @@ def delete_file(request, file_id):
     file.deleted = True
     file.save()
     return redirect('/'+file.fileset_id.__str__()+'/')
+
+def customdb(backend, user, response, *args, **kwargs):
+    check = TheUser.objects.filter(nick=user.username)
+    if len(check)== 0:
+        u = TheUser(nick=user.username, email=user.email, validation=True)
+        u.save()
