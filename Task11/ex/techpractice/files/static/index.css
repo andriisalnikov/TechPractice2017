@@ -1,8 +1,26 @@
+html {
+    height: 97%;
+}
 body {
-	background-image: url("background.jpg");
+	padding: 0;
+	margin: 0;
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 40px;
+}
+header {
+	background-color: black;
+	color: white;
 }
 legend {
 	text-align: center;
+}
+h1 {
+	margin-left: 20px;
+}
+img {
+	margin-left: 5px;
+    float: left;
 }
 footer {
     position: absolute;
@@ -14,15 +32,42 @@ footer {
     border-top: 1px solid #9c9c9c;
     background-color: white;
 }
-.top-buffer {
-	position: absolute;
-    top:1%;
+.log {
+	text-align: center;
 }
 .top-fetch {
 	position: absolute;
     top: 50%;
 }
-h1 {
-	font-style: italic;
-	margin-left: 50px;
+div.social-icon { 
+	background: url(socials.png);
+	display: inline-block; 
+	width: 40px; 
+	height: 38px;
+    cursor: pointer;
+}
+div.google {
+	background-position: -205px -137px;
+}
+div.facebook {
+	background-position: -120px -14px;
+}
+@media (max-width: 768px) {
+	.top-fetch {
+		position: relative;
+	}
+	.form-inline .form-group {
+	    display: inline-block;
+	    margin-bottom: 0;
+	    vertical-align: middle;
+	    width: 32.5%;
+	}
+	.form-inline .form-control {
+   		display: inline-block;
+    	width: 100%;
+    	vertical-align: middle;
+	}
+	.form-inline .form-group .btn {
+		width: 100%;
+	}
 }
