@@ -19,11 +19,9 @@
         {% endblock %}
     </div>
         <h1>Files in this fileset:</h1>
-			<div class="list-group">
+        <div class="list-group">
             {% for f in files %}
-			<a href="/file/{{ f.id }}" class="list-group-item"> {{ f.name }}
-                {% block conten_delete %}{% endblock %}
-			</a>
+			<a href="/file/{{ f.id }}" class="list-group-item"> {{ f.name }}</a> {% block conten_delete %}{% endblock %}
             {% endfor %}
         </div> 
         {% block content_upload %}{% endblock %}
