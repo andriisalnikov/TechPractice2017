@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Create a Game{% endblock %}
+
+   
+{% block content %}
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-12 create-game">
+               <h1 class="text-center">Create a game</h1>
+                    <form name="form" action="/addgame/" method="post">
+                      {% csrf_token %}
+                        <h4 class="text-center">Choose your bet</h4>
+                       <p class="text-center">
+                            <label>
+                              <input type="radio" name="bet" value="stone" />
+                              <span class="radio stone"></span>
+                            </label>
+                            <label>
+                              <input type="radio" name="bet" value="scissors" />
+                              <span class="radio scissors"></span>
+                            </label>
+                            <label>
+                              <input type="radio" name="bet" value="paper" />
+                              <span class="radio paper"></span>
+                            </label>
+                            <label>
+                              <input type="radio" name="bet" value="lizard" />
+                              <span class="radio lizard"></span>
+                            </label>
+                            <label>
+                              <input type="radio" name="bet" value="spock" />
+                              <span class="radio spock"></span>
+                            </label>
+                            {{ form.as_p }}
+                        </p>
+                        <p class="text-center">
+                            <button class="btn btn-success">Create</button>
+                        </p>
+                    </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- /.container -->
+{% endblock %}

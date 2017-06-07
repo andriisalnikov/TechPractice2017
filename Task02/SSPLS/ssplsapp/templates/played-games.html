@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Played Games List{% endblock %}
+   
+{% block content %}
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Header -->
+        <!-- Projects Row -->
+        <div class="row played-games">
+            <h3 class="text-center">Games history</h3>
+            {% for game in games %}
+            <div data-game-id="{{ game.id }}" class="col-md-4 col-sm-6 col-xs-12">
+                <div class="game">
+                    <p class="text-center">
+                        <b>Game: </b>
+                        #<span class="game-id">{{ game.id }}</span>
+                    </p>
+                    <div class="col-sm-6 col-xs-12">
+                        <p>
+                            <b>Player #1: </b>
+                            <span class="playername">
+                                <a href="#">{{ game.firstuser.username }}</a>
+                            </span>
+                        </p>
+                        <p>
+                            <b>Bet: </b>
+                            <span class="bet">
+                                {{ game.firstbet }}
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <p>
+                            <b>Player #2: </b>
+                            <span class="playername">
+                                <a href="#">{{ game.seconduser.username }}</a>
+                            </span>
+                        </p>
+                        <p>
+                            <b>Bet: </b>
+                            <span class="bet">
+                                {{ game.secondbet }}
+                            </span>
+                        </p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="text-center">
+                        <b>Winner: </b>
+                        <span class="winner">
+                        {% if game.status == 'firstwon'  %}
+                        <a href="#">{{ game.firstuser.username }}</a>
+                        {% endif %}
+                        {% if game.status == 'secondwon'  %}
+                        <a href="#">{{ game.seconduser.username }}</a>
+                        {% endif %}
+                        {% if game.status == 'draw'  %}
+                        Draw
+                        {% endif %}
+                        </span>
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+{% endblock %}
