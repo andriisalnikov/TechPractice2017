@@ -167,7 +167,7 @@ def fileset(request, fileset_id):
             for oneFile in files:
                 if not oneFile.deleted:
                     notDeletedFiles.append(oneFile)
-        context = {'nick': request.session['nick'], 'files': notDeletedFiles, 'fileset': fs}
+        context = {'files': notDeletedFiles, 'fileset': fs}
         return HttpResponse(template.render(context, request))
 
 
@@ -225,6 +225,7 @@ def delete_file(request, file_id):
     file.deleted = True
     file.save()
     return redirect('/'+file.fileset_id.__str__()+'/')
+
 
 def customdb(backend, user, response, *args, **kwargs):
     check = TheUser.objects.filter(nick=user.username)
