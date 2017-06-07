@@ -162,8 +162,9 @@ def create_fileset(request):
 
 
 def fileset(request, fileset_id):
+	today = datetime.datetime.now()
     try:
-        fs = FileSet.objects.get(id=fileset_id)
+        fs = FileSet.objects.filter(id=fileset_id, expire_date__gt=today).first()
     except FileSet.DoesNotExist:
         fs = None
     if fs is None:
