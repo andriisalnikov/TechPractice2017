@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Game Result{% endblock %}
+   
+{% block content %}
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-12 game-result">
+               <h1 class="text-center">Game result</h1>
+                   <div class="container-fluid">
+                       <div class="row">
+                          <p class="text-center">
+                              <b>Game: </b>
+                              #<span>1</span>
+                          </p>
+                           <div class="col-sm-6 col-xs-12 text-center">
+                               <p>
+                                   <b>Player #1: </b>
+                                   <span>
+                                       <a href="#">Player 1</a>
+                                   </span>
+                               </p>
+                               <p>
+                                   <b>Bet: </b>
+                                   <span>
+                                       Bet
+                                   </span>
+                               </p>
+                           </div>
+                           <div class="col-sm-6 col-xs-12 text-center">
+                               <p>
+                                   <b>Player #2: </b>
+                                   <span>
+                                       <a href="#">Player 2</a>
+                                   </span>
+                               </p>
+                               <p>
+                                   <b>Bet: </b>
+                                   <span>
+                                       Bet
+                                   </span>
+                               </p>
+                           </div>
+                           <div class="col-xs-12">
+                               <p class="text-center">
+                                   <b>Winner: </b>
+                                   <span>Winner</span>
+                               </p>
+                           </div>
+                       </div>
+                   </div>
+                   <p class="text-center">
+                       <a href="#" class="btn btn-success">Create new game</a>
+                       <a href="#" class="btn btn-warning">Available games</a>
+                       <a href="#" class="btn btn-danger">Played games</a>                   
+                   </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- /.container -->
+{% endblock %}

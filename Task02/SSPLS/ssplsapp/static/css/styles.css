@@ -1,0 +1,131 @@
+* {
+    font-family: Tahoma;
+}
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+body {
+    position: relative;
+    margin: 0;    
+    padding-bottom: 120px;
+    min-height: 100%;
+}
+.main-page-header {
+    margin: 50px 0;
+}
+h1, h2, h3, h4 {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.main-page-header p {
+    text-indent: 25px;
+    font-size: 16px;
+}
+.main-page-header ol {
+    font-size: 14px;
+}
+.main-page-header img {
+    max-width: 100%;
+}
+.games, .players {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.games .games-list {
+    background-color: rgba(128, 128, 128, 0.3);
+    border-radius: 16px;
+    -webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.75);
+    padding: 25px;
+}
+.games .games-list .game {
+    padding: 10px;
+    background-color: white;
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+.played-games, .available-games, .available-games-sidebar, .create-game, .play-game, .game-result, .statistics {
+    margin-top: 50px;
+}
+.played-games .game, .available-games .game {
+    border-radius: 16px;
+    -webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.75);
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: rgba(128,128,128,0.1);
+    
+}
+.create-game form, .play-game form {
+    border-top: 1px dotted black;
+    border-bottom: 1px dotted black;
+    background-color: rgba(128,128,128,0.3);
+    padding: 30px;
+}
+.create-game form label > input, .play-game form label > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+.create-game form label > input + span, .play-game form label > input + span { 
+    cursor:pointer;
+    border:2px solid black;
+}
+.create-game form label > input:checked + span, .play-game form label > input:checked + span{ /* (RADIO CHECKED) IMAGE STYLES */
+  border:2px solid green;
+}
+.create-game form span.radio, .play-game form span.radio {
+    display: inline-block;
+    width: 95px;
+    height: 85px;
+    background-image: url(../img/rock-paper-scissors.png);
+}
+.create-game form span.radio.stone, .play-game form span.radio.stone {
+    background-position: -15px -28px;
+}
+.create-game form span.scissors, .play-game form span.scissors {
+    background-position: -222px -28px;
+}
+.create-game form span.paper, .play-game form span.paper {
+    background-position: -110px -28px;
+}
+.create-game form span.lizard, .play-game form span.lizard {
+    background-position: -324px -28px;
+}
+.create-game form span.spock, .play-game form span.spock {
+    background-position: -425px -28px;
+}
+.game-result .container-fluid {
+    background-color: rgba(128,128,128, 0.2);
+    border-top: 1px dotted black;
+    border-bottom: 1px dotted black;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: black;
+    color: #9d9d9d;
+    padding: 25px;
+}
+.social {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-top: 8px !important;
+    margin-right: 5px !important;
+    background-size: cover;
+	background-image: url(../img/social_sprite.png);
+}
+.facebook {
+}
+.google {
+	background-position-x: -29px;
+}
