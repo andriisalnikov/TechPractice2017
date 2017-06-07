@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^(?P<fileset_id>[0-9]+)/upload_file/', views.upload_file, name='upload_file'),
     url(r'^file/(?P<file_id>[0-9]+)/$', views.download, name='download'),
     url(r'^file/(?P<file_id>[0-9]+)/delete/$', views.delete_file, name='delete_file'),
-    url(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
