@@ -5,7 +5,7 @@
     <form name="reg" method="post" action="/{{ fileset.id }}/change_description/">
         {% csrf_token %}
         <textarea cols="40" rows="5" name="description" placeholder="Description">{{ description }}</textarea>
-        <button type ="submit">Save</button>
+        <button type ="submit" class="btn btn-success">Save</button>
     </form>
 {% endblock %}
 
