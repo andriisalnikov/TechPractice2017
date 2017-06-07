@@ -9,33 +9,30 @@
     
 <body>
     <header>
-      <h1 class="hdr" >VEX.NET</h1> 
+		<h1 class="hdr" >VEX.NET</h1> 
     </header>
-
     <div class="container">
-
-            <h3>Fileset: <span class="label label-info"> {{ fileset.name }} </span></h3>
-            <h3>Owner: <span class="label label-info"> {{ fileset.user.nick  }} </span></h3>
-            <h3>Description: <span class="label label-info"> {{ fileset.description  }} </span></h3>
+        <h3>Fileset: <span class="label label-info"> {{ fileset.name }} </span></h3>
+		<h3>Owner: <span class="label label-info"> {{ fileset.user.nick  }} </span></h3>
+		<h3>Description: <span class="label label-info"> {{ fileset.description  }} </span></h3>
         {% block content %}
         {% endblock %}
     </div>
         <h1>Files in this fileset:</h1>
-         <div class="list-group">
+			<div class="list-group">
             {% for f in files %}
-          <a href="/file/{{ f.id }}" class="list-group-item"> {{ f.name }}
-                  {% block conten_delete %}{% endblock %}
-          </a>
+			<a href="/file/{{ f.id }}" class="list-group-item"> {{ f.name }}
+                {% block conten_delete %}{% endblock %}
+			</a>
             {% endfor %}
         </div> 
         {% block content_upload %}{% endblock %}
-
     <footer>
-            <div class="container">
-                <h6>
-                    © 2017 VEX.NET ALL RIGHTS RESERVED
-                </h6>
-            </div>
+		<div class="container">
+			<h6>
+				© 2017 VEX.NET ALL RIGHTS RESERVED
+			</h6>
+		</div>
     </footer>
     <script src="{% static "jquery.js" %}"></script>
     <script src="{% static "bootstrap.min.js" %}"></script>
