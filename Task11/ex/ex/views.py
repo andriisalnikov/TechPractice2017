@@ -130,7 +130,7 @@ def myprofile(request):
     for set in sets:
         currfiles += TheFile.objects.filter(fileset=set).count()
     template = loader.get_template('myprofile.html')
-    context = {'nick': request.session['nick'], 'filesets': sets, 'allfiles': allfiles, 'allsets': allsets, 'currfiles': currsets, 'currsets': currsets}
+    context = {'nick': request.session['nick'], 'filesets': sets, 'allfiles': allfiles, 'allsets': allsets, 'currfiles': currfiles, 'currsets': currsets}
     return HttpResponse(template.render(context, request))
 
 
@@ -189,7 +189,8 @@ def logout(request):
 def download(request, file_id):
     file_path = os.path.join(file_id)
     f = TheFile.objects.get(id=file_id)
-    if os.path.exists(file_path):
+    if not f.deleted and os.path.exists(file_path):
+		f.qty += 1
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/force-download")
             response['Content-Disposition'] = 'attachment; filename=' + f.name
