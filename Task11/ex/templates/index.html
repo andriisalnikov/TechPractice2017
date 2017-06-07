@@ -47,18 +47,16 @@
 				</form>
 			</div>
 			<div class="col-sm-8 col-sm-offset-1 top-fetch ">
-				<form class="form-inline">
+				<form class="form-inline" method="post" action="/fetch/">
+                {% csrf_token %}
 				<div class="form-group">
-					<button type="button" class="btn btn-warning" onClick='location.href="/create_fileset/"'>Transfer files</button>
+					<input class="input form-control" type ="text" pattern="^[ 0-9]+$" id="text" name="fileset_id" required placeholder="Insert Key"  oninvalid ="setCustomValidity('The key must contain only numbers')" oninput="setCustomValidity('')">
 				</div>
 				<div class="form-group">
-					<input class="input form-control" type ="text" pattern="^[ 0-9]+$" id="text" required placeholder="Insert Key"  oninvalid ="setCustomValidity('The key must contain only numbers')" oninput="setCustomValidity('')">
-				</div>
-				<div class="form-group">
-					<button type="button" class="btn btn-success">Fetch</button>
+					<button button type ="submit"  class="btn btn-success">Fetch</button>
 				</div>
 				</form>
-			</div>			
+			</div>
 			</div>
 			</div>
 		<footer >

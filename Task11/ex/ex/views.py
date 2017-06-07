@@ -251,3 +251,8 @@ def customdb(backend, user, response, *args, **kwargs):
     if len(check) == 0:
         u = TheUser(nick=user.username, email=user.email, validation=True)
         u.save()
+
+
+def fetch(request):
+    if request.method == "POST":
+        return redirect("/"+request.POST['fileset_id']+'/')
