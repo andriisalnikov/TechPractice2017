@@ -1,3 +1,4 @@
+import datetime
 import os
 
 from django.shortcuts import render
@@ -7,6 +8,7 @@ from django.http import HttpResponse, Http404
 from django.conf import settings
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.decorators import login_required
+
 from .models import TheUser, FileSet, TheFile, Codes
 from django.core.mail import send_mail
 from wsgiref.util import FileWrapper
@@ -116,9 +118,19 @@ def myprofile(request):
     except KeyError:
         return redirect('/')
     u = TheUser.objects.filter(nick=request.session['nick'])
-    filesets = FileSet.objects.filter(user=u)
+    today = datetime.datetime.now()
+    sets = FileSet.objects.filter(user=u)
+    allsets = sets.count()
+    allfiles = 0
+    for set in sets:
+        allfiles += TheFile.objects.filter(fileset=set).count()
+    sets = FileSet.objects.filter(user=u, expire_date__gt=today)
+    currsets = sets.count()
+    currfiles = 0
+    for set in sets:
+        currfiles += TheFile.objects.filter(fileset=set).count()
     template = loader.get_template('myprofile.html')
-    context = {'nick': request.session['nick'], 'filesets': filesets}
+    context = {'nick': request.session['nick'], 'filesets': sets, 'allfiles': allfiles, 'allsets': allsets, 'currfiles': currsets, 'currsets': currsets}
     return HttpResponse(template.render(context, request))
 
 
