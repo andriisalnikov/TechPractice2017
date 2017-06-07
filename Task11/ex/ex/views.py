@@ -122,15 +122,30 @@ def myprofile(request):
     sets = FileSet.objects.filter(user=u)
     allsets = sets.count()
     allfiles = 0
+	alldownloads = 0
     for set in sets:
-        allfiles += TheFile.objects.filter(fileset=set).count()
+        files = TheFile.objects.filter(fileset=set)
+		allfiles += files.count()
+		for f in files:
+			alldownloads += f.qty
     sets = FileSet.objects.filter(user=u, expire_date__gt=today)
     currsets = sets.count()
     currfiles = 0
+	currdownloads = 0
     for set in sets:
-        currfiles += TheFile.objects.filter(fileset=set).count()
+		files = TheFile.objects.filter(fileset=set)
+		currfiles += files.count()
+		for f in files:
+			currdownloads += f.qty
+	rank = ''
+	if allfiles > 10:
+		rank = 'A'
+	elif 5 <= allfiles <= 10:
+		rank = 'B'
+	else:
+		rank = 'C'
     template = loader.get_template('myprofile.html')
-    context = {'nick': request.session['nick'], 'filesets': sets, 'allfiles': allfiles, 'allsets': allsets, 'currfiles': currfiles, 'currsets': currsets}
+    context = {'nick': request.session['nick'], 'filesets': sets, 'rank': rank, 'allfiles': allfiles, 'allsets': allsets, 'alldownloads': alldownloads, 'currfiles': currfiles, 'currsets': currsets, 'currdownloads': currdownloads}
     return HttpResponse(template.render(context, request))
 
 
