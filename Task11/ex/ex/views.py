@@ -209,6 +209,7 @@ def download(request, file_id):
     f = TheFile.objects.get(id=file_id)
     if not f.deleted and os.path.exists(file_path):
         f.qty += 1
+        f.save()
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/force-download")
             response['Content-Disposition'] = 'attachment; filename=' + f.name
