@@ -1,11 +1,13 @@
 <!DOCTYPE HTML>
+{% load static %}
 <html lang="en">
+
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>VEX.NET</title>
-		<link href="bootstrap.min.css" rel="stylesheet">
-		<link href="personal_cabinet.css" rel="stylesheet">
+		<link href="{% static "bootstrap.min.css" %}" rel="stylesheet">
+		<link href="{% static "personal_cabinet.css" %}" rel="stylesheet">
 	</head>
 	<body>
 		<div class="container hdr">
@@ -25,7 +27,7 @@
 			    </div>
 			  </section>
 		</div>
-		
+
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12 col-md-9">
@@ -35,87 +37,44 @@
 					</ul>
 					<div class="tab-content">
 						<div id="myfs" class="tab-pane fade in active newfs">
-							 <p>Filename.txt</p>
-							  <dl class="dl-horizontal">
-							  	<dt class="descr">size</dt>
-							    <dd class="descr">- 124KB</dd>
-							    <dt class="descr">creation date</dt>
-							    <dd class="descr">- 17.06.1992</dd>
-							    <dt class="descr">expired date</dt>
-							    <dd class="descr">- 18.06.2017</dd>
-							  </dl>   
-							  <p>Filename.txt</p>
-							  <dl class="dl-horizontal">
-							    <dt class="descr">size</dt>
-							    <dd class="descr">- 124KB</dd>
-							    <dt class="descr">creation date</dt>
-							    <dd class="descr">- 17.06.1992</dd>
-							    <dt class="descr">expired date</dt>
-							    <dd class="descr">- 18.06.2017</dd>
-							  </dl>   
-							  <p>Filename.txt</p>
-							  <dl class="dl-horizontal">
-							    <dt class="descr">size</dt>
-							    <dd class="descr">- 124KB</dd>
-							    <dt class="descr">creation date</dt>
-							    <dd class="descr">- 17.06.1992</dd>
-							    <dt class="descr">expired date</dt>
-							    <dd class="descr">- 18.06.2017</dd>
-							  </dl>  
-							  <p>Filename.txt</p>
-							  <dl class="dl-horizontal">
-							  	<dt class="descr">size</dt>
-							    <dd class="descr">- 124KB</dd>
-							    <dt class="descr">creation date</dt>
-							    <dd class="descr">- 17.06.1992</dd>
-							    <dt class="descr">expired date</dt>
-							    <dd class="descr">- 18.06.2017</dd>
-							  </dl>   
-							  <p>Filename.txt</p>
-							  <dl class="dl-horizontal">
-							    <dt class="descr">size</dt>
-							    <dd class="descr">- 124KB</dd>
-							    <dt class="descr">creation date</dt>
-							    <dd class="descr">- 17.06.1992</dd>
-							    <dt class="descr">expired date</dt>
-							    <dd class="descr">- 18.06.2017</dd>
-							  </dl>   
-							  <p>Filename.txt</p>
-							  <dl class="dl-horizontal">
-							    <dt class="descr">size</dt>
-							    <dd class="descr">- 124KB</dd>
-							    <dt class="descr">creation date</dt>
-							    <dd class="descr">- 17.06.1992</dd>
-							    <dt class="descr">expired date</dt>
-							    <dd class="descr">- 18.06.2017</dd>
-							  </dl>  
-						</div> 
+                            {% for f in filesets %}
+                                <p><h3><a href="/{{ f.id }}/">{{ f.name }}</a></h3></p>
+                                <dl class="dl-horizontal">
+                                    <dt class="descr">Creation date</dt>
+                                    <dd class="descr">- {{ f.created_date }}</dd>
+                                    <dt class="descr">Expired date</dt>
+                                    <dd class="descr">- {{ f.expire_date }}</dd>
+                                </dl>
+                                <br>
+                            {% endfor %}
+						</div>
 						<div id="newfs" class="tab-pane fade ">
 							<div class="col-md-6">
 								<legend>Create new fileset</legend>
-							  	<form >
+							  	<form method="post" action="/create_fileset/">
+                                    {% csrf_token %}
 									<div class="form-group">
-										<input class="input form-control" type ="text" id="text" required placeholder="Name" > 
+										<input class="input form-control" type ="text" id="text" name="name" required placeholder="Name" >
 									</div>
 									<div class="form-group">
-										<input class="input form-control" type ="password" id="passwd" required placeholder="Password" > 
+										<input class="input form-control" type ="password" id="passwd" name="password" required placeholder="Password" >
 									</div>
 									<div class="form-group">
-										<textarea class="form-control" rows="5" id="comment" required placeholder="Description"></textarea> 
+										<textarea class="form-control" rows="5" id="comment" name="description" placeholder="Description"></textarea>
 									</div>
 									<div class="row">
 										<label class="col-md-4 control-label">Select expire date: </label>
 									<div class="col-md-8">
 										<div class="form-group">
-											<input class="input form-control" type ="date" id="passwd" required placeholder="Password" > 
+											<input class="input form-control" type ="date" required name="expire_date">
 										</div>
 									</div>
 									</div>
 									<div class="form-group">
 										<button type ="submit" class="btn btn-success">Create</button>
 									</div>
-									
-								</form>	
+
+								</form>
 							</div>
 						</div>
 					</div>
@@ -138,7 +97,7 @@
           		</h6>
          	</div>
 		</footer>
-		<script src="jquery.js"></script>
-		<script src="bootstrap.min.js"></script>
+		<script src="{% static "jquery.js" %}"></script>
+		<script src="{% static "bootstrap.min.js" %}"></script>
 	</body>
 </html>
