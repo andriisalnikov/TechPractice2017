@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 	<head>
     	<meta charset="UTF-8" http-equiv="Cache-Control" content="no-cache">
-    	<title>EX.UA ALIVE!</title>
-    	<link href="bootstrap.min.css" rel="stylesheet">
-		<link href="message.css" rel="stylesheet">
+    	<title>VEX.NET</title>
+    	<link href="{% static "bootstrap.min.css" %}" rel="stylesheet">
+		<link href="{% static "message.css" %}" rel="stylesheet">
 	</head>
 	<body>
 		<header>
@@ -12,6 +13,9 @@
 		</header>
 		<div class="container">
 			<div class="jumbotron">
+                {% for m in messages %}
+                    {{ m }}
+                {% endfor %}
 			</div>
 		</div>
 		<footer >
@@ -21,7 +25,7 @@
           		</h6>
           	</div>
         </footer>
-        <script src="jquery.js"></script>
-		<script src="bootstrap.min.js"></script>
+        <script src="{% static "jquery.js" %}"></script>
+        <script src="{% static "bootstrap.min.js" %}"></script>
     </body>
 </html>
