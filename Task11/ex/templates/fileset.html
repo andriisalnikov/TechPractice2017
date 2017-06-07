@@ -9,7 +9,7 @@
     
 <body>
     <header>
-		<h1 class="hdr" >VEX.NET</h1> 
+        <a style="text-decoration: none; color:white;" href="/" ><h1 class="hdr" >VEX.NET</h1></a>
     </header>
     <div class="container">
         <h3>Fileset: <span class="label label-info"> {{ fileset.name }} </span></h3>
@@ -18,13 +18,17 @@
         {% block content %}
         {% endblock %}
     </div>
+    <div class="container">
         <h1>Files in this fileset:</h1>
+
         <div class="list-group">
             {% for f in files %}
 			<a href="/file/{{ f.id }}" class="list-group-item"> {{ f.name }}</a> {% block conten_delete %}{% endblock %}
             {% endfor %}
-        </div> 
+
+        </div>
         {% block content_upload %}{% endblock %}
+    </div>
     <footer>
 		<div class="container">
 			<h6>

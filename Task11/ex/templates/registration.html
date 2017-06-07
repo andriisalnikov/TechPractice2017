@@ -5,19 +5,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>VEX.NET</title>
-        <link rel="stylesheet" type="text/css" href="{% static "registration.css" %}">
         <link href="{% static "bootstrap.min.css" %}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{% static "registration.css" %}">
         <script async type="text/javascript" src="{% static "conf_passwd.js" %}"></script>
     </head>
     <body>
     <header>
-    <h1 class="hdr" >VEX.NET</h1> 
+        <a style="text-decoration: none; color:white;" href="/" ><h1 class="hdr">VEX.NET</h1></a>
     </header>
             <div class="container">
               <div class="row">
               <div class="col-sm-6 col-sm-offset-3">
               <legend>Input your personal data</legend>
-            	<form name="reg" class="form-horizontal ">
+            	<form name="reg" class="form-horizontal " method="post" action="registration">
+                    {% csrf_token %}
               <div class="form-group ">
                 <div class="col-sm-8">
                 	<input class="input  form-control" type ="text" id="text" name="nick" required placeholder="Your nick" >
