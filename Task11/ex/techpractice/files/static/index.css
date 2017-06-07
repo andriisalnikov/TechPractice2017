@@ -7,6 +7,7 @@ body {
     position: relative;
     min-height: 100%;
     padding-bottom: 40px;
+    /*background-image: url("background.jpg");*/
 }
 header {
 	background-color: black;
@@ -30,7 +31,8 @@ footer {
     width: 100%;
     margin-top: 50px;
     border-top: 1px solid #9c9c9c;
-    background-color: white;
+    background-color: black;
+    color: white;
 }
 .log {
 	text-align: center;
@@ -46,6 +48,9 @@ div.social-icon {
 	height: 38px;
     cursor: pointer;
 }
+/*div.vk {
+	background-position: -78px -14px;
+}*/
 div.google {
 	background-position: -205px -137px;
 }
@@ -66,8 +71,14 @@ div.facebook {
    		display: inline-block;
     	width: 100%;
     	vertical-align: middle;
+
 	}
 	.form-inline .form-group .btn {
 		width: 100%;
 	}
 }
+
+
+
+
+
