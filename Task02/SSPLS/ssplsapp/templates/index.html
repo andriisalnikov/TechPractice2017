@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Best Game Ever{% endblock %}
+   
+{% block content %}
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Header -->
+        <section class="main-page-header">
+            <div class="row">
+                <div class="col-lg-6 col-sm-12 text-center">
+                    <img src="{% static 'img/sspls.png' %}" alt="sspls">
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <h1 class="text-center">
+                        Welcome To SSPLS Game!
+                    </h1>
+                    <p>
+                        The game is an expansion on the game Rock, Paper, Scissors. Each player picks a variable and reveals it at the same time. The winner is the one who defeats the others. In a tie, the process is repeated until a winner is found. 
+                    </p>
+                    <hr>
+                    <h3 class="text-center">Rules</h3>
+                    <p>
+                        <ol>
+                            <li>Scissors cuts Paper</li>
+                            <li>Paper covers Rock</li>
+                            <li>Rock crushes Lizard</li>
+                            <li>Lizard poisons Spock</li>
+                            <li>Spock smashes Scissors</li>
+                            <li>Scissors decapitates Lizard</li>
+                            <li>Lizard eats Paper</li>
+                            <li>Paper disproves Spock</li>
+                            <li>Spock vaporizes Rock</li>
+                            <li>Rock crushes Scissors</li>
+                        </ol>
+                    </p>
+                    <hr>
+                    <p>Here you can start your own game, choose a game of other definite or random user, check out the statistics.</p>
+                    <h3 class="text-center">Good luck, have fun!</h3>
+                </div>
+            </div>
+        </section>
+        <!-- /.row -->
+
+        <!-- Projects Row -->
+        
+
+    </div>
+    <!-- /.container -->
+{% endblock %}

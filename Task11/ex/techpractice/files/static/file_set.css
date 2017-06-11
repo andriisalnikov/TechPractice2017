@@ -1,0 +1,47 @@
+html {
+    height: 97%;
+}
+body {
+	padding: 0;
+	margin: 0;
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 40px;
+}
+header {
+    background-color: black;
+    color:white;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin-top: 50px;
+    border-top: 1px solid #9c9c9c;
+    background-color: black;
+    color:white;
+}
+.hdr {
+	margin-left: 20px;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file .upl {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}

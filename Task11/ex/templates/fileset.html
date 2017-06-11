@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ name }}</title>
+    <link href="{% static "bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "file_set.css" %}" rel="stylesheet">
+    
+<body>
+    <header>
+        <a style="text-decoration: none; color:white;" href="/" ><h1 class="hdr" >VEX.NET</h1></a>
+    </header>
+    <div class="container">
+        <h3>Fileset: <span class="label label-info"> {{ fileset.name }} </span></h3>
+		<h3>Owner: <span class="label label-info"> {{ fileset.user.nick  }} </span></h3>
+		<h3>Description: <span class="label label-info"> {{ fileset.description  }} </span></h3>
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div class="container">
+        <h1>Files in this fileset:</h1>
+
+        <div class="list-group">
+            {% for f in files %}
+			<a href="/file/{{ f.id }}" class="list-group-item"> {{ f.name }}</a> {% block conten_delete %}{% endblock %}
+            {% endfor %}
+
+        </div>
+        {% block content_upload %}{% endblock %}
+    </div>
+    <footer>
+		<div class="container">
+			<h6>
+				© 2017 VEX.NET ALL RIGHTS RESERVED
+			</h6>
+		</div>
+    </footer>
+    <script src="{% static "jquery.js" %}"></script>
+    <script src="{% static "bootstrap.min.js" %}"></script>
+    <script src="{% static "val_browse.js" %}"></script>
+</head>
+</body>
+</html>

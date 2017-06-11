@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Available Games{% endblock %}
+   
+{% block content %}
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 col-xs-12 available-games-sidebar">
+                <h3 class="current-user-name">
+                    UserName
+                </h3>
+                <hr>
+                <p>
+                    <a href="/create-game/" class="btn btn-success">Create a game</a>
+                </p>
+                <p>
+                    <a href="/play-game/{{ games.0.id }}" class="btn btn-danger">Random game</a>
+                </p>
+                <hr>
+                <h4>
+                    YOUR STATS
+                </h4>
+                <p>
+                    <b>Games: </b>
+                    <span class="stats games-played">{{ userGames }}</span>
+                </p>
+                <p>
+                    <b>Won: </b>
+                    <span class="stats games-won">{{ wonGames }}</span>
+                </p>
+                <p>
+                    <b>Drawn: </b>
+                    <span class="stats games-drown">{{ drawnGames }}</span>
+                </p>
+                <p>
+                    <b>Lost: </b>
+                    <span class="stats games-lost">{{ lostGames }}</span>
+                </p>
+            </div>
+            <div class="col-sm-9 col-xs-12 available-games">
+                <div class="container-fluid">
+                    <div class="row">
+                        <h2 class="text-center">Available games</h2>
+                        {% for game in games %}
+                        <div data-game-id="{{ game.id }}" class="col-md-4 col-sm-6 col-xs-12">
+                            <div data-game-id="{{ game.id }}" class="game">
+                                <div class="pull-left">
+                                    <p>
+                                        <b>Game: </b>
+                                        #<span class="game-id">{{ game.id }}</span>
+                                    </p>
+                                    <p>
+                                        <b>Enemy: </b>
+                                        <span class="enemy-name">
+                                            <a href="#">{{ game.firstuser.username }}</a>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="play-button pull-right text-right">
+                                    <a href="/play-game/{{ game.id }}" class="btn btn-success">
+                                        Play
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>    
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
