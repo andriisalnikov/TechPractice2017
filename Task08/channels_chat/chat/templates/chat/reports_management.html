@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+
+<hr>
+<div class="container bootstrap snippet">
+
+{% if reported_messages %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                <th><span>Reported user</span></th>
+                                <th><span>Message</span></th>
+                                <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in reported_messages %}
+                                <tr>
+                                    <td>
+                                        <img src="/media/{{ item.reported_user.profile.profile_photo }}" alt="">
+                                        <a href="#" class="user-link">{{item.reported_user}}</a>
+                                        <span class="user-subhead">ID: {{item.reported_user.pk}}</span>
+                                    </td>
+                                    <td class="text-left">
+                                        {% if item.content_type == 'text' %}
+                                            <p> {{ item.message }}</p>
+                                        {% else %}
+                                            <img src="/media/room_images/{{ item.message }}" >
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="#">{{item.reported_user.email}}</a>
+                                    </td>
+                                    <td style="width: 20%;">
+                                        <a href="{% url 'users:block_account' userID=item.reported_user.pk %}" class="table-link warning" onclick="return confirm('Are you sure you want to block this account?');">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-minus-circle fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="{% url 'users:delete_account' userID=item.reported_user.pk %}" class="table-link danger" onclick="return confirm('Are you sure you want to delete this account?');">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %} 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %} 
+    <div class="alert alert-danger">
+        <strong>There are no reported messages in the database</strong>
+    </div> 
+    {% endif %}  
+</div>
+{% endblock content %}
