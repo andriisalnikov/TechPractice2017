@@ -7,6 +7,7 @@ from django.utils import timezone
 def seven_days_hence():
     return timezone.now() + timezone.timedelta(days=7)
 
+
 def three_hours_hence():
     return timezone.now() + timezone.timedelta(hours=3)
 
@@ -40,12 +41,11 @@ class TheFile(models.Model):
     name = models.CharField(max_length=300)
     qty = models.IntegerField(default=0)
     deleted = models.BooleanField(default=False)
-
     def __str__(self):
         return self.name
 
 class Codes(models.Model):
     user = models.ForeignKey(TheUser)
-    code = models.CharField(max_length=128)
+    code = models.CharField(max_length=32)
     created_date = models.DateTimeField(default=timezone.now)
     expire_date = models.DateTimeField(default=three_hours_hence)

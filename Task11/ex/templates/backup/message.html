@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" http-equiv="Cache-Control" content="no-cache">
+        <title>EX.UA ALIVE!</title>
+        <link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "message.css" %}">
+        <script src="{% static "jquery.js" %}"></script>
+		<script src="{% static "bootstrap.min.js" %}"></script>
+    </head>
+    <body>
+		<header>
+			<img src="{% static "logo.jpg" %}" width="70" height="50">
+			<h1>VEX.NET</h1>
+		</header>
+		<div class="container">
+			<div class="jumbotron">
+                {% for m in messages %}
+                    {{ m }}<br>
+                {% endfor %}
+			</div>
+		</div>
+		<footer>
+			<div class="container">
+          		<h6>
+            		 © 2017 VEX.NET ALL RIGHTS RESERVED
+          		</h6>
+          	</div>
+        </footer>
+    </body>
+</html>

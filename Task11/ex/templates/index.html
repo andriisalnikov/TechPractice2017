@@ -1,27 +1,70 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+{% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>VEX</title>
-</head>
-<body>
-    {% load static %}
-    <img src="{% static "logo.jpg" %}" alt="Logo" width="200">
-    <h1>VEX.DDNS.NET</h1>
-    <form method="post">
-        <label>Username:
-            <input type="text" name="username" value="">
-        </label><br>
-        <label>Password:
-            <input type="password" name="password" value="">
-        </label><br>
-        <input type="submit" value="Log in" />
-    </form>
-    <form>
-        <input type="submit" value="Register" />
-    </form><br><br>
-    @VEX.UA mail:aaaaaa@bbb.ccc support: sss@uu.zz
-    <br>
-    <a href="registration">registration</a>
-</body>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>VEX.NET</title>
+		<link href="{% static "bootstrap.min.css" %}" rel="stylesheet">
+		<link href="{% static "index.css" %}" rel="stylesheet">
+	</head>
+	<body>
+		<header>
+            <a style="text-decoration: none; color:white;" href="/" ><h1>VEX.NET</h1></a>
+		</header>
+			<div class="container">
+			<div class="row">
+			<div class="col-sm-3 col-sm-offset-9 top-buffer">
+				<legend>Authorization</legend>
+                <div style="color: #d43f3a">{{ message }}</div>
+				<form method="POST">
+                    {% csrf_token %}
+					<div class="form-group">
+						<input class="input form-control" type ="text" id="text" name="nick" required placeholder="Nick" >
+					</div>
+					<div class="form-group">
+						<input class="input form-control" type ="password" id="passwd" name="password" required placeholder="Password" >
+					</div>
+					<div class="row">
+					<div class="col-sm-6 ">
+						<div class="form-group">
+							<button type ="submit" class="btn btn-block btn-success" onClick='location.href="/myprofile/"'>Sign in</button>
+						</div>
+					</div>
+					<div class="col-sm-6 ">
+						<div class="form-group">
+							<button type ="button" class="btn btn-block btn-primary" onClick='location.href="/registration/"'>Sign up</button>
+						</div>
+					</div>
+					</div>
+					<div class="form-group log">
+						<legend> Login with: </legend>
+						<div class="text-center" id="uLogin" >
+                        <a href="{% url 'social:begin' 'google-oauth2' %}"><div class="social-icon google" data-uloginbutton="google"></div></a>
+		                <div class="social-icon facebook" data-uloginbutton="facebook"></div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-8 col-sm-offset-1 top-fetch ">
+				<form class="form-inline" method="post" action="/fetch/">
+                {% csrf_token %}
+				<div class="form-group">
+					<input class="input form-control" type ="text" pattern="^[ 0-9]+$" id="text" name="fileset_id" required placeholder="Insert Key"  oninvalid ="setCustomValidity('The key must contain only numbers')" oninput="setCustomValidity('')">
+				</div>
+				<div class="form-group">
+					<button type ="submit"  class="btn btn-success">Fetch</button>
+				</div>
+				</form>
+			</div>
+			</div>
+			</div>
+		<footer >
+			<div class="container">
+				<h6>© 2017 VEX.NET ALL RIGHTS RESERVED</h6>
+			</div>
+		</footer>
+		<script src="{% static "jquery.js" %}"></script>
+		<script src="{% static "bootstrap.min.js" %}"></script>
+	</body>
 </html>
